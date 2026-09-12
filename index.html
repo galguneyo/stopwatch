@@ -7,13 +7,14 @@
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <style>
   :root {
-    --bg: #0f1115;
-    --card: #1a1d24;
-    --text: #f2f3f5;
-    --muted: #9aa0ab;
-    --accent: #4f8cff;
-    --danger: #ff5c5c;
-    --success: #3ecf8e;
+    --green: #30d158;
+    --green-dim: #1f7a37;
+    --red: #ff453a;
+    --red-dim: #8f2a24;
+    --gray-btn: #3a3a3c;
+    --track: #1c1c1e;
+    --text: #f5f5f7;
+    --muted: #8e8e93;
   }
   * { box-sizing: border-box; }
   body {
@@ -22,56 +23,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: radial-gradient(circle at top, #1c2029, #0f1115);
+    background: radial-gradient(circle at 50% 20%, #17181c, #030304 70%);
     font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     color: var(--text);
-    padding: 24px;
-    overflow-x: hidden;
-    position: relative;
+    padding: 32px 16px;
+  }
+  .app {
+    width: 300px;
   }
 
-  .card {
-    position: relative;
-    z-index: 1;
-    background: #0d0f13;
-    border-radius: 24px;
-    padding: 36px 32px;
-    width: 380px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-    text-align: center;
-    overflow: hidden;
-  }
-  .card-face {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-  }
-  .card-scrim {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: linear-gradient(180deg, rgba(9,10,14,0.55) 0%, rgba(9,10,14,0.72) 45%, rgba(9,10,14,0.86) 100%);
-  }
-  .card-content {
-    position: relative;
-    z-index: 2;
-  }
-  h1 {
-    font-size: 16px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin: 0 0 20px;
-  }
-
-  /* birthdate section */
+  /* birthdate control strip */
   .birth-section {
-    background: #14161c;
-    border: 1px solid #262a33;
-    border-radius: 14px;
+    background: #1c1c1e;
+    border: 1px solid #2c2c2e;
+    border-radius: 18px;
     padding: 14px 16px;
     margin-bottom: 22px;
     text-align: left;
@@ -88,208 +53,179 @@
   }
   .birth-row input[type="date"] {
     flex: 1;
-    background: #1f232c;
-    border: 1px solid #2f333e;
+    background: #2c2c2e;
+    border: 1px solid #3a3a3c;
     border-radius: 8px;
     padding: 8px 10px;
     color: var(--text);
     font-size: 14px;
     color-scheme: dark;
   }
-  .birth-row input[type="date"]:disabled {
-    opacity: 0.5;
-  }
+  .birth-row input[type="date"]:disabled { opacity: 0.5; }
   .birth-info {
     margin-top: 8px;
-    font-size: 12px;
+    font-size: 11.5px;
     color: var(--muted);
     line-height: 1.5;
   }
-  .birth-info.error { color: var(--danger); }
+  .birth-info.error { color: var(--red); }
 
-  /* life countdown ring */
-  .life-display {
+  /* watch case */
+  .watch-case {
     position: relative;
-    width: min(272px, 82vw);
-    aspect-ratio: 1 / 1;
-    margin: 0 auto 18px;
+    width: 300px;
+    height: 372px;
+    margin: 0 auto;
+    border-radius: 66px;
+    padding: 12px;
+    background: linear-gradient(155deg, #4a4c52 0%, #26262a 45%, #131316 100%);
+    box-shadow: 0 24px 50px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(255,255,255,0.05);
   }
-  .life-ring {
+  .crown {
+    position: absolute;
+    right: -9px;
+    top: 32%;
+    width: 16px;
+    height: 56px;
+    border-radius: 7px;
+    background: linear-gradient(90deg, #57585e, #232326);
+    box-shadow: 1px 0 2px rgba(0,0,0,0.4);
+  }
+  .side-button {
+    position: absolute;
+    right: -7px;
+    top: 52%;
+    width: 12px;
+    height: 42px;
+    border-radius: 6px;
+    background: linear-gradient(90deg, #57585e, #232326);
+    box-shadow: 1px 0 2px rgba(0,0,0,0.4);
+  }
+  .screen {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    border-radius: 54px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 26px 20px 20px;
+  }
+
+  .time-display {
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+    line-height: 1;
+    margin-bottom: 14px;
+  }
+  .time-display .main {
+    font-family: 'SF Mono', ui-monospace, Menlo, Consolas, monospace;
+    font-size: 34px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--text);
+  }
+  .time-display .cc {
+    font-family: 'SF Mono', ui-monospace, Menlo, Consolas, monospace;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  /* life dial (doubles as the analog stopwatch dial) */
+  .dial {
+    position: relative;
+    width: 176px;
+    height: 176px;
+    margin-bottom: 16px;
+  }
+  .dial-ring {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     transform: rotate(-90deg);
   }
-  .life-ring .ring-track {
+  .dial-ring .ring-track {
     fill: none;
-    stroke: #262a33;
-    stroke-width: 10;
+    stroke: var(--track);
+    stroke-width: 9;
   }
-  .life-ring .ring-progress {
+  .dial-ring .ring-progress {
     fill: none;
-    stroke: var(--danger);
-    stroke-width: 10;
+    stroke: var(--red);
+    stroke-width: 9;
     stroke-linecap: round;
     transition: stroke-dashoffset 0.2s linear;
   }
-  .life-content {
+  .dial-content {
     position: absolute;
     inset: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 0 30px;
+    padding: 0 14px;
   }
-  .life-label {
-    font-size: 12px;
+  .dial-label {
+    font-size: 9.5px;
+    letter-spacing: 0.5px;
     color: var(--muted);
-    margin-bottom: 6px;
+    margin-bottom: 3px;
   }
-  .life-main {
-    font-size: clamp(18px, 4.6vw, 22px);
+  .dial-main {
+    font-size: 11px;
     font-weight: 700;
-    letter-spacing: 0.3px;
+    color: var(--text);
   }
-  .life-sub {
+  .dial-sub {
     font-variant-numeric: tabular-nums;
-    font-size: clamp(34px, 9.5vw, 44px);
-    font-weight: 800;
-    color: var(--danger);
-    margin-top: 4px;
-    letter-spacing: 1px;
-  }
-
-  .divider {
-    border: none;
-    border-top: 1px dashed #2a2e38;
-    margin: 18px 0;
-  }
-
-  /* flip clock */
-  .flip-clock {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    margin-bottom: 24px;
-  }
-  .flip-group {
-    display: flex;
-    gap: 3px;
-  }
-  .flip-colon {
-    font-size: 26px;
-    font-weight: 800;
-    color: var(--accent);
-    padding-bottom: 6px;
-  }
-  .flip-digit {
-    position: relative;
-    width: 42px;
-    height: 60px;
-    perspective: 220px;
-  }
-  .flip-half, .flip-leaf {
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 30px;
-    overflow: hidden;
-    background: #20242d;
-    display: flex;
-    justify-content: center;
-  }
-  .flip-half span, .flip-leaf span {
-    display: block;
-    width: 100%;
-    font-variant-numeric: tabular-nums;
-    font-size: 36px;
-    font-weight: 800;
-    color: var(--accent);
-    line-height: 60px;
-    text-align: center;
-  }
-  .flip-half.top, .flip-leaf-top {
-    top: 0;
-    border-radius: 7px 7px 0 0;
-    border-bottom: 1px solid #14161c;
-  }
-  .flip-half.bottom, .flip-leaf-bottom {
-    bottom: 0;
-    border-radius: 0 0 7px 7px;
-  }
-  .flip-half.bottom span, .flip-leaf-bottom span {
-    margin-top: -30px;
-  }
-  .flip-leaf-top {
-    z-index: 2;
-    transform-origin: bottom;
-    backface-visibility: hidden;
-  }
-  .flip-leaf-bottom {
-    z-index: 2;
-    transform-origin: top;
-    backface-visibility: hidden;
-    transform: rotateX(180deg);
-  }
-  .flip-digit.flipping .flip-leaf-top {
-    animation: flipTop 0.35s cubic-bezier(.4,0,.2,1) forwards;
-  }
-  .flip-digit.flipping .flip-leaf-bottom {
-    animation: flipBottom 0.35s 0.17s cubic-bezier(.4,0,.2,1) forwards;
-  }
-  @keyframes flipTop {
-    0%   { transform: rotateX(0deg); }
-    100% { transform: rotateX(-180deg); }
-  }
-  @keyframes flipBottom {
-    0%   { transform: rotateX(180deg); }
-    100% { transform: rotateX(0deg); }
+    font-family: 'SF Mono', ui-monospace, Menlo, Consolas, monospace;
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--red);
+    margin-top: 3px;
   }
 
   .controls {
     display: flex;
-    gap: 12px;
-    justify-content: center;
-    margin-bottom: 24px;
+    gap: 10px;
+    margin-bottom: 8px;
   }
   button {
-    flex: 1;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 16px 0;
-    border: none;
-    border-radius: 14px;
     cursor: pointer;
     transition: transform 0.1s ease, opacity 0.2s ease;
   }
-  button svg {
-    width: 22px;
-    height: 22px;
-  }
-  button:active { transform: scale(0.96); }
-  button:disabled { opacity: 0.4; cursor: not-allowed; }
-  #startBtn { background: var(--success); color: #06231a; }
-  #stopBtn { background: var(--danger); color: #2b0c0c; }
-  #lapBtn { background: #2a2e38; color: var(--text); }
-  #resetBtn { background: #2a2e38; color: var(--text); }
+  button svg { width: 20px; height: 20px; }
+  button:active { transform: scale(0.92); }
+  button:disabled { opacity: 0.35; cursor: not-allowed; }
+  #startBtn { background: var(--green); color: #04220f; }
+  #stopBtn { background: var(--red); color: #2a0705; }
+  #lapBtn, #resetBtn { background: var(--gray-btn); color: var(--text); }
 
+  /* lap list, watchOS-style rows */
   .laps {
-    max-height: 220px;
+    width: 100%;
+    max-height: 200px;
     overflow-y: auto;
-    text-align: left;
-    border-top: 1px solid #2a2e38;
-    padding-top: 12px;
+    margin-top: 20px;
+    border-top: 1px solid #1f1f22;
   }
-  .laps::-webkit-scrollbar { width: 6px; }
-  .laps::-webkit-scrollbar-thumb { background: #333844; border-radius: 3px; }
+  .laps::-webkit-scrollbar { width: 4px; }
+  .laps::-webkit-scrollbar-thumb { background: #2c2c2e; border-radius: 2px; }
   .lap-item {
-    padding: 8px 4px;
-    font-size: 13px;
-    border-bottom: 1px solid #22252d;
+    padding: 10px 4px;
+    font-size: 12.5px;
+    border-bottom: 1px solid #1f1f22;
   }
   .lap-item:last-child { border-bottom: none; }
   .lap-row {
@@ -297,44 +233,23 @@
     justify-content: space-between;
     color: var(--text);
     font-weight: 600;
+    font-variant-numeric: tabular-nums;
   }
   .lap-remaining {
     margin-top: 2px;
     color: var(--muted);
-    font-size: 12px;
+    font-size: 11px;
   }
   .empty {
-    color: #4a4f5a;
-    font-size: 13px;
-    padding: 12px 0;
+    color: #48484a;
+    font-size: 12.5px;
+    padding: 14px 0;
+    text-align: center;
   }
 </style>
 </head>
 <body>
-  <div class="card">
-    <svg class="card-face" viewBox="0 0 400 520" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-      <path d="M115,55 L245,42 L300,130 L288,255 L320,330 L255,470 L150,478 L88,355 L58,210 L68,110 Z" fill="#caa06a" stroke="#0b0c10" stroke-width="6"/>
-      <path d="M195,48 L245,42 L300,130 L288,255 L320,330 L255,470 L198,476 Z" fill="#3a7d75" stroke="#0b0c10" stroke-width="6"/>
-      <path d="M92,66 Q150,8 205,18 Q262,8 298,78 L274,108 Q228,58 198,63 Q150,53 118,108 Z" fill="#12141a" stroke="#0b0c10" stroke-width="4"/>
-      <g transform="translate(145,185) rotate(-12)">
-        <ellipse cx="0" cy="0" rx="36" ry="19" fill="#f2ead9" stroke="#0b0c10" stroke-width="5"/>
-        <circle cx="7" cy="0" r="10" fill="#4f8cff" stroke="#0b0c10" stroke-width="4"/>
-        <circle cx="7" cy="0" r="4" fill="#0b0c10"/>
-      </g>
-      <g transform="translate(248,148) rotate(6)">
-        <circle cx="0" cy="0" r="24" fill="#f2ead9" stroke="#0b0c10" stroke-width="5"/>
-        <circle cx="-4" cy="2" r="9" fill="#ff5c5c" stroke="#0b0c10" stroke-width="4"/>
-        <circle cx="-4" cy="2" r="4" fill="#0b0c10"/>
-      </g>
-      <path d="M203,172 L232,235 L198,250 L187,217 Z" fill="#e8a13c" stroke="#0b0c10" stroke-width="5"/>
-      <path d="M172,298 Q212,322 256,293 Q227,336 182,322 Z" fill="#b23a4e" stroke="#0b0c10" stroke-width="5"/>
-      <polygon points="108,238 148,258 118,298 84,273" fill="#8c5cff" opacity="0.85" stroke="#0b0c10" stroke-width="4"/>
-      <polygon points="286,218 324,248 296,288 266,258" fill="#3ecf8e" opacity="0.85" stroke="#0b0c10" stroke-width="4"/>
-      <path d="M148,468 L88,355 L118,336 L176,436 Z" fill="#7a4f2e" opacity="0.7"/>
-      <path d="M158,460 L236,460 L286,500 L108,500 Z" fill="#20242d" stroke="#0b0c10" stroke-width="5"/>
-    </svg>
-    <div class="card-scrim"></div>
-    <div class="card-content">
+  <div class="app">
     <div class="birth-section">
       <div class="birth-row">
         <label for="birthdate">생년월일</label>
@@ -343,64 +258,63 @@
       <div class="birth-info" id="birthInfo">생년월일을 입력하면 기대 수명 100세 기준 잔여 수명이 표시됩니다.</div>
     </div>
 
-    <div class="life-display">
-      <svg class="life-ring" viewBox="0 0 200 200">
-        <circle class="ring-track" cx="100" cy="100" r="90"></circle>
-        <circle class="ring-progress" id="ringProgress" cx="100" cy="100" r="90"></circle>
-      </svg>
-      <div class="life-content">
-        <div class="life-label">잔여수명</div>
-        <div class="life-main" id="lifeMain">--년 --개월 --일</div>
-        <div class="life-sub" id="lifeSub">--:--:--</div>
+    <div class="watch-case">
+      <div class="crown"></div>
+      <div class="side-button"></div>
+      <div class="screen">
+        <div class="time-display">
+          <span class="main" id="time">00:00:00</span><span class="cc" id="ms">.00</span>
+        </div>
+
+        <div class="dial">
+          <svg class="dial-ring" viewBox="0 0 200 200">
+            <circle class="ring-track" cx="100" cy="100" r="90"></circle>
+            <circle class="ring-progress" id="ringProgress" cx="100" cy="100" r="90"></circle>
+          </svg>
+          <div class="dial-content">
+            <div class="dial-label">잔여수명</div>
+            <div class="dial-main" id="lifeMain">--년 --개월 --일</div>
+            <div class="dial-sub" id="lifeSub">--:--:--</div>
+          </div>
+        </div>
+
+        <div class="controls">
+          <button id="startBtn" disabled aria-label="시작">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <button id="stopBtn" disabled aria-label="정지">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+          </button>
+        </div>
+        <div class="controls">
+          <button id="lapBtn" disabled aria-label="랩">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+          </button>
+          <button id="resetBtn" disabled aria-label="리셋">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+          </button>
+        </div>
       </div>
-    </div>
-
-    <hr class="divider">
-
-    <div class="flip-clock" id="flipClock">
-      <div class="flip-group" id="flipHours"></div>
-      <div class="flip-colon">:</div>
-      <div class="flip-group" id="flipMinutes"></div>
-      <div class="flip-colon">:</div>
-      <div class="flip-group" id="flipSeconds"></div>
-    </div>
-
-    <div class="controls">
-      <button id="startBtn" disabled aria-label="시작">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-      </button>
-      <button id="stopBtn" disabled aria-label="정지">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
-      </button>
-    </div>
-    <div class="controls">
-      <button id="lapBtn" disabled aria-label="랩">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
-      </button>
-      <button id="resetBtn" disabled aria-label="리셋">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
-      </button>
     </div>
 
     <div class="laps" id="laps">
       <div class="empty" id="emptyMsg">기록된 랩이 없습니다</div>
-    </div>
     </div>
   </div>
 
 <script>
   const LIFE_EXPECTANCY_YEARS = 100;
 
-  let startTime = 0;      // performance.now() at last start
-  let elapsed = 0;        // accumulated stopwatch elapsed ms (paused-safe)
+  let startTime = 0;
+  let elapsed = 0;
   let timerId = null;
   let running = false;
   let lapCount = 0;
 
-  let birthDate = null;    // Date, local midnight
-  let deathDate = null;    // birthDate + 100 years
-  let baselineNow = null;  // Date captured when birthdate applied / reset
-  let totalLifeMs = null;  // deathDate - birthDate, the full 100-year span
+  let birthDate = null;
+  let deathDate = null;
+  let baselineNow = null;
+  let totalLifeMs = null;
 
   const birthdateInput = document.getElementById('birthdate');
   const birthInfo = document.getElementById('birthInfo');
@@ -410,6 +324,8 @@
   const RING_CIRCUMFERENCE = 2 * Math.PI * 90;
   ringProgress.style.strokeDasharray = `${RING_CIRCUMFERENCE}`;
   ringProgress.style.strokeDashoffset = `${RING_CIRCUMFERENCE}`;
+  const timeEl = document.getElementById('time');
+  const msEl = document.getElementById('ms');
   const startBtn = document.getElementById('startBtn');
   const stopBtn = document.getElementById('stopBtn');
   const lapBtn = document.getElementById('lapBtn');
@@ -422,54 +338,6 @@
   birthdateInput.min = '1900-01-01';
 
   const pad = (n, len = 2) => String(n).padStart(len, '0');
-
-  // flip-clock digits
-  function createFlipDigit(parent) {
-    const el = document.createElement('div');
-    el.className = 'flip-digit';
-    el.innerHTML = `
-      <div class="flip-half top"><span>0</span></div>
-      <div class="flip-half bottom"><span>0</span></div>
-      <div class="flip-leaf flip-leaf-top"><span>0</span></div>
-      <div class="flip-leaf flip-leaf-bottom"><span>0</span></div>
-    `;
-    parent.appendChild(el);
-    return {
-      el,
-      top: el.querySelector('.top span'),
-      bottom: el.querySelector('.bottom span'),
-      leafTop: el.querySelector('.flip-leaf-top span'),
-      leafBottom: el.querySelector('.flip-leaf-bottom span'),
-      current: '0'
-    };
-  }
-
-  function updateFlipDigit(d, val) {
-    if (d.current === val) return;
-    d.leafTop.textContent = d.current;
-    d.leafBottom.textContent = val;
-    d.top.textContent = val;
-    d.bottom.textContent = val;
-    d.current = val;
-    d.el.classList.remove('flipping');
-    void d.el.offsetWidth;
-    d.el.classList.add('flipping');
-  }
-
-  const flipDigits = [
-    createFlipDigit(document.getElementById('flipHours')),
-    createFlipDigit(document.getElementById('flipHours')),
-    createFlipDigit(document.getElementById('flipMinutes')),
-    createFlipDigit(document.getElementById('flipMinutes')),
-    createFlipDigit(document.getElementById('flipSeconds')),
-    createFlipDigit(document.getElementById('flipSeconds'))
-  ];
-
-  function updateFlipClock(totalMs) {
-    const { main } = formatElapsed(totalMs);
-    const digits = main.replace(/:/g, '');
-    for (let i = 0; i < 6; i++) updateFlipDigit(flipDigits[i], digits[i]);
-  }
 
   function formatElapsed(ms) {
     const totalMs = Math.max(0, Math.floor(ms));
@@ -487,7 +355,6 @@
     return `${d.getFullYear()}.${pad(d.getMonth() + 1)}.${pad(d.getDate())}`;
   }
 
-  // breakdown of (toDate - fromDate), assumes fromDate <= toDate
   function getRemainingBreakdown(fromDate, toDate) {
     let y = toDate.getFullYear() - fromDate.getFullYear();
     let mo = toDate.getMonth() - fromDate.getMonth();
@@ -531,14 +398,16 @@
 
   function updateRing(virtualNow) {
     const remainingMs = Math.min(totalLifeMs, Math.max(0, deathDate.getTime() - virtualNow.getTime()));
-    const fraction = remainingMs / totalLifeMs; // 1 = full life left, 0 = none left
+    const fraction = remainingMs / totalLifeMs;
     const offset = RING_CIRCUMFERENCE * (1 - fraction);
     ringProgress.style.strokeDashoffset = `${offset}`;
   }
 
   function render() {
     const curElapsed = currentElapsedMs();
-    updateFlipClock(curElapsed);
+    const { main, ms } = formatElapsed(curElapsed);
+    timeEl.textContent = main;
+    msEl.textContent = ms;
 
     if (deathDate) {
       const virtualNow = getVirtualNow();
