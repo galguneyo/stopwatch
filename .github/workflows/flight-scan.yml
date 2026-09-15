@@ -53,6 +53,8 @@ jobs:
         run: |
           git config user.name "flight-scan-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/results.json reports/latest.md
+          # history.jsonl 은 반드시 커밋해야 한다. 러너는 매번 새로 시작하므로
+          # 이력이 저장소에 남지 않으면 추세·매진 속도가 영원히 계산되지 않는다.
+          git add data/results.json data/insights.json data/history.jsonl reports/latest.md
           git diff --cached --quiet || git commit -m "chore: weekly flight scan update"
           git push

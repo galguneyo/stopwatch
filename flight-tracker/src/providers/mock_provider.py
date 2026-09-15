@@ -38,6 +38,50 @@ def _stable_int(seed: str, low: int, high: int) -> int:
     return low + (h % (high - low + 1))
 
 
+def synth_history(results: dict, runs: int) -> list:
+    """목업 전용: 과거 관측 이력을 합성한다.
+
+    추세·변동성·매진 속도는 관측이 여러 번 쌓여야 계산되는데, 목업은 몇 번을 돌려도
+    같은 값이 나와 인사이트 화면이 비어 보인다. 이 함수는 "출발일이 가까울수록,
+    수요가 몰리는 날일수록 가격이 오르고 좌석이 줄었다"는 형태의 이력을 만들어
+    화면을 확인할 수 있게 한다.
+
+    합성값이며 실제 시장 관측이 아니다 — source 는 "mock"으로 남고 화면에도
+    목업 배너가 함께 뜬다.
+    """
+    import datetime as _dt
+
+    from holidays_2026 import HOLIDAY_BY_DATE
+    from insights import Observation, observations_from_results
+
+    today = _dt.date.today()
+    out: list[Observation] = []
+
+    for current in observations_from_results(results):
+        if current.lowest_krw is None:
+            continue
+        demand = 2.0 if current.date in HOLIDAY_BY_DATE else 1.0
+        # 날짜마다 상승 폭이 조금씩 다르게 — 안 그러면 모든 날의 추세가 똑같이 나온다
+        jitter = 0.7 + _stable_int(current.date + current.direction, 0, 60) / 100
+
+        for step in range(runs, 0, -1):  # step이 클수록 먼 과거
+            observed = _dt.datetime.combine(today, _dt.time(9, 0)) - _dt.timedelta(days=step * 7)
+            discount = max(0.4, 1 - 0.035 * demand * jitter * step)
+            out.append(Observation(
+                observed_at=observed.isoformat(),
+                direction=current.direction,
+                date=current.date,
+                lowest_krw=max(20000, int(current.lowest_krw * discount)),
+                bookable_flights=current.bookable_flights + int(demand * step),
+                bookable_carriers=min(7, current.bookable_carriers + (1 if step > 2 else 0)),
+                total_flights=current.total_flights,
+                source="mock",
+            ))
+
+    out.sort(key=lambda o: o.observed_at)
+    return out
+
+
 def _seat_status(seed: str) -> SeatStatus:
     roll = _stable_int(seed, 0, 99)
     if roll < 70:

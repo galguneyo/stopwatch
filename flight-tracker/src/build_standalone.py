@@ -40,6 +40,7 @@ def build() -> Path:
         "results": json.loads((DATA / "results.json").read_text(encoding="utf-8")),
         "weather": json.loads((DATA / "weather.json").read_text(encoding="utf-8")),
         "delays": json.loads((DATA / "delays.json").read_text(encoding="utf-8")),
+        "insights": json.loads((DATA / "insights.json").read_text(encoding="utf-8")),
     }
     # </script> 가 문자열 안에 들어가면 스크립트 태그가 조기에 닫히므로 이스케이프한다.
     payload = json.dumps(snapshot, ensure_ascii=False).replace("</", "<\\/")

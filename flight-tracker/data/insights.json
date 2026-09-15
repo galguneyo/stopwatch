@@ -1,0 +1,1012 @@
+{
+  "generated_at": "2026-09-15T09:02:45.035866",
+  "source": "mock",
+  "observation_runs": 6,
+  "by_direction": {
+    "outbound": [
+      {
+        "direction": "outbound",
+        "date": "2026-09-18",
+        "days_until": 3,
+        "observations": 6,
+        "lowest_krw": 46896,
+        "price_index": 1.039,
+        "trend_pct": 17.7,
+        "volatility_pct": 17.7,
+        "bookable_flights": 17,
+        "flights_lost_per_day": 0.14,
+        "days_to_soldout": 121.4,
+        "demand": {
+          "is_holiday": false,
+          "holiday_name": null,
+          "is_sandwich_day": false,
+          "is_long_weekend": false
+        },
+        "urgency": 40,
+        "verdict": "watch",
+        "headline": "서울→제주 2026-09-18 지켜볼 구간입니다",
+        "reasons": [
+          "최저가가 첫 관측 대비 +18% (6회 관측)",
+          "예약 가능 편이 22→17편으로 줄었습니다",
+          "출발까지 3일 남았습니다"
+        ]
+      },
+      {
+        "direction": "outbound",
+        "date": "2026-09-19",
+        "days_until": 4,
+        "observations": 6,
+        "lowest_krw": 42078,
+        "price_index": 0.932,
+        "trend_pct": 24.1,
+        "volatility_pct": 24.1,
+        "bookable_flights": 7,
+        "flights_lost_per_day": 0.14,
+        "days_to_soldout": 50.0,
+        "demand": {
+          "is_holiday": false,
+          "holiday_name": null,
+          "is_sandwich_day": false,
+          "is_long_weekend": false
+        },
+        "urgency": 40,
+        "verdict": "watch",
+        "headline": "서울→제주 2026-09-19 지켜볼 구간입니다",
+        "reasons": [
+          "최저가가 첫 관측 대비 +24% (6회 관측)",
+          "예약 가능 편이 12→7편으로 줄었습니다",
+          "출발까지 4일 남았습니다"
+        ]
+      },
+      {
+        "direction": "outbound",
+        "date": "2026-09-25",
+        "days_until": 10,
+        "observations": 6,
+        "lowest_krw": 40828,
+        "price_index": 0.905,
+        "trend_pct": 42.4,
+        "volatility_pct": 42.4,
+        "bookable_flights": 19,
+        "flights_lost_per_day": 0.29,
+        "days_to_soldout": 65.5,
+        "demand": {
+          "is_holiday": true,
+          "holiday_name": "추석",
+          "is_sandwich_day": false,
+          "is_long_weekend": true
+        },
+        "urgency": 80,
+        "verdict": "book_now",
+        "headline": "서울→제주 2026-09-25 지금 예약하세요",
+        "reasons": [
+          "최저가가 첫 관측 대비 +42% (6회 관측)",
+          "가격 변동 폭이 42%로 큽니다",
+          "예약 가능 편이 29→19편으로 줄었습니다",
+          "추석 — 수요가 몰리는 날",
+          "출발까지 10일 남았습니다"
+        ]
+      },
+      {
+        "direction": "outbound",
+        "date": "2026-09-26",
+        "days_until": 11,
+        "observations": 6,
+        "lowest_krw": 54382,
+        "price_index": 1.205,
+        "trend_pct": 44.5,
+        "volatility_pct": 44.5,
+        "bookable_flights": 8,
+        "flights_lost_per_day": 0.29,
+        "days_to_soldout": 27.6,
+        "demand": {
+          "is_holiday": true,
+          "holiday_name": "추석연휴",
+          "is_sandwich_day": false,
+          "is_long_weekend": true
+        },
+        "urgency": 80,
+        "verdict": "book_now",
+        "headline": "서울→제주 2026-09-26 지금 예약하세요",
+        "reasons": [
+          "같은 기간 다른 후보일 중앙값 대비 +21%",
+          "최저가가 첫 관측 대비 +44% (6회 관측)",
+          "가격 변동 폭이 44%로 큽니다",
+          "예약 가능 편이 18→8편으로 줄었습니다",
+          "추석연휴 — 수요가 몰리는 날",
+          "출발까지 11일 남았습니다"
+        ]
+      },
+      {
+        "direction": "outbound",
+        "date": "2026-10-02",
+        "days_until": 17,
+        "observations": 6,
+        "lowest_krw": 40820,
+        "price_index": 0.904,
+        "trend_pct": 26.3,
+        "volatility_pct": 26.3,
+        "bookable_flights": 19,
+        "flights_lost_per_day": 0.14,
+        "days_to_soldout": 135.7,
+        "demand": {
+          "is_holiday": false,
+          "holiday_name": null,
+          "is_sandwich_day": false,
+          "is_long_weekend": false
+        },
+        "urgency": 50,
+        "verdict": "watch",
+        "headline": "서울→제주 2026-10-02 지켜볼 구간입니다",
+        "reasons": [
+          "최저가가 첫 관측 대비 +26% (6회 관측)",
+          "가격 변동 폭이 26%로 큽니다",
+          "예약 가능 편이 24→19편으로 줄었습니다",
+          "출발까지 17일 남았습니다"
+        ]
+      },
+      {
+        "direction": "outbound",
+        "date": "2026-10-03",
+        "days_until": 18,
+        "observations": 6,
+        "lowest_krw": 39413,
+        "price_index": 0.873,
+        "trend_pct": 46.0,
+        "volatility_pct": 46.0,
+        "bookable_flights": 8,
+        "flights_lost_per_day": 0.29,
+        "days_to_soldout": 27.6,
+        "demand": {
+          "is_holiday": true,
+          "holiday_name": "개천절",
+          "is_sandwich_day": false,
+          "is_long_weekend": true
+        },
+        "urgency": 80,
+        "verdict": "book_now",
+        "headline": "서울→제주 2026-10-03 지금 예약하세요",
+        "reasons": [
+          "같은 기간 다른 후보일 중앙값 대비 -13%",
+          "최저가가 첫 관측 대비 +46% (6회 관측)",
+          "가격 변동 폭이 46%로 큽니다",
+          "예약 가능 편이 18→8편으로 줄었습니다",
+          "개천절 — 수요가 몰리는 날",
+          "출발까지 18일 남았습니다"
+        ]
+      },
+      {
+        "direction": "outbound",
+        "date": "2026-10-09",
+        "days_until": 24,
+        "observations": 6,
+        "lowest_krw": 54721,
+        "price_index": 1.213,
+        "trend_pct": 38.9,
+        "volatility_pct": 38.9,
+        "bookable_flights": 17,
+        "flights_lost_per_day": 0.29,
+        "days_to_soldout": 58.6,
+        "demand": {
+          "is_holiday": true,
+          "holiday_name": "한글날",
+          "is_sandwich_day": false,
+          "is_long_weekend": true
+        },
+        "urgency": 65,
+        "verdict": "book_now",
+        "headline": "서울→제주 2026-10-09 지금 예약하세요",
+        "reasons": [
+          "같은 기간 다른 후보일 중앙값 대비 +21%",
+          "최저가가 첫 관측 대비 +39% (6회 관측)",
+          "가격 변동 폭이 39%로 큽니다",
+          "예약 가능 편이 27→17편으로 줄었습니다",
+          "한글날 — 수요가 몰리는 날"
+        ]
+      },
+      {
+        "direction": "outbound",
+        "date": "2026-10-10",
+        "days_until": 25,
+        "observations": 6,
+        "lowest_krw": 55352,
+        "price_index": 1.227,
+        "trend_pct": 26.0,
+        "volatility_pct": 26.0,
+        "bookable_flights": 6,
+        "flights_lost_per_day": 0.14,
+        "days_to_soldout": 42.9,
+        "demand": {
+          "is_holiday": false,
+          "holiday_name": null,
+          "is_sandwich_day": false,
+          "is_long_weekend": true
+        },
+        "urgency": 55,
+        "verdict": "watch",
+        "headline": "서울→제주 2026-10-10 지켜볼 구간입니다",
+        "reasons": [
+          "같은 기간 다른 후보일 중앙값 대비 +23%",
+          "최저가가 첫 관측 대비 +26% (6회 관측)",
+          "가격 변동 폭이 26%로 큽니다",
+          "예약 가능 편이 11→6편으로 줄었습니다",
+          "3일 이상 연휴 구간"
+        ]
+      },
+      {
+        "direction": "outbound",
+        "date": "2026-10-16",
+        "days_until": 31,
+        "observations": 6,
+        "lowest_krw": 53258,
+        "price_index": 1.18,
+        "trend_pct": 14.9,
+        "volatility_pct": 14.9,
+        "bookable_flights": 19,
+        "flights_lost_per_day": 0.14,
+        "days_to_soldout": 135.7,
+        "demand": {
+          "is_holiday": false,
+          "holiday_name": null,
+          "is_sandwich_day": false,
+          "is_long_weekend": false
+        },
+        "urgency": 25,
+        "verdict": "relaxed",
+        "headline": "서울→제주 2026-10-16 서두르지 않아도 됩니다",
+        "reasons": [
+          "같은 기간 다른 후보일 중앙값 대비 +18%",
+          "최저가가 첫 관측 대비 +15% (6회 관측)",
+          "예약 가능 편이 24→19편으로 줄었습니다"
+        ]
+      },
+      {
+        "direction": "outbound",
+        "date": "2026-10-17",
+        "days_until": 32,
+        "observations": 6,
+        "lowest_krw": 49193,
+        "price_index": 1.09,
+        "trend_pct": 27.7,
+        "volatility_pct": 27.7,
+        "bookable_flights": 6,
+        "flights_lost_per_day": 0.14,
+        "days_to_soldout": 42.9,
+        "demand": {
+          "is_holiday": false,
+          "holiday_name": null,
+          "is_sandwich_day": false,
+          "is_long_weekend": false
+        },
+        "urgency": 35,
+        "verdict": "watch",
+        "headline": "서울→제주 2026-10-17 지켜볼 구간입니다",
+        "reasons": [
+          "최저가가 첫 관측 대비 +28% (6회 관측)",
+          "가격 변동 폭이 28%로 큽니다",
+          "예약 가능 편이 11→6편으로 줄었습니다"
+        ]
+      },
+      {
+        "direction": "outbound",
+        "date": "2026-10-23",
+        "days_until": 38,
+        "observations": 6,
+        "lowest_krw": 43364,
+        "price_index": 0.961,
+        "trend_pct": 18.9,
+        "volatility_pct": 18.9,
+        "bookable_flights": 19,
+        "flights_lost_per_day": 0.14,
+        "days_to_soldout": 135.7,
+        "demand": {
+          "is_holiday": false,
+          "holiday_name": null,
+          "is_sandwich_day": false,
+          "is_long_weekend": false
+        },
+        "urgency": 25,
+        "verdict": "relaxed",
+        "headline": "서울→제주 2026-10-23 서두르지 않아도 됩니다",
+        "reasons": [
+          "최저가가 첫 관측 대비 +19% (6회 관측)",
+          "예약 가능 편이 24→19편으로 줄었습니다"
+        ]
+      },
+      {
+        "direction": "outbound",
+        "date": "2026-10-24",
+        "days_until": 39,
+        "observations": 6,
+        "lowest_krw": 42051,
+        "price_index": 0.932,
+        "trend_pct": 26.0,
+        "volatility_pct": 26.0,
+        "bookable_flights": 7,
+        "flights_lost_per_day": 0.14,
+        "days_to_soldout": 50.0,
+        "demand": {
+          "is_holiday": false,
+          "holiday_name": null,
+          "is_sandwich_day": false,
+          "is_long_weekend": false
+        },
+        "urgency": 35,
+        "verdict": "watch",
+        "headline": "서울→제주 2026-10-24 지켜볼 구간입니다",
+        "reasons": [
+          "최저가가 첫 관측 대비 +26% (6회 관측)",
+          "가격 변동 폭이 26%로 큽니다",
+          "예약 가능 편이 12→7편으로 줄었습니다"
+        ]
+      },
+      {
+        "direction": "outbound",
+        "date": "2026-10-30",
+        "days_until": 45,
+        "observations": 6,
+        "lowest_krw": 53872,
+        "price_index": 1.194,
+        "trend_pct": 17.2,
+        "volatility_pct": 17.2,
+        "bookable_flights": 17,
+        "flights_lost_per_day": 0.14,
+        "days_to_soldout": 121.4,
+        "demand": {
+          "is_holiday": false,
+          "holiday_name": null,
+          "is_sandwich_day": false,
+          "is_long_weekend": false
+        },
+        "urgency": 25,
+        "verdict": "relaxed",
+        "headline": "서울→제주 2026-10-30 서두르지 않아도 됩니다",
+        "reasons": [
+          "같은 기간 다른 후보일 중앙값 대비 +19%",
+          "최저가가 첫 관측 대비 +17% (6회 관측)",
+          "예약 가능 편이 22→17편으로 줄었습니다"
+        ]
+      },
+      {
+        "direction": "outbound",
+        "date": "2026-10-31",
+        "days_until": 46,
+        "observations": 6,
+        "lowest_krw": 50751,
+        "price_index": 1.125,
+        "trend_pct": 21.2,
+        "volatility_pct": 21.2,
+        "bookable_flights": 7,
+        "flights_lost_per_day": 0.14,
+        "days_to_soldout": 50.0,
+        "demand": {
+          "is_holiday": false,
+          "holiday_name": null,
+          "is_sandwich_day": false,
+          "is_long_weekend": false
+        },
+        "urgency": 25,
+        "verdict": "relaxed",
+        "headline": "서울→제주 2026-10-31 서두르지 않아도 됩니다",
+        "reasons": [
+          "같은 기간 다른 후보일 중앙값 대비 +12%",
+          "최저가가 첫 관측 대비 +21% (6회 관측)",
+          "예약 가능 편이 12→7편으로 줄었습니다"
+        ]
+      },
+      {
+        "direction": "outbound",
+        "date": "2026-11-06",
+        "days_until": 52,
+        "observations": 6,
+        "lowest_krw": 42310,
+        "price_index": 0.938,
+        "trend_pct": 28.3,
+        "volatility_pct": 28.3,
+        "bookable_flights": 20,
+        "flights_lost_per_day": 0.14,
+        "days_to_soldout": 142.9,
+        "demand": {
+          "is_holiday": false,
+          "holiday_name": null,
+          "is_sandwich_day": false,
+          "is_long_weekend": false
+        },
+        "urgency": 35,
+        "verdict": "watch",
+        "headline": "서울→제주 2026-11-06 지켜볼 구간입니다",
+        "reasons": [
+          "최저가가 첫 관측 대비 +28% (6회 관측)",
+          "가격 변동 폭이 28%로 큽니다",
+          "예약 가능 편이 25→20편으로 줄었습니다"
+        ]
+      },
+      {
+        "direction": "outbound",
+        "date": "2026-11-07",
+        "days_until": 53,
+        "observations": 6,
+        "lowest_krw": 42800,
+        "price_index": 0.948,
+        "trend_pct": 18.5,
+        "volatility_pct": 18.5,
+        "bookable_flights": 9,
+        "flights_lost_per_day": 0.14,
+        "days_to_soldout": 64.3,
+        "demand": {
+          "is_holiday": false,
+          "holiday_name": null,
+          "is_sandwich_day": false,
+          "is_long_weekend": false
+        },
+        "urgency": 25,
+        "verdict": "relaxed",
+        "headline": "서울→제주 2026-11-07 서두르지 않아도 됩니다",
+        "reasons": [
+          "최저가가 첫 관측 대비 +18% (6회 관측)",
+          "예약 가능 편이 14→9편으로 줄었습니다"
+        ]
+      }
+    ],
+    "inbound": [
+      {
+        "direction": "inbound",
+        "date": "2026-09-20",
+        "days_until": 5,
+        "observations": 6,
+        "lowest_krw": 41109,
+        "price_index": 0.974,
+        "trend_pct": 28.0,
+        "volatility_pct": 28.0,
+        "bookable_flights": 8,
+        "flights_lost_per_day": 0.14,
+        "days_to_soldout": 57.1,
+        "demand": {
+          "is_holiday": false,
+          "holiday_name": null,
+          "is_sandwich_day": false,
+          "is_long_weekend": false
+        },
+        "urgency": 50,
+        "verdict": "watch",
+        "headline": "제주→서울 2026-09-20 지켜볼 구간입니다",
+        "reasons": [
+          "최저가가 첫 관측 대비 +28% (6회 관측)",
+          "가격 변동 폭이 28%로 큽니다",
+          "예약 가능 편이 13→8편으로 줄었습니다",
+          "출발까지 5일 남았습니다"
+        ]
+      },
+      {
+        "direction": "inbound",
+        "date": "2026-09-21",
+        "days_until": 6,
+        "observations": 6,
+        "lowest_krw": 48649,
+        "price_index": 1.153,
+        "trend_pct": 16.0,
+        "volatility_pct": 16.0,
+        "bookable_flights": 24,
+        "flights_lost_per_day": 0.14,
+        "days_to_soldout": 171.4,
+        "demand": {
+          "is_holiday": false,
+          "holiday_name": null,
+          "is_sandwich_day": false,
+          "is_long_weekend": false
+        },
+        "urgency": 40,
+        "verdict": "watch",
+        "headline": "제주→서울 2026-09-21 지켜볼 구간입니다",
+        "reasons": [
+          "같은 기간 다른 후보일 중앙값 대비 +15%",
+          "최저가가 첫 관측 대비 +16% (6회 관측)",
+          "예약 가능 편이 29→24편으로 줄었습니다",
+          "출발까지 6일 남았습니다"
+        ]
+      },
+      {
+        "direction": "inbound",
+        "date": "2026-09-27",
+        "days_until": 12,
+        "observations": 6,
+        "lowest_krw": 41416,
+        "price_index": 0.982,
+        "trend_pct": 22.5,
+        "volatility_pct": 22.5,
+        "bookable_flights": 8,
+        "flights_lost_per_day": 0.14,
+        "days_to_soldout": 57.1,
+        "demand": {
+          "is_holiday": false,
+          "holiday_name": null,
+          "is_sandwich_day": false,
+          "is_long_weekend": true
+        },
+        "urgency": 60,
+        "verdict": "book_now",
+        "headline": "제주→서울 2026-09-27 지금 예약하세요",
+        "reasons": [
+          "최저가가 첫 관측 대비 +22% (6회 관측)",
+          "예약 가능 편이 13→8편으로 줄었습니다",
+          "3일 이상 연휴 구간",
+          "출발까지 12일 남았습니다"
+        ]
+      },
+      {
+        "direction": "inbound",
+        "date": "2026-09-28",
+        "days_until": 13,
+        "observations": 6,
+        "lowest_krw": 45898,
+        "price_index": 1.088,
+        "trend_pct": 25.2,
+        "volatility_pct": 25.2,
+        "bookable_flights": 25,
+        "flights_lost_per_day": 0.14,
+        "days_to_soldout": 178.6,
+        "demand": {
+          "is_holiday": false,
+          "holiday_name": null,
+          "is_sandwich_day": false,
+          "is_long_weekend": false
+        },
+        "urgency": 50,
+        "verdict": "watch",
+        "headline": "제주→서울 2026-09-28 지켜볼 구간입니다",
+        "reasons": [
+          "최저가가 첫 관측 대비 +25% (6회 관측)",
+          "가격 변동 폭이 25%로 큽니다",
+          "예약 가능 편이 30→25편으로 줄었습니다",
+          "출발까지 13일 남았습니다"
+        ]
+      },
+      {
+        "direction": "inbound",
+        "date": "2026-10-04",
+        "days_until": 19,
+        "observations": 6,
+        "lowest_krw": 42034,
+        "price_index": 0.996,
+        "trend_pct": 25.7,
+        "volatility_pct": 25.7,
+        "bookable_flights": 7,
+        "flights_lost_per_day": 0.14,
+        "days_to_soldout": 50.0,
+        "demand": {
+          "is_holiday": false,
+          "holiday_name": null,
+          "is_sandwich_day": false,
+          "is_long_weekend": true
+        },
+        "urgency": 70,
+        "verdict": "book_now",
+        "headline": "제주→서울 2026-10-04 지금 예약하세요",
+        "reasons": [
+          "최저가가 첫 관측 대비 +26% (6회 관측)",
+          "가격 변동 폭이 26%로 큽니다",
+          "예약 가능 편이 12→7편으로 줄었습니다",
+          "3일 이상 연휴 구간",
+          "출발까지 19일 남았습니다"
+        ]
+      },
+      {
+        "direction": "inbound",
+        "date": "2026-10-05",
+        "days_until": 20,
+        "observations": 6,
+        "lowest_krw": 42347,
+        "price_index": 1.004,
+        "trend_pct": 43.1,
+        "volatility_pct": 43.1,
+        "bookable_flights": 21,
+        "flights_lost_per_day": 0.29,
+        "days_to_soldout": 72.4,
+        "demand": {
+          "is_holiday": true,
+          "holiday_name": "개천절 대체공휴일",
+          "is_sandwich_day": false,
+          "is_long_weekend": true
+        },
+        "urgency": 80,
+        "verdict": "book_now",
+        "headline": "제주→서울 2026-10-05 지금 예약하세요",
+        "reasons": [
+          "최저가가 첫 관측 대비 +43% (6회 관측)",
+          "가격 변동 폭이 43%로 큽니다",
+          "예약 가능 편이 31→21편으로 줄었습니다",
+          "개천절 대체공휴일 — 수요가 몰리는 날",
+          "출발까지 20일 남았습니다"
+        ]
+      },
+      {
+        "direction": "inbound",
+        "date": "2026-10-11",
+        "days_until": 26,
+        "observations": 6,
+        "lowest_krw": 69323,
+        "price_index": 1.643,
+        "trend_pct": 15.1,
+        "volatility_pct": 15.1,
+        "bookable_flights": 6,
+        "flights_lost_per_day": 0.14,
+        "days_to_soldout": 42.9,
+        "demand": {
+          "is_holiday": false,
+          "holiday_name": null,
+          "is_sandwich_day": false,
+          "is_long_weekend": true
+        },
+        "urgency": 45,
+        "verdict": "watch",
+        "headline": "제주→서울 2026-10-11 지켜볼 구간입니다",
+        "reasons": [
+          "같은 기간 다른 후보일 중앙값 대비 +64%",
+          "최저가가 첫 관측 대비 +15% (6회 관측)",
+          "예약 가능 편이 11→6편으로 줄었습니다",
+          "3일 이상 연휴 구간"
+        ]
+      },
+      {
+        "direction": "inbound",
+        "date": "2026-10-12",
+        "days_until": 27,
+        "observations": 6,
+        "lowest_krw": 40022,
+        "price_index": 0.949,
+        "trend_pct": 21.7,
+        "volatility_pct": 21.7,
+        "bookable_flights": 22,
+        "flights_lost_per_day": 0.14,
+        "days_to_soldout": 157.1,
+        "demand": {
+          "is_holiday": false,
+          "holiday_name": null,
+          "is_sandwich_day": false,
+          "is_long_weekend": false
+        },
+        "urgency": 25,
+        "verdict": "relaxed",
+        "headline": "제주→서울 2026-10-12 서두르지 않아도 됩니다",
+        "reasons": [
+          "최저가가 첫 관측 대비 +22% (6회 관측)",
+          "예약 가능 편이 27→22편으로 줄었습니다"
+        ]
+      },
+      {
+        "direction": "inbound",
+        "date": "2026-10-18",
+        "days_until": 33,
+        "observations": 6,
+        "lowest_krw": 70020,
+        "price_index": 1.66,
+        "trend_pct": 21.7,
+        "volatility_pct": 21.7,
+        "bookable_flights": 7,
+        "flights_lost_per_day": 0.14,
+        "days_to_soldout": 50.0,
+        "demand": {
+          "is_holiday": false,
+          "holiday_name": null,
+          "is_sandwich_day": false,
+          "is_long_weekend": false
+        },
+        "urgency": 25,
+        "verdict": "relaxed",
+        "headline": "제주→서울 2026-10-18 서두르지 않아도 됩니다",
+        "reasons": [
+          "같은 기간 다른 후보일 중앙값 대비 +66%",
+          "최저가가 첫 관측 대비 +22% (6회 관측)",
+          "예약 가능 편이 12→7편으로 줄었습니다"
+        ]
+      },
+      {
+        "direction": "inbound",
+        "date": "2026-10-19",
+        "days_until": 34,
+        "observations": 6,
+        "lowest_krw": 40675,
+        "price_index": 0.964,
+        "trend_pct": 25.2,
+        "volatility_pct": 25.2,
+        "bookable_flights": 24,
+        "flights_lost_per_day": 0.14,
+        "days_to_soldout": 171.4,
+        "demand": {
+          "is_holiday": false,
+          "holiday_name": null,
+          "is_sandwich_day": false,
+          "is_long_weekend": false
+        },
+        "urgency": 35,
+        "verdict": "watch",
+        "headline": "제주→서울 2026-10-19 지켜볼 구간입니다",
+        "reasons": [
+          "최저가가 첫 관측 대비 +25% (6회 관측)",
+          "가격 변동 폭이 25%로 큽니다",
+          "예약 가능 편이 29→24편으로 줄었습니다"
+        ]
+      },
+      {
+        "direction": "inbound",
+        "date": "2026-10-25",
+        "days_until": 40,
+        "observations": 6,
+        "lowest_krw": 43068,
+        "price_index": 1.021,
+        "trend_pct": 17.5,
+        "volatility_pct": 17.5,
+        "bookable_flights": 8,
+        "flights_lost_per_day": 0.14,
+        "days_to_soldout": 57.1,
+        "demand": {
+          "is_holiday": false,
+          "holiday_name": null,
+          "is_sandwich_day": false,
+          "is_long_weekend": false
+        },
+        "urgency": 25,
+        "verdict": "relaxed",
+        "headline": "제주→서울 2026-10-25 서두르지 않아도 됩니다",
+        "reasons": [
+          "최저가가 첫 관측 대비 +18% (6회 관측)",
+          "예약 가능 편이 13→8편으로 줄었습니다"
+        ]
+      },
+      {
+        "direction": "inbound",
+        "date": "2026-10-26",
+        "days_until": 41,
+        "observations": 6,
+        "lowest_krw": 47884,
+        "price_index": 1.135,
+        "trend_pct": 15.6,
+        "volatility_pct": 15.6,
+        "bookable_flights": 24,
+        "flights_lost_per_day": 0.14,
+        "days_to_soldout": 171.4,
+        "demand": {
+          "is_holiday": false,
+          "holiday_name": null,
+          "is_sandwich_day": false,
+          "is_long_weekend": false
+        },
+        "urgency": 25,
+        "verdict": "relaxed",
+        "headline": "제주→서울 2026-10-26 서두르지 않아도 됩니다",
+        "reasons": [
+          "같은 기간 다른 후보일 중앙값 대비 +14%",
+          "최저가가 첫 관측 대비 +16% (6회 관측)",
+          "예약 가능 편이 29→24편으로 줄었습니다"
+        ]
+      },
+      {
+        "direction": "inbound",
+        "date": "2026-11-01",
+        "days_until": 47,
+        "observations": 6,
+        "lowest_krw": 84229,
+        "price_index": 1.996,
+        "trend_pct": 24.4,
+        "volatility_pct": 24.4,
+        "bookable_flights": 7,
+        "flights_lost_per_day": 0.14,
+        "days_to_soldout": 50.0,
+        "demand": {
+          "is_holiday": false,
+          "holiday_name": null,
+          "is_sandwich_day": false,
+          "is_long_weekend": false
+        },
+        "urgency": 25,
+        "verdict": "relaxed",
+        "headline": "제주→서울 2026-11-01 서두르지 않아도 됩니다",
+        "reasons": [
+          "같은 기간 다른 후보일 중앙값 대비 +100%",
+          "최저가가 첫 관측 대비 +24% (6회 관측)",
+          "예약 가능 편이 12→7편으로 줄었습니다"
+        ]
+      },
+      {
+        "direction": "inbound",
+        "date": "2026-11-02",
+        "days_until": 48,
+        "observations": 6,
+        "lowest_krw": 41738,
+        "price_index": 0.989,
+        "trend_pct": 18.9,
+        "volatility_pct": 18.9,
+        "bookable_flights": 22,
+        "flights_lost_per_day": 0.14,
+        "days_to_soldout": 157.1,
+        "demand": {
+          "is_holiday": false,
+          "holiday_name": null,
+          "is_sandwich_day": false,
+          "is_long_weekend": false
+        },
+        "urgency": 25,
+        "verdict": "relaxed",
+        "headline": "제주→서울 2026-11-02 서두르지 않아도 됩니다",
+        "reasons": [
+          "최저가가 첫 관측 대비 +19% (6회 관측)",
+          "예약 가능 편이 27→22편으로 줄었습니다"
+        ]
+      },
+      {
+        "direction": "inbound",
+        "date": "2026-11-08",
+        "days_until": 54,
+        "observations": 6,
+        "lowest_krw": 41875,
+        "price_index": 0.993,
+        "trend_pct": 27.4,
+        "volatility_pct": 27.4,
+        "bookable_flights": 7,
+        "flights_lost_per_day": 0.14,
+        "days_to_soldout": 50.0,
+        "demand": {
+          "is_holiday": false,
+          "holiday_name": null,
+          "is_sandwich_day": false,
+          "is_long_weekend": false
+        },
+        "urgency": 65,
+        "verdict": "book_now",
+        "headline": "제주→서울 2026-11-08 지금 예약하세요",
+        "reasons": [
+          "최저가가 첫 관측 대비 +27% (6회 관측)",
+          "가격 변동 폭이 27%로 큽니다",
+          "예약 가능 편이 12→7편으로 줄었습니다",
+          "이 속도가 이어지면 출발 54일 전보다 앞서 매진될 수 있습니다 (단순 선형 추정)"
+        ]
+      },
+      {
+        "direction": "inbound",
+        "date": "2026-11-09",
+        "days_until": 55,
+        "observations": 6,
+        "lowest_krw": 41546,
+        "price_index": 0.985,
+        "trend_pct": 14.2,
+        "volatility_pct": 14.2,
+        "bookable_flights": 24,
+        "flights_lost_per_day": 0.14,
+        "days_to_soldout": 171.4,
+        "demand": {
+          "is_holiday": false,
+          "holiday_name": null,
+          "is_sandwich_day": false,
+          "is_long_weekend": false
+        },
+        "urgency": 25,
+        "verdict": "relaxed",
+        "headline": "제주→서울 2026-11-09 서두르지 않아도 됩니다",
+        "reasons": [
+          "최저가가 첫 관측 대비 +14% (6회 관측)",
+          "예약 가능 편이 29→24편으로 줄었습니다"
+        ]
+      }
+    ]
+  },
+  "top_actions": [
+    {
+      "direction": "outbound",
+      "date": "2026-09-25",
+      "days_until": 10,
+      "observations": 6,
+      "lowest_krw": 40828,
+      "price_index": 0.905,
+      "trend_pct": 42.4,
+      "volatility_pct": 42.4,
+      "bookable_flights": 19,
+      "flights_lost_per_day": 0.29,
+      "days_to_soldout": 65.5,
+      "demand": {
+        "is_holiday": true,
+        "holiday_name": "추석",
+        "is_sandwich_day": false,
+        "is_long_weekend": true
+      },
+      "urgency": 80,
+      "verdict": "book_now",
+      "headline": "서울→제주 2026-09-25 지금 예약하세요",
+      "reasons": [
+        "최저가가 첫 관측 대비 +42% (6회 관측)",
+        "가격 변동 폭이 42%로 큽니다",
+        "예약 가능 편이 29→19편으로 줄었습니다",
+        "추석 — 수요가 몰리는 날",
+        "출발까지 10일 남았습니다"
+      ]
+    },
+    {
+      "direction": "outbound",
+      "date": "2026-09-26",
+      "days_until": 11,
+      "observations": 6,
+      "lowest_krw": 54382,
+      "price_index": 1.205,
+      "trend_pct": 44.5,
+      "volatility_pct": 44.5,
+      "bookable_flights": 8,
+      "flights_lost_per_day": 0.29,
+      "days_to_soldout": 27.6,
+      "demand": {
+        "is_holiday": true,
+        "holiday_name": "추석연휴",
+        "is_sandwich_day": false,
+        "is_long_weekend": true
+      },
+      "urgency": 80,
+      "verdict": "book_now",
+      "headline": "서울→제주 2026-09-26 지금 예약하세요",
+      "reasons": [
+        "같은 기간 다른 후보일 중앙값 대비 +21%",
+        "최저가가 첫 관측 대비 +44% (6회 관측)",
+        "가격 변동 폭이 44%로 큽니다",
+        "예약 가능 편이 18→8편으로 줄었습니다",
+        "추석연휴 — 수요가 몰리는 날",
+        "출발까지 11일 남았습니다"
+      ]
+    },
+    {
+      "direction": "outbound",
+      "date": "2026-10-03",
+      "days_until": 18,
+      "observations": 6,
+      "lowest_krw": 39413,
+      "price_index": 0.873,
+      "trend_pct": 46.0,
+      "volatility_pct": 46.0,
+      "bookable_flights": 8,
+      "flights_lost_per_day": 0.29,
+      "days_to_soldout": 27.6,
+      "demand": {
+        "is_holiday": true,
+        "holiday_name": "개천절",
+        "is_sandwich_day": false,
+        "is_long_weekend": true
+      },
+      "urgency": 80,
+      "verdict": "book_now",
+      "headline": "서울→제주 2026-10-03 지금 예약하세요",
+      "reasons": [
+        "같은 기간 다른 후보일 중앙값 대비 -13%",
+        "최저가가 첫 관측 대비 +46% (6회 관측)",
+        "가격 변동 폭이 46%로 큽니다",
+        "예약 가능 편이 18→8편으로 줄었습니다",
+        "개천절 — 수요가 몰리는 날",
+        "출발까지 18일 남았습니다"
+      ]
+    },
+    {
+      "direction": "inbound",
+      "date": "2026-10-05",
+      "days_until": 20,
+      "observations": 6,
+      "lowest_krw": 42347,
+      "price_index": 1.004,
+      "trend_pct": 43.1,
+      "volatility_pct": 43.1,
+      "bookable_flights": 21,
+      "flights_lost_per_day": 0.29,
+      "days_to_soldout": 72.4,
+      "demand": {
+        "is_holiday": true,
+        "holiday_name": "개천절 대체공휴일",
+        "is_sandwich_day": false,
+        "is_long_weekend": true
+      },
+      "urgency": 80,
+      "verdict": "book_now",
+      "headline": "제주→서울 2026-10-05 지금 예약하세요",
+      "reasons": [
+        "최저가가 첫 관측 대비 +43% (6회 관측)",
+        "가격 변동 폭이 43%로 큽니다",
+        "예약 가능 편이 31→21편으로 줄었습니다",
+        "개천절 대체공휴일 — 수요가 몰리는 날",
+        "출발까지 20일 남았습니다"
+      ]
+    }
+  ]
+}

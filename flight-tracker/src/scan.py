@@ -18,11 +18,14 @@ import datetime as dt
 import json
 from pathlib import Path
 
+import insights
 import rules
 from providers.base import FlightOffer, ProviderError
 from providers.mock_provider import MockProvider
 
-DATA_PATH = Path(__file__).resolve().parents[1] / "data" / "results.json"
+DATA_DIR = Path(__file__).resolve().parents[1] / "data"
+DATA_PATH = DATA_DIR / "results.json"
+INSIGHTS_PATH = DATA_DIR / "insights.json"
 WEEKS_AHEAD_DEFAULT = 8  # 약 2개월
 
 
@@ -105,15 +108,33 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--provider", choices=["mock", "live"], default="mock")
     parser.add_argument("--weeks-ahead", type=int, default=WEEKS_AHEAD_DEFAULT)
+    parser.add_argument(
+        "--backfill", type=int, default=0, metavar="N",
+        help="목업 전용: 과거 N회분 관측 이력을 합성해 추세·매진속도 화면을 확인용으로 채운다",
+    )
     args = parser.parse_args()
 
+    if args.backfill and args.provider != "mock":
+        parser.error("--backfill 은 목업에서만 씁니다. 실데이터 이력은 스캔이 반복되며 쌓입니다.")
+
     output = run(args.provider, args.weeks_ahead)
-    DATA_PATH.parent.mkdir(parents=True, exist_ok=True)
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
     DATA_PATH.write_text(json.dumps(output, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    if args.backfill:
+        from providers.mock_provider import synth_history
+
+        insights.HISTORY_PATH.unlink(missing_ok=True)
+        insights.append_history(synth_history(output, runs=args.backfill))
+
+    insights.append_history(insights.observations_from_results(output))
+    report = insights.build(output, insights.load_history())
+    INSIGHTS_PATH.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
 
     n_out = sum(1 for f in output["outbound"]["flights"] if f["in_target_window"])
     n_in = sum(1 for f in output["inbound"]["flights"] if f["in_target_window"])
     print(f"[scan] provider={args.provider} outbound(창내)={n_out}건 inbound(창내)={n_in}건 -> {DATA_PATH}")
+    print(f"[scan] 관측 {report['observation_runs']}회 · 조치 권고 {len(report['top_actions'])}건 -> {INSIGHTS_PATH}")
     if output["outbound"]["skipped"] or output["inbound"]["skipped"]:
         print(
             f"[scan] 건너뛴 항공사/날짜: outbound={len(output['outbound']['skipped'])}, "

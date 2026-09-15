@@ -121,6 +121,33 @@
   }
 
   .shell { max-width: 560px; margin: 0 auto; padding-inline: 16px; padding-bottom: 44px; }
+  .cols { display: grid; gap: 12px; }
+
+  /* 데스크톱: 화면을 넓게 쓰고, 항공편 목록과 부가 정보를 나란히 둔다 */
+  @media (min-width: 900px) {
+    body { font-size: 15px; }
+    .shell, .header-inner { max-width: 1180px; }
+    h1 { font-size: 22px; }
+    .segmented { max-width: 420px; }
+    .cols {
+      grid-template-columns: minmax(0, 1.5fr) minmax(330px, 1fr);
+      gap: 18px; align-items: start;
+    }
+    .cols > main { order: 1; }
+    .cols > aside { order: 2; display: flex; flex-direction: column; gap: 12px; }
+    .cols > aside > div { margin: 0; }
+    .weather { margin-bottom: 0; }
+    .ops, .summary { margin-bottom: 0; }
+    .chip { width: 62px; }
+    .chip .day { font-size: 21px; }
+    .arow { padding: 14px 18px; }
+    .aname { font-size: 15px; }
+    tbody td { font-size: 13.5px; padding: 10px 0; }
+    .actions { grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); }
+  }
+  @media (min-width: 1280px) {
+    .shell, .header-inner { max-width: 1320px; }
+  }
 
   header {
     position: sticky;
@@ -251,6 +278,38 @@
   .ops-legend b { color: var(--text); font-weight: 700; font-variant-numeric: tabular-nums; }
   .ops-note { margin-top: 10px; font-size: 10.5px; color: var(--faint); line-height: 1.5; }
 
+  /* 구매 제안 */
+  .actions-head { display: flex; align-items: baseline; gap: 9px; margin: 20px 0 9px; }
+  .actions-title { font-size: 13px; font-weight: 700; letter-spacing: -0.02em; }
+  .actions-sub { font-size: 10.5px; color: var(--faint); }
+  .actions { display: grid; gap: 10px; margin-bottom: 4px; }
+  .action { padding: 13px 15px; border-left: 3px solid var(--vcolor, var(--accent)); }
+  .action-top { display: flex; align-items: center; gap: 8px; margin-bottom: 7px; }
+  .vchip {
+    font-size: 10.5px; font-weight: 700; padding: 2.5px 8px; border-radius: 999px;
+    color: var(--vcolor); background: color-mix(in srgb, var(--vcolor) 16%, transparent);
+    border: 1px solid color-mix(in srgb, var(--vcolor) 32%, transparent); flex: 0 0 auto;
+  }
+  .action-when { font-size: 12.5px; font-weight: 700; letter-spacing: -0.02em; }
+  .action-left { margin-left: auto; font-size: 10.5px; color: var(--faint); font-variant-numeric: tabular-nums; }
+  .reasons { margin: 0; padding-left: 15px; display: grid; gap: 3px; }
+  .reasons li { font-size: 11.5px; color: var(--muted); line-height: 1.45; }
+
+  /* 선택일 인사이트 */
+  .insight { padding: 14px 16px; }
+  .insight-head { display: flex; align-items: center; gap: 8px; margin-bottom: 11px; }
+  .insight-title { font-size: 13px; font-weight: 700; letter-spacing: -0.02em; }
+  .metrics-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 11px 14px; margin-bottom: 11px; }
+  .metric-k { font-size: 10px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--faint); }
+  .metric-v { font-size: 15px; font-weight: 700; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+  .metric-v.up { color: var(--bad); }
+  .metric-v.down { color: var(--ok); }
+  .metric-v.none { color: var(--faint); font-size: 12px; font-weight: 500; }
+  .insight-note { font-size: 10.5px; color: var(--faint); line-height: 1.5; margin-top: 9px; }
+
+  .chip.urgent { box-shadow: inset 0 1px 0 var(--glass-spec), 0 0 0 2px var(--bad-fill), 0 4px 14px var(--glass-shadow); }
+  .chip[aria-pressed="true"].urgent { box-shadow: inset 0 1px 0 var(--glass-spec), 0 0 0 2px var(--bad-fill); }
+
   /* 항공사 목록 */
   .list-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 9px; }
   .list-title { font-size: 13px; font-weight: 700; letter-spacing: -0.02em; }
@@ -322,19 +381,28 @@
 
   <div class="rail-wrap"><div class="rail" id="rail" role="group" aria-label="출발 날짜"></div></div>
 
-  <div id="summary"></div>
-  <div class="weather" id="weather"></div>
-  <div id="ops"></div>
+  <div id="actions"></div>
 
-  <div class="list-head">
-    <div class="list-title">항공사별 예약 가능 여부</div>
-    <div class="legend" aria-hidden="true">
-      <span><i style="background:var(--ok-fill)"></i>있음</span>
-      <span><i style="background:var(--warn-fill)"></i>적음</span>
-      <span><i style="background:var(--bad-fill)"></i>매진</span>
-    </div>
+  <div class="cols">
+    <aside>
+      <div id="summary"></div>
+      <div class="weather" id="weather"></div>
+      <div id="insight"></div>
+      <div id="ops"></div>
+    </aside>
+
+    <main>
+      <div class="list-head">
+        <div class="list-title">항공사별 예약 가능 여부</div>
+        <div class="legend" aria-hidden="true">
+          <span><i style="background:var(--ok-fill)"></i>있음</span>
+          <span><i style="background:var(--warn-fill)"></i>적음</span>
+          <span><i style="background:var(--bad-fill)"></i>매진</span>
+        </div>
+      </div>
+      <div class="list glass" id="list"></div>
+    </main>
   </div>
-  <div class="list glass" id="list"></div>
 </div>
 
 <script>
@@ -382,29 +450,40 @@ const REFRESH_MS = 10 * 60 * 1000; // 10분 주기 갱신
 // 값이 고정된 스냅샷이므로 자동 갱신을 켜지 않고 "언제 기준"인지만 밝힌다.
 const SNAPSHOT = window.__SNAPSHOT__ || null;
 
-let flights = null, weather = null, delays = null;
+let flights = null, weather = null, delays = null, insights = null;
 let direction = 'outbound', selectedDate = null, expanded = null;
 let lastUpdated = null, isStale = false;
+
+const VERDICT = {
+  book_now:     { label: '지금 예약', color: 'var(--bad)' },
+  watch:        { label: '주시',      color: 'var(--warn)' },
+  relaxed:      { label: '여유',      color: 'var(--ok)' },
+  gone:         { label: '매진',      color: 'var(--none)' },
+  insufficient: { label: '관측 부족', color: 'var(--faint)' },
+};
 
 async function fetchAll() {
   if (SNAPSHOT) {
     flights = SNAPSHOT.results;
     weather = SNAPSHOT.weather;
     delays = SNAPSHOT.delays;
+    insights = SNAPSHOT.insights;
     lastUpdated = new Date(SNAPSHOT.generated_at);
     isStale = false;
     return true;
   }
-  const [f, w, d] = await Promise.allSettled([
-    fetch(DATA_BASE + 'results.json', { cache: 'no-store' }).then(r => r.json()),
-    fetch(DATA_BASE + 'weather.json', { cache: 'no-store' }).then(r => r.json()),
-    fetch(DATA_BASE + 'delays.json',  { cache: 'no-store' }).then(r => r.json()),
+  const [f, w, d, i] = await Promise.allSettled([
+    fetch(DATA_BASE + 'results.json',  { cache: 'no-store' }).then(r => r.json()),
+    fetch(DATA_BASE + 'weather.json',  { cache: 'no-store' }).then(r => r.json()),
+    fetch(DATA_BASE + 'delays.json',   { cache: 'no-store' }).then(r => r.json()),
+    fetch(DATA_BASE + 'insights.json', { cache: 'no-store' }).then(r => r.json()),
   ]);
   // 갱신에 실패하면 화면을 비우지 않고 직전 값을 유지한 채 '오래됨'으로 표시한다.
   if (f.status !== 'fulfilled') { isStale = true; return false; }
   flights = f.value;
   weather = w.status === 'fulfilled' ? w.value : null;
   delays  = d.status === 'fulfilled' ? d.value : null;
+  insights = i.status === 'fulfilled' ? i.value : null;
   lastUpdated = new Date();
   isStale = false;
   return true;
@@ -521,6 +600,7 @@ function renderAll() {
     selectedDate = dates[0][0];
     expanded = null;
   }
+  renderActions();
   renderRail(dates);
   renderDay();
 }
@@ -541,12 +621,14 @@ function renderRail(dates) {
     const mark = demand.is_holiday ? 'var(--bad-fill)'
               : demand.is_sandwich_day ? 'var(--warn-fill)'
               : demand.is_long_weekend ? 'var(--accent)' : 'transparent';
+    const urgent = insightFor(dateStr)?.verdict === 'book_now';
     const chip = document.createElement('button');
     chip.type = 'button';
-    chip.className = 'chip';
+    chip.className = 'chip' + (urgent ? ' urgent' : '');
     chip.dataset.date = dateStr;
     chip.setAttribute('aria-pressed', String(dateStr === selectedDate));
-    chip.setAttribute('aria-label', `${d.getMonth() + 1}월 ${d.getDate()}일 ${DOW[d.getDay()]}요일`);
+    chip.setAttribute('aria-label',
+      `${d.getMonth() + 1}월 ${d.getDate()}일 ${DOW[d.getDay()]}요일${urgent ? ' · 지금 예약 권장' : ''}`);
     chip.innerHTML = `<div class="dow">${DOW[d.getDay()]}</div>` +
                      `<div class="day">${d.getDate()}</div>` +
                      `<div class="mark"><i style="background:${mark}"></i></div>`;
@@ -574,8 +656,82 @@ function scrollSelectedIntoView() {
 function renderDay() {
   renderSummary();
   renderWeather();
+  renderInsight();
   renderOps();
   renderList();
+}
+
+function insightFor(dateStr) {
+  return insights?.by_direction?.[direction]?.find(i => i.date === dateStr) || null;
+}
+
+function renderActions() {
+  const el = document.getElementById('actions');
+  const actions = insights?.top_actions || [];
+  if (!actions.length) { el.innerHTML = ''; return; }
+
+  const cards = actions.map(a => {
+    const v = VERDICT[a.verdict] || VERDICT.relaxed;
+    const d = new Date(a.date + 'T00:00:00');
+    const route = a.direction === 'outbound' ? '서울 → 제주' : '제주 → 서울';
+    const reasons = a.reasons.slice(0, 3).map(r => `<li>${r}</li>`).join('');
+    return `<div class="action glass" style="--vcolor:${v.color}">
+      <div class="action-top">
+        <span class="vchip">${v.label}</span>
+        <span class="action-when">${route} · ${d.getMonth() + 1}.${d.getDate()}(${DOW[d.getDay()]})</span>
+        <span class="action-left">D-${a.days_until}</span>
+      </div>
+      <ul class="reasons">${reasons}</ul>
+    </div>`;
+  }).join('');
+
+  el.innerHTML = `
+    <div class="actions-head">
+      <span class="actions-title">지금 챙겨야 할 날짜</span>
+      <span class="actions-sub">관측 ${insights.observation_runs}회 기준 · 근거는 모두 실제 계산값</span>
+    </div>
+    <div class="actions">${cards}</div>`;
+}
+
+function renderInsight() {
+  const el = document.getElementById('insight');
+  const ins = insightFor(selectedDate);
+  if (!ins) { el.innerHTML = ''; return; }
+
+  const v = VERDICT[ins.verdict] || VERDICT.relaxed;
+  const pct = (n, signed = true) => {
+    if (n === null || n === undefined) return '<span class="metric-v none">관측 부족</span>';
+    const cls = signed ? (n > 0 ? 'up' : n < 0 ? 'down' : '') : (n >= 25 ? 'up' : '');
+    return `<span class="metric-v ${cls}">${signed && n > 0 ? '+' : ''}${n.toFixed(0)}%</span>`;
+  };
+
+  const idx = ins.price_index == null ? '<span class="metric-v none">—</span>'
+    : `<span class="metric-v ${ins.price_index > 1.1 ? 'up' : ins.price_index < 0.9 ? 'down' : ''}">${
+        ((ins.price_index - 1) * 100 > 0 ? '+' : '')}${((ins.price_index - 1) * 100).toFixed(0)}%</span>`;
+
+  // 매진 추정일이 출발일보다 멀면 그 숫자는 의미가 없다 — 며칠 남았다고 적으면
+  // 출발 3일 전에 "매진까지 121일" 같은 말이 된다.
+  const burn = ins.days_to_soldout == null
+    ? '<span class="metric-v none">관측 부족</span>'
+    : ins.days_to_soldout <= ins.days_until
+      ? `<span class="metric-v up">약 ${Math.round(ins.days_to_soldout)}일 뒤</span>`
+      : '<span class="metric-v none">출발 전 매진 가능성 낮음</span>';
+
+  el.innerHTML = `<div class="insight glass">
+    <div class="insight-head">
+      <span class="vchip" style="--vcolor:${v.color}">${v.label}</span>
+      <span class="insight-title">이 날짜 진단</span>
+    </div>
+    <div class="metrics-grid">
+      <div><div class="metric-k">가격 추세</div>${pct(ins.trend_pct)}</div>
+      <div><div class="metric-k">변동 폭</div>${pct(ins.volatility_pct, false)}</div>
+      <div><div class="metric-k">다른 날 대비</div>${idx}</div>
+      <div><div class="metric-k">매진까지</div>${burn}</div>
+    </div>
+    ${ins.reasons.length ? `<ul class="reasons">${ins.reasons.map(r => `<li>${r}</li>`).join('')}</ul>` : ''}
+    <div class="insight-note">추세·변동 폭·매진 속도는 이 저장소가 실제로 관측한 기록으로만 계산합니다.
+      매진 시점은 최근 감소 속도를 그대로 이은 단순 추정입니다.</div>
+  </div>`;
 }
 
 function renderSummary() {
