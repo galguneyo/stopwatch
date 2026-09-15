@@ -440,7 +440,7 @@
       <a class="stamp dl" id="download" download
          href="../dist/갈매기의-귀향-플래너.html"
          title="이 대시보드를 HTML 파일 하나로 내려받습니다">
-        <span aria-hidden="true">⤓</span> HTML 저장
+        <span aria-hidden="true">⤓</span><span class="dl-text">HTML 저장</span>
       </a>
     </div>
   </div>
@@ -590,6 +590,41 @@ function renderStamp() {
   text.textContent = `10분마다 자동 갱신 · ${ago}`;
 }
 
+const STANDALONE_NAME = '갈매기의-귀향-플래너.html';
+
+async function setupDownload() {
+  // 단일 파일로 저장된 버전은 이미 그 파일 자체이므로 저장 버튼이 의미 없다.
+  const dl = document.getElementById('download');
+  if (SNAPSHOT) { dl.remove(); return; }
+
+  const href = DATA_BASE.replace(/data\/$/, 'dist/') + STANDALONE_NAME;
+  dl.href = href;
+
+  // 아티팩트 뷰어는 페이지가 스스로 시작한 다운로드를 막는다. 그쪽에서는 전용
+  // downloads 기능으로 저장하고, 일반 호스팅에서는 위 링크가 그대로 동작한다.
+  const pending = window.claude?.use?.('downloads');
+  const downloads = pending ? await pending.catch(() => null) : null;
+  if (!downloads) return;
+
+  const label = dl.querySelector('.dl-text');
+  const reset = () => { label.textContent = 'HTML 저장'; };
+
+  dl.addEventListener('click', async (e) => {
+    e.preventDefault();
+    label.textContent = '저장 중…';
+    try {
+      const res = await fetch(href, { cache: 'no-store' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      await downloads.save({ filename: STANDALONE_NAME, data: await res.blob() });
+      reset();
+    } catch (err) {
+      // 사용자가 거절한 것은 실패가 아니다 — 조용히 되돌린다.
+      label.textContent = err?.code === 'declined' ? 'HTML 저장' : '저장 불가';
+      setTimeout(reset, 2500);
+    }
+  });
+}
+
 async function boot() {
   await fetchAll();
 
@@ -600,10 +635,7 @@ async function boot() {
     return;
   }
 
-  // 단일 파일로 저장된 버전에서는 이미 파일을 갖고 있으므로 저장 버튼이 의미 없다.
-  const dl = document.getElementById('download');
-  if (SNAPSHOT) dl.remove();
-  else dl.href = DATA_BASE.replace(/data\/$/, 'dist/') + '갈매기의-귀향-플래너.html';
+  setupDownload();
 
   if (SNAPSHOT) {
     document.getElementById('stamp').disabled = true;
