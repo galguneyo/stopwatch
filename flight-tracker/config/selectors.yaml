@@ -1,0 +1,90 @@
+# 항공사별 실시간 조회용 CSS 셀렉터 설정.
+#
+# 아래 값은 전부 미검증 placeholder입니다. `verified: true` 로 바뀌기 전에는
+# playwright_provider.py 가 의도적으로 에러를 던져 "확인 안 된 값으로 조회했다"는
+# 상황을 방지합니다.
+#
+# 채우는 방법:
+#   1) 실제 인터넷이 되는 환경(로컬 PC 등)에서 브라우저로 각 항공사 국내선
+#      예매 검색 결과 화면을 연다 (서울<->제주, 편도, 직항).
+#   2) 개발자도구(F12) Elements 탭에서 결과 행/시간/가격/매진 표시의 CSS 셀렉터를 확인한다.
+#   3) 아래 값을 채우고 verified: true 로 바꾼다.
+#   4) `python src/scan.py --provider live --airline KE` 처럼 단일 항공사로 먼저
+#      검증한 뒤 전체로 확장한다.
+
+KE:
+  name: 대한항공
+  verified: false
+  search_url_template: "https://www.koreanair.com/booking/search?origin={origin}&dest={dest}&date={date}"
+  result_row_selector: ""
+  flight_no_selector: ""
+  dep_time_selector: ""
+  arr_time_selector: ""
+  price_selector: ""
+  sold_out_selector: ""
+
+OZ:
+  name: 아시아나항공
+  verified: false
+  search_url_template: "https://flyasiana.com/booking/search?origin={origin}&dest={dest}&date={date}"
+  result_row_selector: ""
+  flight_no_selector: ""
+  dep_time_selector: ""
+  arr_time_selector: ""
+  price_selector: ""
+  sold_out_selector: ""
+
+7C:
+  name: 제주항공
+  verified: false
+  search_url_template: ""
+  result_row_selector: ""
+  flight_no_selector: ""
+  dep_time_selector: ""
+  arr_time_selector: ""
+  price_selector: ""
+  sold_out_selector: ""
+
+TW:
+  name: 티웨이항공
+  verified: false
+  search_url_template: ""
+  result_row_selector: ""
+  flight_no_selector: ""
+  dep_time_selector: ""
+  arr_time_selector: ""
+  price_selector: ""
+  sold_out_selector: ""
+
+BX:
+  name: 에어부산
+  verified: false
+  search_url_template: ""
+  result_row_selector: ""
+  flight_no_selector: ""
+  dep_time_selector: ""
+  arr_time_selector: ""
+  price_selector: ""
+  sold_out_selector: ""
+
+RS:
+  name: 에어서울
+  verified: false
+  search_url_template: ""
+  result_row_selector: ""
+  flight_no_selector: ""
+  dep_time_selector: ""
+  arr_time_selector: ""
+  price_selector: ""
+  sold_out_selector: ""
+
+ZE:
+  name: 이스타항공
+  verified: false
+  search_url_template: ""
+  result_row_selector: ""
+  flight_no_selector: ""
+  dep_time_selector: ""
+  arr_time_selector: ""
+  price_selector: ""
+  sold_out_selector: ""

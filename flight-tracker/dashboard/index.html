@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>서울-제주 항공권 대시보드</title>
+<style>
+  :root {
+    --bg: #0b0c0f;
+    --card: #16171c;
+    --card-border: #26272e;
+    --text: #f2f2f5;
+    --muted: #8b8d97;
+    --accent: #4f8cff;
+    --green: #30d158;
+    --red: #ff453a;
+    --amber: #ffb020;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Pretendard", sans-serif;
+    padding: 24px 16px 60px;
+  }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  .sub { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+  .banner {
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 13px;
+    margin-bottom: 20px;
+    border: 1px solid;
+  }
+  .banner.mock { background: rgba(255,176,32,0.1); border-color: var(--amber); color: var(--amber); }
+  .banner.live { background: rgba(48,209,88,0.1); border-color: var(--green); color: var(--green); }
+  .banner.empty { background: rgba(255,69,58,0.1); border-color: var(--red); color: var(--red); }
+  .legend { display: flex; gap: 12px; flex-wrap: wrap; font-size: 12px; color: var(--muted); margin-bottom: 18px; }
+  .legend span { display: inline-flex; align-items: center; gap: 4px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .route-section { margin-bottom: 32px; }
+  .route-title { font-size: 15px; font-weight: 600; margin-bottom: 10px; }
+  .day-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+  }
+  .day-card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 12px;
+  }
+  .day-card.holiday { border-color: var(--red); }
+  .day-card.sandwich { border-color: var(--amber); }
+  .day-date { font-size: 13px; font-weight: 600; }
+  .day-badges { display: flex; gap: 4px; flex-wrap: wrap; margin: 4px 0 8px; }
+  .badge { font-size: 10px; padding: 2px 6px; border-radius: 6px; }
+  .badge.holiday { background: rgba(255,69,58,0.15); color: var(--red); }
+  .badge.sandwich { background: rgba(255,176,32,0.15); color: var(--amber); }
+  .badge.longweekend { background: rgba(79,140,255,0.15); color: var(--accent); }
+  .flight-row { font-size: 12px; display: flex; justify-content: space-between; padding: 3px 0; border-top: 1px solid var(--card-border); }
+  .flight-row:first-of-type { border-top: none; }
+  .flight-row .price { font-weight: 600; }
+  .flight-row.soldout { color: var(--muted); text-decoration: line-through; }
+  .empty-day { color: var(--muted); font-size: 12px; }
+  .skipped { margin-top: 8px; font-size: 11px; color: var(--muted); }
+</style>
+</head>
+<body>
+  <h1>서울 &harr; 제주 직항 항공권 대시보드</h1>
+  <div class="sub" id="meta">불러오는 중...</div>
+  <div id="banner"></div>
+  <div class="legend">
+    <span><span class="dot" style="background:var(--red)"></span>공휴일</span>
+    <span><span class="dot" style="background:var(--amber)"></span>샌드위치 데이</span>
+    <span><span class="dot" style="background:var(--accent)"></span>3일 이상 연휴</span>
+  </div>
+  <div id="content">로딩 중...</div>
+
+<script>
+async function load() {
+  const contentEl = document.getElementById('content');
+  const metaEl = document.getElementById('meta');
+  const bannerEl = document.getElementById('banner');
+  let data;
+  try {
+    const res = await fetch('../data/results.json', { cache: 'no-store' });
+    data = await res.json();
+  } catch (e) {
+    contentEl.textContent = 'data/results.json 을 불러오지 못했습니다. scan.py를 먼저 실행하세요.';
+    return;
+  }
+
+  metaEl.textContent = `생성 시각: ${data.generated_at} · 조회 방식: ${data.provider} · 대상 기간: 향후 ${data.window_weeks}주`;
+
+  const allFlights = [...data.outbound.flights, ...data.inbound.flights];
+  const hasMock = allFlights.some(f => f.source === 'mock') || data.provider === 'mock';
+  const hasLive = allFlights.some(f => f.source === 'live');
+
+  if (allFlights.length === 0) {
+    bannerEl.innerHTML = `<div class="banner empty">실시간 데이터가 없습니다. (${
+      [...(data.outbound.skipped||[]), ...(data.inbound.skipped||[])].length
+    }건 조회 건너뜀 — 항공사 셀렉터 미검증 등). config/selectors.yaml 을 확인하세요.</div>`;
+  } else if (hasMock && !hasLive) {
+    bannerEl.innerHTML = `<div class="banner mock">⚠ 아래 데이터는 실제 항공권 가격이 아닌 <b>목업(mock) 데이터</b>입니다. 파이프라인/대시보드 검증용이며 실제 예매에 사용하지 마세요.</div>`;
+  } else {
+    bannerEl.innerHTML = `<div class="banner live">실시간(live) 조회 결과입니다. 최종 가격/좌석은 반드시 항공사 공식 예매 화면에서 재확인하세요.</div>`;
+  }
+
+  contentEl.innerHTML = '';
+  contentEl.appendChild(renderRoute('서울(GMP) → 제주(CJU) · 금요일 10시 이후 / 토요일 오전', data.outbound));
+  contentEl.appendChild(renderRoute('제주(CJU) → 서울(GMP) · 일요일 18시 이후 / 월요일 전체', data.inbound));
+}
+
+function renderRoute(title, routeData) {
+  const section = document.createElement('div');
+  section.className = 'route-section';
+
+  const h = document.createElement('div');
+  h.className = 'route-title';
+  h.textContent = title;
+  section.appendChild(h);
+
+  const grid = document.createElement('div');
+  grid.className = 'day-grid';
+
+  const byDate = {};
+  for (const f of routeData.flights) {
+    const dateKey = f.dep_dt.slice(0, 10);
+    (byDate[dateKey] ||= []).push(f);
+  }
+
+  const sortedDates = Object.keys(byDate).sort();
+  for (const dateKey of sortedDates) {
+    const flights = byDate[dateKey].sort((a, b) => a.dep_dt.localeCompare(b.dep_dt));
+    const demand = flights[0].demand;
+
+    const card = document.createElement('div');
+    card.className = 'day-card' + (demand.is_holiday ? ' holiday' : demand.is_sandwich_day ? ' sandwich' : '');
+
+    const dateLabel = document.createElement('div');
+    dateLabel.className = 'day-date';
+    const d = new Date(dateKey + 'T00:00:00');
+    const weekday = ['일','월','화','수','목','금','토'][d.getDay()];
+    dateLabel.textContent = `${dateKey} (${weekday})`;
+    card.appendChild(dateLabel);
+
+    const badges = document.createElement('div');
+    badges.className = 'day-badges';
+    if (demand.is_holiday) badges.innerHTML += `<span class="badge holiday">${demand.holiday_name}</span>`;
+    if (demand.is_sandwich_day) badges.innerHTML += `<span class="badge sandwich">샌드위치 데이</span>`;
+    if (demand.is_long_weekend) badges.innerHTML += `<span class="badge longweekend">연휴</span>`;
+    card.appendChild(badges);
+
+    for (const f of flights.slice(0, 6)) {
+      const row = document.createElement('div');
+      row.className = 'flight-row' + (f.bookable ? '' : ' soldout');
+      const time = f.dep_dt.slice(11, 16);
+      const price = f.price_krw != null ? f.price_krw.toLocaleString('ko-KR') + '원' : '가격 미확인';
+      row.innerHTML = `<span>${time} ${f.airline_name}</span><span class="price">${f.bookable ? price : '매진'}</span>`;
+      card.appendChild(row);
+    }
+
+    grid.appendChild(card);
+  }
+
+  if (sortedDates.length === 0) {
+    const empty = document.createElement('div');
+    empty.className = 'empty-day';
+    empty.textContent = '조회된 항공편이 없습니다.';
+    grid.appendChild(empty);
+  }
+
+  section.appendChild(grid);
+
+  if (routeData.skipped && routeData.skipped.length) {
+    const sk = document.createElement('div');
+    sk.className = 'skipped';
+    sk.textContent = `건너뛴 조회: ${routeData.skipped.length}건 (results.json의 skipped 참조)`;
+    section.appendChild(sk);
+  }
+
+  return section;
+}
+
+load();
+</script>
+</body>
+</html>
