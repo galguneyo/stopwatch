@@ -30,23 +30,26 @@ def _week_label(year: int, week: int) -> str:
 
 
 def _best_per_airline(flights: list[dict]) -> list[dict]:
-    """항공사별 최저가(예약 가능한 것만) 1건씩, 우선순위 순으로."""
+    """항공사별 최저가(예약 가능한 것만, 지정 시간대 내) 1건씩, 우선순위 순으로."""
     from rules import AIRLINE_PRIORITY
 
     best: dict[str, dict] = {}
     for f in flights:
-        if not f["bookable"] or f["price_krw"] is None:
+        if not f["in_target_window"]:
+            continue
+        if f["seat_status"] == "soldout" or f["economy_price_krw"] is None:
             continue
         code = f["airline_code"]
-        if code not in best or f["price_krw"] < best[code]["price_krw"]:
+        if code not in best or f["economy_price_krw"] < best[code]["economy_price_krw"]:
             best[code] = f
     return [best[c] for c in AIRLINE_PRIORITY if c in best]
 
 
 def _format_flight_line(f: dict) -> str:
     time = f["dep_dt"][11:16]
-    price = f"{f['price_krw']:,}원" if f["price_krw"] is not None else "가격 미확인"
-    return f"  - {time} {f['airline_name']} {f['flight_no']} — {price}"
+    price = f"{f['economy_price_krw']:,}원" if f["economy_price_krw"] is not None else "가격 미확인"
+    status_note = " (잔여좌석 적음)" if f["seat_status"] == "limited" else ""
+    return f"  - {time} {f['airline_name']} {f['flight_no']} — 이코노미 {price}{status_note}"
 
 
 def build_report(data: dict) -> str:
@@ -60,9 +63,11 @@ def build_report(data: dict) -> str:
 
     by_week: dict[tuple[int, int], dict[str, list[dict]]] = defaultdict(lambda: {"outbound": [], "inbound": []})
     for f in data["outbound"]["flights"]:
-        by_week[_week_key(f["dep_dt"])]["outbound"].append(f)
+        if f["in_target_window"]:
+            by_week[_week_key(f["dep_dt"])]["outbound"].append(f)
     for f in data["inbound"]["flights"]:
-        by_week[_week_key(f["dep_dt"])]["inbound"].append(f)
+        if f["in_target_window"]:
+            by_week[_week_key(f["dep_dt"])]["inbound"].append(f)
 
     if not by_week:
         lines.append("_이번 조회에서는 조건에 맞는 항공편이 없습니다._")

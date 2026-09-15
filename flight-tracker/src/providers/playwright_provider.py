@@ -91,11 +91,14 @@ class PlaywrightFlightProvider(FlightSearchProvider):
         flight_no = text("flight_no_selector")
         dep_text = text("dep_time_selector")  # 예: "10:30"
         arr_text = text("arr_time_selector")
-        price_text = text("price_selector")
+        economy_text = text("economy_price_selector")
+        business_text = text("business_price_selector") if cfg.get("business_price_selector") else ""
         sold_out = row.query_selector(cfg.get("sold_out_selector", "")) is not None
+        limited = row.query_selector(cfg.get("limited_seats_selector", "")) is not None if cfg.get("limited_seats_selector") else False
 
-        price_digits = re.sub(r"[^0-9]", "", price_text)
-        price = int(price_digits) if price_digits else None
+        economy = _parse_price(economy_text)
+        business = _parse_price(business_text) if business_text else None
+        seat_status = "soldout" if sold_out else ("limited" if limited else "available")
 
         dep_dt = _combine(date, dep_text)
         arr_dt = _combine(date, arr_text)
@@ -110,13 +113,19 @@ class PlaywrightFlightProvider(FlightSearchProvider):
             dest=dest,
             dep_dt=dep_dt,
             arr_dt=arr_dt,
-            price_krw=price,
+            economy_price_krw=economy,
+            business_price_krw=business,
+            seat_status=seat_status,
             is_direct=True,
-            bookable=not sold_out,
             source="live",
             booking_url=None,
             fetched_at=dt.datetime.now(),
         )
+
+
+def _parse_price(text: str) -> int | None:
+    digits = re.sub(r"[^0-9]", "", text)
+    return int(digits) if digits else None
 
 
 def _combine(date: dt.date, hhmm: str) -> dt.datetime | None:

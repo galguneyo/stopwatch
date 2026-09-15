@@ -9,6 +9,9 @@ from __future__ import annotations
 
 import datetime as dt
 from dataclasses import dataclass, asdict
+from typing import Literal
+
+SeatStatus = Literal["available", "limited", "soldout"]
 
 
 @dataclass
@@ -20,9 +23,10 @@ class FlightOffer:
     dest: str
     dep_dt: dt.datetime
     arr_dt: dt.datetime
-    price_krw: int | None  # 실시간 확인 실패 시 None
+    economy_price_krw: int | None  # 실시간 확인 실패 시 None
+    business_price_krw: int | None  # 비즈니스/프레스티지 클래스 미운영 노선/항공사는 None
+    seat_status: SeatStatus
     is_direct: bool
-    bookable: bool  # 매진/예매마감이면 False
     source: str  # "live" | "mock" — 실데이터인지 목업인지 반드시 구분
     booking_url: str | None = None
     fetched_at: dt.datetime | None = None

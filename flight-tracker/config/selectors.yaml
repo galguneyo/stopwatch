@@ -20,8 +20,10 @@ KE:
   flight_no_selector: ""
   dep_time_selector: ""
   arr_time_selector: ""
-  price_selector: ""
+  economy_price_selector: ""
+  business_price_selector: ""  # 비즈니스 클래스 미운영 항공사는 빈 문자열로 둔다
   sold_out_selector: ""
+  limited_seats_selector: ""  # 선택: '잔여좌석 적음' 표시가 있는 경우
 
 OZ:
   name: 아시아나항공
@@ -31,8 +33,10 @@ OZ:
   flight_no_selector: ""
   dep_time_selector: ""
   arr_time_selector: ""
-  price_selector: ""
+  economy_price_selector: ""
+  business_price_selector: ""  # 비즈니스 클래스 미운영 항공사는 빈 문자열로 둔다
   sold_out_selector: ""
+  limited_seats_selector: ""  # 선택: '잔여좌석 적음' 표시가 있는 경우
 
 7C:
   name: 제주항공
@@ -42,8 +46,10 @@ OZ:
   flight_no_selector: ""
   dep_time_selector: ""
   arr_time_selector: ""
-  price_selector: ""
+  economy_price_selector: ""
+  business_price_selector: ""  # 비즈니스 클래스 미운영 항공사는 빈 문자열로 둔다
   sold_out_selector: ""
+  limited_seats_selector: ""  # 선택: '잔여좌석 적음' 표시가 있는 경우
 
 TW:
   name: 티웨이항공
@@ -53,8 +59,10 @@ TW:
   flight_no_selector: ""
   dep_time_selector: ""
   arr_time_selector: ""
-  price_selector: ""
+  economy_price_selector: ""
+  business_price_selector: ""  # 비즈니스 클래스 미운영 항공사는 빈 문자열로 둔다
   sold_out_selector: ""
+  limited_seats_selector: ""  # 선택: '잔여좌석 적음' 표시가 있는 경우
 
 BX:
   name: 에어부산
@@ -64,8 +72,10 @@ BX:
   flight_no_selector: ""
   dep_time_selector: ""
   arr_time_selector: ""
-  price_selector: ""
+  economy_price_selector: ""
+  business_price_selector: ""  # 비즈니스 클래스 미운영 항공사는 빈 문자열로 둔다
   sold_out_selector: ""
+  limited_seats_selector: ""  # 선택: '잔여좌석 적음' 표시가 있는 경우
 
 RS:
   name: 에어서울
@@ -75,8 +85,10 @@ RS:
   flight_no_selector: ""
   dep_time_selector: ""
   arr_time_selector: ""
-  price_selector: ""
+  economy_price_selector: ""
+  business_price_selector: ""  # 비즈니스 클래스 미운영 항공사는 빈 문자열로 둔다
   sold_out_selector: ""
+  limited_seats_selector: ""  # 선택: '잔여좌석 적음' 표시가 있는 경우
 
 ZE:
   name: 이스타항공
@@ -86,5 +98,7 @@ ZE:
   flight_no_selector: ""
   dep_time_selector: ""
   arr_time_selector: ""
-  price_selector: ""
+  economy_price_selector: ""
+  business_price_selector: ""  # 비즈니스 클래스 미운영 항공사는 빈 문자열로 둔다
   sold_out_selector: ""
+  limited_seats_selector: ""  # 선택: '잔여좌석 적음' 표시가 있는 경우

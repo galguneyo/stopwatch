@@ -58,12 +58,16 @@ flight-tracker/
 │       ├── base.py             # FlightOffer, Provider 공통 인터페이스
 │       ├── mock_provider.py    # 목업 데이터 생성기 (source="mock"으로 명시)
 │       └── playwright_provider.py  # 실항공사 조회용 범용 엔진 (셀렉터 검증 전엔 의도적으로 실패)
+│       ├── weather.py           # WeatherInfo, WeatherProvider 인터페이스 + Open-Meteo 실provider
+│       └── mock_weather.py      # 날씨 목업 provider
 ├── config/selectors.yaml       # 항공사별 CSS 셀렉터 설정 (현재 전부 미검증)
 ├── data/results.json           # scan.py 실행 결과 (대시보드가 읽음)
-├── dashboard/index.html        # 정적 대시보드: 월별 달력형 예약가능현황 + 상세 목록
+├── data/weather.json           # weather_scan.py 실행 결과 (대시보드가 읽음)
+├── dashboard/index.html        # Travel Planner 스타일 대시보드 (Apple 디자인 기조)
 ├── src/weekly_report.py        # 주차별 사전예약 확인 마크다운 리포트 생성 (reports/latest.md)
+├── src/weather_scan.py         # 공항별 날씨 예보 조회 오케스트레이터
 ├── tests/test_rules.py
-└── .github/workflows/flight-scan.yml  # 주간 자동 실행 (repo 루트 기준 경로)
+└── .github/workflows/flight-scan.yml  # 주간(항공권)+날씨 자동 실행 (repo 루트 기준 경로)
 ```
 
 `scan.py`는 `providers.base.FlightSearchProvider` 인터페이스에만 의존하므로,
@@ -85,20 +89,42 @@ python src/scan.py --provider mock --weeks-ahead 8
 # 2) 주차별 사전예약 확인 리포트 생성 (reports/latest.md)
 python src/weekly_report.py
 
-# 3) 정적 서버로 대시보드 열기
+# 3) 날씨 목업 데이터 생성 (네트워크 불필요)
+python src/weather_scan.py --provider mock
+
+# 4) 정적 서버로 대시보드 열기
 python -m http.server 8000
 # 브라우저에서 http://localhost:8000/dashboard/index.html
 ```
 
-대시보드는 두 파트로 구성됩니다.
-- **월별 예약가능현황**(달력형): 노선별로 검색 대상 요일(서울→제주는 금/토, 제주→서울은
-  일/월)만 색이 채워지고, 나머지 요일은 흐리게 표시됩니다. 셀 안에는 최저가와 편수를,
-  테두리 색으로 공휴일(빨강)/샌드위치 데이(주황)/3일 이상 연휴(파랑)를 표시합니다.
-- **상세 목록**: 날짜별 전 항공편(항공사·시각·가격·매진 여부)을 카드로 나열합니다.
+### 대시보드 (Travel Planner 스타일)
+
+한 번에 펼쳐지는 달력이 아니라, 화면 하나에서 아래 순서로 좁혀가는 방식입니다.
+
+1. **노선 토글**(서울→제주 / 제주→서울) — Apple 세그먼트 컨트롤 스타일.
+2. **날짜 스트립**: 검색 대상 요일(서울→제주는 금/토, 제주→서울은 일/월)만 가로
+   스크롤 칩으로 나열, 공휴일(빨강 점)/샌드위치 데이(주황 점)/연휴(파랑 점) 표시.
+3. **날씨 요약**: 선택한 날짜의 출발/도착 공항 예보(요약·강수확률·풍속)를 상단에
+   표시. 날짜를 바꾸면 즉시 갱신됩니다. 예보는 통상 신뢰 구간인 약 14일까지만
+   제공되며, 그 밖의 날짜는 "예보 범위 밖"으로 명시됩니다(없는 값을 지어내지 않음).
+4. **항공사 목록**: 항공사 배지(색상 모노그램 — 실제 공식 로고 이미지가 아니라
+   구분용 색상 배지입니다. 공식 로고 파일을 확보하면 `.badge`에 `<img>`로 손쉽게
+   교체 가능)와 함께, 선택한 날짜·시간대 조건 안에 예약 가능한 편이 있는지를
+   신호등(초록=있음/주황=적음/빨강=매진/회색=운항없음)으로 보여줍니다.
+5. 항공사 행을 클릭하면 **그날 전체 시간대**의 시간·좌석상태·이코노미가·비즈니스가를
+   표로 펼쳐 보여줍니다. 요청하신 시간대 밖의 편은 흐리게 표시되고 안내 문구가 붙습니다.
 
 `weekly_report.py`는 같은 데이터를 ISO 주차 단위로 묶어 "이번 주에 예약해야 할 편"을
 사람이 바로 읽을 수 있는 마크다운으로 정리합니다 — 수요 집중 주차는 상단에
 경고 문구가 자동으로 붙습니다.
+
+### 날씨 데이터에 대한 같은 원칙
+
+항공권과 마찬가지로 이 세션에는 날씨 API(Open-Meteo 등)에 접속할 네트워크가
+없어 `providers/weather.py`의 `OpenMeteoWeatherProvider`는 실행 검증을 하지
+못했습니다. Open-Meteo는 API 키가 필요 없는 공개 API라 셀렉터처럼 막힐 일은
+없지만, 그래도 "이 세션에서 직접 실행해보지 못했다"는 사실은 동일하므로
+네트워크가 열린 환경에서 먼저 하루치로 확인해보길 권장합니다.
 
 ## 실데이터 연결하기
 
