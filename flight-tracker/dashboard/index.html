@@ -4,447 +4,553 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>제주 항공권 플래너</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap">
 <style>
   :root {
-    --bg: #f5f5f7;
-    --surface: rgba(255,255,255,0.72);
-    --surface-solid: #ffffff;
-    --border: rgba(60,60,67,0.12);
-    --text: #1d1d1f;
-    --muted: #6e6e73;
+    --bg: #f2f2f5;
+    --surface: #ffffff;
+    --surface-blur: rgba(242,242,245,0.82);
+    --surface-sunken: #e9e9ee;
+    --hairline: rgba(60,60,67,0.13);
+    --text: #16161a;
+    --muted: #6c6c74;
+    --faint: #9a9aa2;
     --accent: #0071e3;
-    --green: #34c759;
-    --amber: #ffcc00;
-    --red: #ff3b30;
-    --gray: #aeaeb2;
-    --shadow: 0 1px 2px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06);
+    --ok: #1d9e4b;
+    --warn: #c77700;
+    --bad: #d92b20;
+    --none: #a8a8b0;
+    --ok-fill: #34c759;
+    --warn-fill: #ff9f0a;
+    --bad-fill: #ff3b30;
+    --shadow: 0 1px 1px rgba(0,0,0,0.04), 0 6px 18px rgba(20,20,40,0.07);
     color-scheme: light;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
       --bg: #000000;
-      --surface: rgba(28,28,30,0.72);
-      --surface-solid: #1c1c1e;
-      --border: rgba(255,255,255,0.12);
-      --text: #f5f5f7;
-      --muted: #98989d;
-      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.4);
+      --surface: #1a1a1d;
+      --surface-blur: rgba(10,10,12,0.8);
+      --surface-sunken: #141417;
+      --hairline: rgba(255,255,255,0.11);
+      --text: #f3f3f6;
+      --muted: #9b9ba3;
+      --faint: #6e6e78;
+      --accent: #3b9eff;
+      --ok: #34c759;
+      --warn: #ff9f0a;
+      --bad: #ff6159;
+      --none: #7c7c86;
+      --shadow: 0 1px 1px rgba(0,0,0,0.5), 0 6px 18px rgba(0,0,0,0.45);
       color-scheme: dark;
     }
   }
   :root[data-theme="dark"] {
     --bg: #000000;
-    --surface: rgba(28,28,30,0.72);
-    --surface-solid: #1c1c1e;
-    --border: rgba(255,255,255,0.12);
-    --text: #f5f5f7;
-    --muted: #98989d;
-    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.4);
+    --surface: #1a1a1d;
+    --surface-blur: rgba(10,10,12,0.8);
+    --surface-sunken: #141417;
+    --hairline: rgba(255,255,255,0.11);
+    --text: #f3f3f6;
+    --muted: #9b9ba3;
+    --faint: #6e6e78;
+    --accent: #3b9eff;
+    --ok: #34c759;
+    --warn: #ff9f0a;
+    --bad: #ff6159;
+    --none: #7c7c86;
+    --shadow: 0 1px 1px rgba(0,0,0,0.5), 0 6px 18px rgba(0,0,0,0.45);
     color-scheme: dark;
   }
+
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   body {
     margin: 0;
     background: var(--bg);
     color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Pretendard", "Segoe UI", Roboto, sans-serif;
-    padding-bottom: calc(40px + env(safe-area-inset-bottom, 0px));
-    padding-top: env(safe-area-inset-top, 0px);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Noto Sans KR",
+                 "Pretendard", system-ui, "Segoe UI", sans-serif;
+    font-size: 14px;
+    line-height: 1.45;
+    word-break: keep-all;
+    -webkit-font-smoothing: antialiased;
   }
-  .topbar {
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+  .shell { max-width: 560px; margin: 0 auto; padding-inline: 18px; }
+
+  header {
     position: sticky;
     top: env(safe-area-inset-top, 0px);
-    z-index: 10;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    padding: 14px 20px 12px;
+    z-index: 20;
+    background: var(--surface-blur);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--hairline);
   }
-  .title { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 12px; }
-  .segmented {
-    display: flex;
-    background: rgba(118,118,128,0.12);
-    border-radius: 10px;
-    padding: 2px;
-    gap: 2px;
-  }
+  .header-inner { max-width: 560px; margin: 0 auto; padding: 14px 18px 12px; }
+  h1 { font-size: 19px; font-weight: 700; letter-spacing: -0.022em; margin: 0 0 11px; }
+
+  .segmented { display: flex; gap: 2px; background: var(--surface-sunken); border-radius: 10px; padding: 2px; }
   .segmented button {
-    flex: 1;
-    border: none;
-    background: transparent;
-    color: var(--text);
-    font-size: 13px;
-    font-weight: 600;
-    padding: 7px 10px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-family: inherit;
-    transition: background 0.15s ease;
+    flex: 1; border: 0; background: transparent; color: var(--text);
+    font: inherit; font-size: 13px; font-weight: 600; letter-spacing: -0.01em;
+    padding: 7px 8px; border-radius: 8px; cursor: pointer; transition: background 0.18s ease;
   }
-  .segmented button.active {
-    background: var(--surface-solid);
-    box-shadow: var(--shadow);
-  }
+  .segmented button[aria-pressed="true"] { background: var(--surface); box-shadow: var(--shadow); }
+
   .notice {
-    margin: 10px 20px 0;
-    font-size: 12px;
-    padding: 8px 12px;
-    border-radius: 10px;
-    background: rgba(255,204,0,0.15);
-    color: #8a6d00;
+    display: flex; gap: 8px; align-items: flex-start;
+    margin-top: 14px; padding: 9px 12px; border-radius: 11px;
+    font-size: 12px; line-height: 1.4;
+    background: color-mix(in srgb, var(--warn-fill) 14%, var(--surface));
+    color: var(--warn);
+    border: 1px solid color-mix(in srgb, var(--warn-fill) 30%, transparent);
   }
-  .notice.live { background: rgba(52,199,89,0.15); color: #1f8a3d; }
-  .notice.empty { background: rgba(255,59,48,0.15); color: #c62b22; }
+  .notice.is-live { background: color-mix(in srgb, var(--ok-fill) 12%, var(--surface)); color: var(--ok);
+                    border-color: color-mix(in srgb, var(--ok-fill) 28%, transparent); }
+  .notice.is-empty { background: color-mix(in srgb, var(--bad-fill) 12%, var(--surface)); color: var(--bad);
+                     border-color: color-mix(in srgb, var(--bad-fill) 28%, transparent); }
 
-  .content { padding: 16px 20px 0; max-width: 640px; margin: 0 auto; }
+  .rule-line { margin-top: 16px; font-size: 12px; color: var(--muted); letter-spacing: -0.005em; }
 
-  .date-strip { display: flex; gap: 8px; overflow-x: auto; padding: 4px 2px 10px; scrollbar-width: none; }
-  .date-strip::-webkit-scrollbar { display: none; }
-  .month-label { display: flex; align-items: flex-end; padding-bottom: 8px; font-size: 12px; color: var(--muted); font-weight: 600; flex-shrink: 0; }
-  .date-chip {
-    flex-shrink: 0;
-    width: 56px;
-    padding: 8px 0 10px;
-    border-radius: 14px;
-    background: var(--surface-solid);
-    border: 1px solid var(--border);
-    text-align: center;
-    cursor: pointer;
-    box-shadow: var(--shadow);
-    font-family: inherit;
+  /* date rail */
+  .rail-wrap { margin: 10px -18px 0; }
+  .rail { display: flex; gap: 7px; overflow-x: auto; padding: 6px 18px 12px; scrollbar-width: none; scroll-behavior: smooth; }
+  .rail::-webkit-scrollbar { display: none; }
+  .rail-month { flex: 0 0 auto; align-self: center; font-size: 11px; font-weight: 700; color: var(--faint); padding: 0 2px; }
+  .chip {
+    flex: 0 0 auto; width: 54px; padding: 7px 0 8px;
+    background: var(--surface); border: 1px solid var(--hairline); border-radius: 13px;
+    font: inherit; color: inherit; cursor: pointer; text-align: center;
+    box-shadow: var(--shadow); transition: transform 0.15s ease, background 0.15s ease;
   }
-  .date-chip .dow { font-size: 11px; color: var(--muted); font-weight: 600; }
-  .date-chip .num { font-size: 18px; font-weight: 700; margin: 2px 0; }
-  .date-chip .dot { width: 5px; height: 5px; border-radius: 50%; margin: 0 auto; }
-  .date-chip.selected { background: var(--accent); border-color: var(--accent); }
-  .date-chip.selected .dow, .date-chip.selected .num { color: #fff; }
-  .date-chip.selected .dot { background: #fff !important; }
+  .chip:active { transform: scale(0.96); }
+  .chip .dow { font-size: 11px; font-weight: 600; color: var(--muted); }
+  .chip .day { font-size: 18px; font-weight: 700; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; margin-top: 1px; }
+  .chip .mark { height: 5px; margin-top: 3px; display: flex; justify-content: center; }
+  .chip .mark i { width: 5px; height: 5px; border-radius: 50%; display: block; }
+  .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); }
+  .chip[aria-pressed="true"] .dow, .chip[aria-pressed="true"] .day { color: #fff; }
+  .chip[aria-pressed="true"] .mark i { background: rgba(255,255,255,0.85) !important; }
 
-  .weather-row { display: flex; gap: 10px; margin-bottom: 18px; }
-  .weather-card {
-    flex: 1;
-    background: linear-gradient(160deg, #4facfe10, #00f2fe08);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 14px;
+  /* summary */
+  .summary {
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    padding: 13px 15px; border-radius: 15px; background: var(--surface);
+    border: 1px solid var(--hairline); box-shadow: var(--shadow); margin-bottom: 11px;
   }
-  .weather-card .wc-label { font-size: 11px; color: var(--muted); font-weight: 600; margin-bottom: 6px; }
-  .weather-card .wc-icon { font-size: 26px; line-height: 1; }
-  .weather-card .wc-summary { font-size: 14px; font-weight: 700; margin: 4px 0 8px; }
-  .weather-card .wc-metrics { display: flex; gap: 12px; font-size: 11px; color: var(--muted); }
-  .weather-card .wc-metrics b { color: var(--text); font-weight: 600; }
-  .weather-card.unavailable { opacity: 0.55; }
-  .weather-card.unavailable .wc-summary { font-size: 12px; font-weight: 500; }
+  .summary .stat { display: flex; flex-direction: column; gap: 1px; }
+  .summary .stat-k { font-size: 10px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--faint); }
+  .summary .stat-v { font-size: 16px; font-weight: 700; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .summary .stat-v small { font-size: 11px; font-weight: 500; color: var(--muted); margin-left: 1px; }
+  .demand-chips { display: flex; gap: 5px; flex-wrap: wrap; margin-left: auto; }
+  .dchip { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 999px; }
+  .dchip.holiday { background: color-mix(in srgb, var(--bad-fill) 15%, var(--surface)); color: var(--bad); }
+  .dchip.sandwich { background: color-mix(in srgb, var(--warn-fill) 18%, var(--surface)); color: var(--warn); }
+  .dchip.longwk { background: color-mix(in srgb, var(--accent) 14%, var(--surface)); color: var(--accent); }
 
-  .section-label { font-size: 13px; font-weight: 600; color: var(--muted); margin: 4px 0 8px; }
-
-  .airline-card {
-    background: var(--surface-solid);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    box-shadow: var(--shadow);
-    overflow: hidden;
-    margin-bottom: 24px;
+  /* weather */
+  .weather { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-bottom: 22px; }
+  .wcard {
+    padding: 13px 14px; border-radius: 15px; background: var(--surface);
+    border: 1px solid var(--hairline); box-shadow: var(--shadow);
   }
-  .airline-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 13px 14px;
-    cursor: pointer;
-    border-top: 1px solid var(--border);
-  }
-  .airline-row:first-child { border-top: none; }
-  .badge {
-    width: 34px; height: 34px; border-radius: 9px;
-    display: flex; align-items: center; justify-content: center;
-    color: #fff; font-weight: 700; font-size: 12px; flex-shrink: 0;
-    letter-spacing: -0.02em;
-  }
-  .airline-name { flex: 1; font-size: 14px; font-weight: 600; }
-  .status-wrap { display: flex; align-items: center; gap: 6px; }
-  .status-dot { width: 9px; height: 9px; border-radius: 50%; }
-  .status-label { font-size: 12px; color: var(--muted); min-width: 44px; text-align: right; }
-  .chevron { color: var(--gray); font-size: 12px; transition: transform 0.2s ease; }
-  .airline-row.open .chevron { transform: rotate(90deg); }
+  .wcard .leg { display: flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; color: var(--muted); }
+  .wcard .leg .code { font-size: 10px; color: var(--faint); font-weight: 500; }
+  .wcard .now { display: flex; align-items: center; gap: 9px; margin: 7px 0 9px; }
+  .wcard .glyph { font-size: 25px; line-height: 1; }
+  .wcard .sky { font-size: 14px; font-weight: 700; letter-spacing: -0.015em; }
+  .wcard .temp { font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .wcard .metrics { display: flex; gap: 13px; font-size: 11px; color: var(--muted); }
+  .wcard .metrics b { font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; }
+  .wcard.dim { background: var(--surface-sunken); box-shadow: none; }
+  .wcard.dim .msg { font-size: 11.5px; color: var(--muted); margin-top: 7px; line-height: 1.4; }
 
-  .detail-panel { padding: 0 14px 14px; display: none; }
-  .detail-panel.open { display: block; }
-  .detail-table { width: 100%; border-collapse: collapse; font-size: 12px; }
-  .detail-table th { text-align: left; color: var(--muted); font-weight: 600; font-size: 10px; padding: 4px 6px; border-bottom: 1px solid var(--border); }
-  .detail-table td { padding: 7px 6px; border-bottom: 1px solid var(--border); }
-  .detail-table tr:last-child td { border-bottom: none; }
-  .detail-table tr.outside { opacity: 0.4; }
-  .price { font-weight: 600; }
-  .dash { color: var(--gray); }
-  .row-status-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; margin-right: 4px; }
-  .outside-note { font-size: 10px; color: var(--muted); padding: 6px 6px 0; }
+  /* airline list */
+  .list-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+  .list-title { font-size: 13px; font-weight: 700; letter-spacing: -0.01em; }
+  .legend { display: flex; gap: 9px; font-size: 10.5px; color: var(--faint); }
+  .legend span { display: inline-flex; align-items: center; gap: 3px; }
+  .legend i { width: 6px; height: 6px; border-radius: 50%; display: block; }
 
-  .empty-state { text-align: center; color: var(--muted); font-size: 13px; padding: 30px 0; }
+  .list { background: var(--surface); border: 1px solid var(--hairline); border-radius: 16px;
+          box-shadow: var(--shadow); overflow: hidden; margin-bottom: 30px; }
+  .arow {
+    width: 100%; display: flex; align-items: center; gap: 11px;
+    padding: 11px 14px; background: transparent; border: 0; border-top: 1px solid var(--hairline);
+    font: inherit; color: inherit; cursor: pointer; text-align: left;
+  }
+  .arow:first-child { border-top: 0; }
+  .arow:hover { background: color-mix(in srgb, var(--accent) 4%, transparent); }
+  .tile {
+    width: 36px; height: 36px; border-radius: 10px; flex: 0 0 auto;
+    display: grid; place-items: center; overflow: hidden;
+  }
+  .tile.brand { background: #fff; border: 1px solid var(--hairline); padding: 5px; }
+  .tile.brand img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .tile.mono { color: #fff; font-size: 12px; font-weight: 700; letter-spacing: -0.02em; }
+  .aname { flex: 1; font-size: 14px; font-weight: 600; letter-spacing: -0.012em; }
+  .status { display: inline-flex; align-items: center; gap: 6px; }
+  .status i { width: 9px; height: 9px; border-radius: 50%; display: block; }
+  .status span { font-size: 12px; font-weight: 600; min-width: 42px; text-align: right; }
+  .caret { width: 14px; color: var(--faint); font-size: 11px; transition: transform 0.2s ease; }
+  .arow[aria-expanded="true"] .caret { transform: rotate(90deg); }
+
+  .panel { padding: 2px 14px 14px; }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  thead th {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+    color: var(--faint); text-align: right; padding: 5px 0 6px; border-bottom: 1px solid var(--hairline);
+  }
+  thead th:first-child, tbody td:first-child { text-align: left; }
+  thead th:nth-child(2), tbody td:nth-child(2) { text-align: left; }
+  tbody td { font-size: 12.5px; padding: 8px 0; border-bottom: 1px solid var(--hairline); text-align: right; }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr.outside td { color: var(--faint); }
+  td .time { font-weight: 600; }
+  td .fare { font-weight: 600; }
+  td .na { color: var(--faint); }
+  .seat { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; }
+  .seat i { width: 6px; height: 6px; border-radius: 50%; display: block; }
+  .best { margin-left: 5px; font-size: 9.5px; font-weight: 700; padding: 1.5px 5px; border-radius: 999px;
+          background: color-mix(in srgb, var(--ok-fill) 18%, var(--surface)); color: var(--ok); }
+  .foot { font-size: 11px; color: var(--faint); padding-top: 9px; line-height: 1.45; }
+  .empty { padding: 26px 14px; text-align: center; font-size: 12.5px; color: var(--muted); }
 </style>
 </head>
 <body>
-  <div class="topbar">
-    <div class="title">제주 항공권 플래너</div>
-    <div class="segmented" id="directionToggle">
-      <button data-dir="outbound" class="active">서울 → 제주</button>
-      <button data-dir="inbound">제주 → 서울</button>
+<header>
+  <div class="header-inner">
+    <h1>제주 항공권 플래너</h1>
+    <div class="segmented" id="dirToggle" role="group" aria-label="노선 선택">
+      <button type="button" data-dir="outbound" aria-pressed="true">서울 → 제주</button>
+      <button type="button" data-dir="inbound" aria-pressed="false">제주 → 서울</button>
     </div>
   </div>
-  <div id="noticeWrap"></div>
+</header>
 
-  <div class="content">
-    <div class="section-label" id="ruleLabel"></div>
-    <div class="date-strip" id="dateStrip"></div>
+<div class="shell">
+  <div id="notice"></div>
+  <p class="rule-line" id="ruleLine"></p>
 
-    <div class="weather-row" id="weatherRow"></div>
+  <div class="rail-wrap"><div class="rail" id="rail" role="group" aria-label="출발 날짜"></div></div>
 
-    <div class="section-label">항공사별 예약 가능 여부</div>
-    <div class="airline-card" id="airlineCard"></div>
+  <div id="summary"></div>
+  <div class="weather" id="weather"></div>
+
+  <div class="list-head">
+    <div class="list-title">항공사별 예약 가능 여부</div>
+    <div class="legend" aria-hidden="true">
+      <span><i style="background:var(--ok-fill)"></i>있음</span>
+      <span><i style="background:var(--warn-fill)"></i>적음</span>
+      <span><i style="background:var(--bad-fill)"></i>매진</span>
+    </div>
   </div>
+  <div class="list" id="list"></div>
+</div>
 
 <script>
-const AIRLINE_META = {
-  KE: { name: '대한항공', color: '#0a2f6b' },
-  OZ: { name: '아시아나항공', color: '#c8102e' },
-  '7C': { name: '제주항공', color: '#f5821f' },
-  TW: { name: '티웨이항공', color: '#004b93' },
-  BX: { name: '에어부산', color: '#0067ac' },
-  RS: { name: '에어서울', color: '#00a9e0' },
-  ZE: { name: '이스타항공', color: '#8a2be2' },
-};
-const AIRLINE_ORDER = ['KE', 'OZ', '7C', 'TW', 'BX', 'RS', 'ZE'];
+const DATA_BASE = location.pathname.includes('/dashboard/') ? '../data/' : 'data/';
 
-const WEATHER_ICON = {
+const AIRLINES = [
+  { code: 'KE',  name: '대한항공',     logo: 'assets/ke.svg' },
+  { code: 'OZ',  name: '아시아나항공', logo: 'assets/oz.svg' },
+  { code: '7C',  name: '제주항공',     color: '#f5821f' },
+  { code: 'TW',  name: '티웨이항공',   color: '#0d47a1' },
+  { code: 'BX',  name: '에어부산',     color: '#0067ac' },
+  { code: 'RS',  name: '에어서울',     color: '#00a9e0' },
+  { code: 'ZE',  name: '이스타항공',   color: '#7b3fb8' },
+];
+
+const SKY_GLYPH = {
   '맑음': '☀️', '대체로 맑음': '🌤️', '부분 흐림': '⛅', '흐림': '☁️',
   '안개': '🌫️', '짙은 안개': '🌫️',
   '약한 이슬비': '🌦️', '이슬비': '🌦️', '강한 이슬비': '🌧️',
   '약한 비': '🌦️', '비': '🌧️', '강한 비': '🌧️',
   '약한 눈': '🌨️', '눈': '❄️', '폭설': '❄️',
-  '약한 소나기': '🌦️', '소나기': '🌧️', '강한 소나기': '⛈️',
-  '뇌우': '⛈️',
+  '약한 소나기': '🌦️', '소나기': '🌧️', '강한 소나기': '⛈️', '뇌우': '⛈️',
 };
 
-let flightData = null;
-let weatherData = null;
-let direction = 'outbound';
-let selectedDate = null;
-let openAirline = null;
+const ROUTES = {
+  outbound: { from: 'GMP', to: 'CJU', fromName: '서울 김포', toName: '제주',
+              rule: '금요일 10:00 이후 출발 또는 토요일 오전 출발 · 직항만' },
+  inbound:  { from: 'CJU', to: 'GMP', fromName: '제주', toName: '서울 김포',
+              rule: '일요일 18:00 이후 도착 또는 월요일 전일 도착 · 직항만' },
+};
+
+const STATUS = {
+  available: { label: '있음',   fill: 'var(--ok-fill)',   tone: 'var(--ok)' },
+  limited:   { label: '적음',   fill: 'var(--warn-fill)', tone: 'var(--warn)' },
+  soldout:   { label: '매진',   fill: 'var(--bad-fill)',  tone: 'var(--bad)' },
+  none:      { label: '운항없음', fill: 'var(--none)',    tone: 'var(--faint)' },
+};
+
+const won = n => n.toLocaleString('ko-KR') + '원';
+const DOW = ['일','월','화','수','목','금','토'];
+
+let flights = null, weather = null;
+let direction = 'outbound', selectedDate = null, expanded = null;
 
 async function boot() {
-  const [flightsRes, weatherRes] = await Promise.allSettled([
-    fetch('../data/results.json', { cache: 'no-store' }).then(r => r.json()),
-    fetch('../data/weather.json', { cache: 'no-store' }).then(r => r.json()),
+  const [f, w] = await Promise.allSettled([
+    fetch(DATA_BASE + 'results.json', { cache: 'no-store' }).then(r => r.json()),
+    fetch(DATA_BASE + 'weather.json', { cache: 'no-store' }).then(r => r.json()),
   ]);
-  flightData = flightsRes.status === 'fulfilled' ? flightsRes.value : null;
-  weatherData = weatherRes.status === 'fulfilled' ? weatherRes.value : null;
+  flights = f.status === 'fulfilled' ? f.value : null;
+  weather = w.status === 'fulfilled' ? w.value : null;
 
-  if (!flightData) {
-    document.querySelector('.content').innerHTML = '<div class="empty-state">data/results.json 을 불러오지 못했습니다. scan.py를 먼저 실행하세요.</div>';
+  if (!flights) {
+    document.getElementById('list').innerHTML =
+      '<div class="empty">항공편 데이터를 불러오지 못했습니다. <code>python src/scan.py</code> 를 먼저 실행하세요.</div>';
     return;
   }
 
-  document.querySelectorAll('#directionToggle button').forEach(btn => {
+  document.querySelectorAll('#dirToggle button').forEach(btn => {
     btn.addEventListener('click', () => {
+      if (direction === btn.dataset.dir) return;
       direction = btn.dataset.dir;
-      document.querySelectorAll('#directionToggle button').forEach(b => b.classList.toggle('active', b === btn));
+      document.querySelectorAll('#dirToggle button')
+        .forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
       selectedDate = null;
-      openAirline = null;
-      render();
+      expanded = null;
+      renderAll();
     });
   });
 
   renderNotice();
-  render();
+  renderAll();
 }
 
 function renderNotice() {
-  const all = [...flightData.outbound.flights, ...flightData.inbound.flights];
-  const hasMock = all.some(f => f.source === 'mock') || flightData.provider === 'mock';
-  const hasLive = all.some(f => f.source === 'live');
-  const wrap = document.getElementById('noticeWrap');
-  if (all.length === 0) {
-    wrap.innerHTML = `<div class="notice empty">실시간 데이터 없음 — config/selectors.yaml 미검증. 목업으로 실행하거나 셀렉터를 채워주세요.</div>`;
-  } else if (hasMock && !hasLive) {
-    wrap.innerHTML = `<div class="notice">⚠️ 목업(mock) 데이터입니다. 실제 항공권 가격이 아닙니다.</div>`;
+  const all = [...flights.outbound.flights, ...flights.inbound.flights];
+  const live = all.some(f => f.source === 'live');
+  const el = document.getElementById('notice');
+  if (!all.length) {
+    const skipped = [...flights.outbound.skipped, ...flights.inbound.skipped].length;
+    el.innerHTML = `<div class="notice is-empty"><span>●</span><span>조회된 항공편이 없습니다. 미검증 셀렉터로 ${skipped}건을 건너뛰었습니다 — <code>config/selectors.yaml</code>을 확인하세요.</span></div>`;
+  } else if (!live) {
+    el.innerHTML = `<div class="notice"><span>●</span><span><b>목업 데이터</b>입니다. 화면 구성 확인용이며 실제 항공권 가격·좌석이 아닙니다.</span></div>`;
   } else {
-    wrap.innerHTML = `<div class="notice live">실시간 조회 결과 — 최종 가격/좌석은 항공사 공식 화면에서 재확인하세요.</div>`;
+    el.innerHTML = `<div class="notice is-live"><span>●</span><span>실시간 조회 결과입니다. 결제 전 항공사 공식 화면에서 최종 확인하세요.</span></div>`;
   }
 }
 
-function routeInfo() {
-  if (direction === 'outbound') {
-    return {
-      key: 'outbound', depAirport: 'GMP', arrAirport: 'CJU',
-      rule: '서울(GMP) → 제주(CJU) · 금요일 10시 이후 또는 토요일 오전 출발',
-      dateField: 'dep_dt',
-    };
-  }
-  return {
-    key: 'inbound', depAirport: 'CJU', arrAirport: 'GMP',
-    rule: '제주(CJU) → 서울(GMP) · 일요일 18시 이후 또는 월요일 전체 도착',
-    dateField: 'dep_dt',
-  };
+function dayFlights(dateStr) {
+  return flights[direction].flights
+    .filter(f => f.dep_dt.slice(0, 10) === dateStr)
+    .sort((a, b) => a.dep_dt.localeCompare(b.dep_dt));
 }
 
-function candidateDates(routeData) {
-  const dates = new Map();
-  for (const f of routeData.flights) {
-    const key = f.dep_dt.slice(0, 10);
-    if (!dates.has(key)) dates.set(key, f.demand);
+function datesForDirection() {
+  const seen = new Map();
+  for (const f of flights[direction].flights) {
+    const d = f.dep_dt.slice(0, 10);
+    if (!seen.has(d)) seen.set(d, f.demand);
   }
-  return [...dates.entries()].sort((a, b) => a[0].localeCompare(b[0]));
+  return [...seen.entries()].sort((a, b) => a[0].localeCompare(b[0]));
 }
 
-function render() {
-  const info = routeInfo();
-  const routeData = flightData[info.key];
-  document.getElementById('ruleLabel').textContent = info.rule;
-
-  const dates = candidateDates(routeData);
+function renderAll() {
+  document.getElementById('ruleLine').textContent =
+    `${ROUTES[direction].fromName} → ${ROUTES[direction].toName} · ${ROUTES[direction].rule}`;
+  const dates = datesForDirection();
   if (!selectedDate && dates.length) selectedDate = dates[0][0];
-
-  renderDateStrip(dates);
-  renderWeather(info);
-  renderAirlines(routeData, info);
+  renderRail(dates);
+  renderDay();
 }
 
-function renderDateStrip(dates) {
-  const strip = document.getElementById('dateStrip');
-  strip.innerHTML = '';
-  let lastMonth = null;
+function renderRail(dates) {
+  const rail = document.getElementById('rail');
+  rail.innerHTML = '';
+  let month = null;
   for (const [dateStr, demand] of dates) {
     const d = new Date(dateStr + 'T00:00:00');
-    const month = d.getMonth() + 1;
-    if (month !== lastMonth) {
-      const label = document.createElement('div');
-      label.className = 'month-label';
-      label.textContent = `${month}월`;
-      strip.appendChild(label);
-      lastMonth = month;
+    if (d.getMonth() + 1 !== month) {
+      month = d.getMonth() + 1;
+      const m = document.createElement('div');
+      m.className = 'rail-month';
+      m.textContent = month + '월';
+      rail.appendChild(m);
     }
+    const mark = demand.is_holiday ? 'var(--bad-fill)'
+              : demand.is_sandwich_day ? 'var(--warn-fill)'
+              : demand.is_long_weekend ? 'var(--accent)' : 'transparent';
     const chip = document.createElement('button');
-    chip.className = 'date-chip' + (dateStr === selectedDate ? ' selected' : '');
-    const weekday = ['일','월','화','수','목','금','토'][d.getDay()];
-    let dotColor = 'transparent';
-    if (demand.is_holiday) dotColor = 'var(--red)';
-    else if (demand.is_sandwich_day) dotColor = 'var(--amber)';
-    else if (demand.is_long_weekend) dotColor = 'var(--accent)';
-    chip.innerHTML = `<div class="dow">${weekday}</div><div class="num">${d.getDate()}</div><div class="dot" style="background:${dotColor}"></div>`;
-    chip.addEventListener('click', () => { selectedDate = dateStr; openAirline = null; render(); });
-    strip.appendChild(chip);
+    chip.type = 'button';
+    chip.className = 'chip';
+    chip.dataset.date = dateStr;
+    chip.setAttribute('aria-pressed', String(dateStr === selectedDate));
+    chip.setAttribute('aria-label', `${d.getMonth() + 1}월 ${d.getDate()}일 ${DOW[d.getDay()]}요일`);
+    chip.innerHTML =
+      `<div class="dow">${DOW[d.getDay()]}</div>` +
+      `<div class="day">${d.getDate()}</div>` +
+      `<div class="mark"><i style="background:${mark}"></i></div>`;
+    chip.addEventListener('click', () => selectDate(dateStr));
+    rail.appendChild(chip);
   }
+  scrollSelectedIntoView();
 }
 
-function renderWeather(info) {
-  const row = document.getElementById('weatherRow');
-  row.innerHTML = '';
-  row.appendChild(weatherCard('출발 · ' + info.depAirport, info.depAirport));
-  row.appendChild(weatherCard('도착 · ' + info.arrAirport, info.arrAirport));
+function selectDate(dateStr) {
+  if (selectedDate === dateStr) return;
+  selectedDate = dateStr;
+  expanded = null;
+  document.querySelectorAll('.chip').forEach(c =>
+    c.setAttribute('aria-pressed', String(c.dataset.date === dateStr)));
+  scrollSelectedIntoView();
+  renderDay();
 }
 
-function weatherCard(label, airportCode) {
-  const card = document.createElement('div');
-  const entry = weatherData?.by_airport?.[airportCode]?.[selectedDate];
-  if (!entry) {
-    card.className = 'weather-card unavailable';
-    card.innerHTML = `<div class="wc-label">${label}</div><div class="wc-summary">예보 범위 밖 (약 ${weatherData?.forecast_horizon_days ?? 14}일 이내만 제공)</div>`;
-    return card;
-  }
-  card.className = 'weather-card';
-  card.innerHTML = `
-    <div class="wc-label">${label}${entry.source === 'mock' ? ' · 목업' : ''}</div>
-    <div class="wc-icon">${WEATHER_ICON[entry.summary] || '🌡️'}</div>
-    <div class="wc-summary">${entry.summary} · ${Math.round(entry.temp_low_c)}°~${Math.round(entry.temp_high_c)}°</div>
-    <div class="wc-metrics">
-      <span>강수 <b>${entry.precip_probability_pct}%</b></span>
-      <span>풍속 <b>${entry.wind_speed_kmh}km/h</b></span>
-    </div>`;
-  return card;
+function scrollSelectedIntoView() {
+  const el = document.querySelector('.chip[aria-pressed="true"]');
+  if (el) el.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'auto' });
 }
 
-function airlineStatus(flights) {
-  const inWindow = flights.filter(f => f.in_target_window);
-  if (inWindow.length === 0) return { status: 'none', label: '운항없음', color: 'var(--gray)' };
-  if (inWindow.some(f => f.seat_status === 'available')) return { status: 'available', label: '있음', color: 'var(--green)' };
-  if (inWindow.some(f => f.seat_status === 'limited')) return { status: 'limited', label: '적음', color: 'var(--amber)' };
-  return { status: 'soldout', label: '매진', color: 'var(--red)' };
+function renderDay() {
+  renderSummary();
+  renderWeather();
+  renderList();
 }
 
-function renderAirlines(routeData, info) {
-  const card = document.getElementById('airlineCard');
-  card.innerHTML = '';
+function renderSummary() {
+  const el = document.getElementById('summary');
+  if (!selectedDate) { el.innerHTML = ''; return; }
+  const day = dayFlights(selectedDate);
+  const inWindow = day.filter(f => f.in_target_window);
+  const open = inWindow.filter(f => f.seat_status !== 'soldout' && f.economy_price_krw != null);
+  const cheapest = open.length ? Math.min(...open.map(f => f.economy_price_krw)) : null;
+  const carriers = new Set(open.map(f => f.airline_code)).size;
+  const demand = day[0]?.demand;
 
-  if (!selectedDate) {
-    card.innerHTML = '<div class="empty-state">표시할 날짜가 없습니다.</div>';
-    return;
+  const chips = [];
+  if (demand?.is_holiday) chips.push(`<span class="dchip holiday">${demand.holiday_name}</span>`);
+  if (demand?.is_sandwich_day) chips.push('<span class="dchip sandwich">샌드위치 데이</span>');
+  if (demand?.is_long_weekend) chips.push('<span class="dchip longwk">연휴</span>');
+
+  const d = new Date(selectedDate + 'T00:00:00');
+  el.innerHTML = `<div class="summary">
+    <div class="stat">
+      <div class="stat-k">선택일</div>
+      <div class="stat-v">${d.getMonth() + 1}.${d.getDate()}<small>(${DOW[d.getDay()]})</small></div>
+    </div>
+    <div class="stat">
+      <div class="stat-k">최저가</div>
+      <div class="stat-v">${cheapest != null ? won(cheapest) : '—'}</div>
+    </div>
+    <div class="stat">
+      <div class="stat-k">예약가능 항공사</div>
+      <div class="stat-v">${carriers}<small>/${AIRLINES.length}</small></div>
+    </div>
+    ${chips.length ? `<div class="demand-chips">${chips.join('')}</div>` : ''}
+  </div>`;
+}
+
+function renderWeather() {
+  const r = ROUTES[direction];
+  document.getElementById('weather').innerHTML =
+    weatherCard('출발', r.from, r.fromName) + weatherCard('도착', r.to, r.toName);
+}
+
+function weatherCard(leg, code, name) {
+  const w = weather?.by_airport?.[code]?.[selectedDate];
+  const head = `<div class="leg">${leg} · ${name} <span class="code">${code}</span></div>`;
+  if (!w) {
+    const horizon = weather?.forecast_horizon_days ?? 14;
+    return `<div class="wcard dim">${head}
+      <div class="msg">예보 범위 밖<br>단기예보는 약 ${horizon}일 이내만 제공됩니다.</div></div>`;
   }
-
-  const flightsByAirline = {};
-  for (const f of routeData.flights) {
-    if (f.dep_dt.slice(0, 10) !== selectedDate) continue;
-    (flightsByAirline[f.airline_code] ||= []).push(f);
-  }
-
-  for (const code of AIRLINE_ORDER) {
-    const meta = AIRLINE_META[code];
-    const flights = (flightsByAirline[code] || []).sort((a, b) => a.dep_dt.localeCompare(b.dep_dt));
-    const status = airlineStatus(flights);
-    const isOpen = openAirline === code;
-
-    const row = document.createElement('div');
-    row.className = 'airline-row' + (isOpen ? ' open' : '');
-    row.innerHTML = `
-      <div class="badge" style="background:${meta.color}">${code}</div>
-      <div class="airline-name">${meta.name}</div>
-      <div class="status-wrap">
-        <span class="status-dot" style="background:${status.color}"></span>
-        <span class="status-label">${status.label}</span>
+  return `<div class="wcard">${head}
+    <div class="now">
+      <div class="glyph">${SKY_GLYPH[w.summary] || '🌡️'}</div>
+      <div>
+        <div class="sky">${w.summary}</div>
+        <div class="temp">${Math.round(w.temp_low_c)}° / ${Math.round(w.temp_high_c)}°</div>
       </div>
-      <span class="chevron">▸</span>`;
-    row.addEventListener('click', () => {
-      openAirline = isOpen ? null : code;
-      render();
-    });
-    card.appendChild(row);
+    </div>
+    <div class="metrics">
+      <span>강수 <b>${w.precip_probability_pct}%</b></span>
+      <span>풍속 <b>${w.wind_speed_kmh}</b>km/h</span>
+    </div></div>`;
+}
 
-    const panel = document.createElement('div');
-    panel.className = 'detail-panel' + (isOpen ? ' open' : '');
+function rollup(list) {
+  const inWindow = list.filter(f => f.in_target_window);
+  if (!inWindow.length) return 'none';
+  if (inWindow.some(f => f.seat_status === 'available')) return 'available';
+  if (inWindow.some(f => f.seat_status === 'limited')) return 'limited';
+  return 'soldout';
+}
+
+function renderList() {
+  const list = document.getElementById('list');
+  if (!selectedDate) { list.innerHTML = '<div class="empty">표시할 날짜가 없습니다.</div>'; return; }
+
+  const day = dayFlights(selectedDate);
+  list.innerHTML = '';
+
+  for (const air of AIRLINES) {
+    const mine = day.filter(f => f.airline_code === air.code);
+    const key = rollup(mine);
+    const st = STATUS[key];
+    const isOpen = expanded === air.code;
+
+    const row = document.createElement('button');
+    row.type = 'button';
+    row.className = 'arow';
+    row.setAttribute('aria-expanded', String(isOpen));
+    row.innerHTML =
+      (air.logo
+        ? `<span class="tile brand"><img src="${air.logo}" alt=""></span>`
+        : `<span class="tile mono" style="background:${air.color}">${air.code}</span>`) +
+      `<span class="aname">${air.name}</span>` +
+      `<span class="status"><i style="background:${st.fill}"></i>` +
+      `<span style="color:${st.tone}">${st.label}</span></span>` +
+      `<span class="caret" aria-hidden="true">▸</span>`;
+    row.addEventListener('click', () => {
+      expanded = isOpen ? null : air.code;
+      renderList();
+    });
+    list.appendChild(row);
+
     if (isOpen) {
-      panel.appendChild(renderDetailTable(flights, info));
+      const panel = document.createElement('div');
+      panel.className = 'panel';
+      panel.innerHTML = detailTable(mine);
+      list.appendChild(panel);
     }
-    card.appendChild(panel);
   }
 }
 
-function renderDetailTable(flights, info) {
-  const wrap = document.createElement('div');
-  if (!flights.length) {
-    wrap.innerHTML = '<div class="outside-note">이 날짜에 운항하는 편이 없습니다.</div>';
-    return wrap;
-  }
-  const hasOutside = flights.some(f => !f.in_target_window);
-  const rows = flights.map(f => {
-    const time = f.dep_dt.slice(11, 16);
-    const dot = { available: 'var(--green)', limited: 'var(--amber)', soldout: 'var(--red)' }[f.seat_status];
-    const eco = f.economy_price_krw != null ? f.economy_price_krw.toLocaleString('ko-KR') + '원' : '<span class="dash">-</span>';
-    const biz = f.business_price_krw != null ? f.business_price_krw.toLocaleString('ko-KR') + '원' : '<span class="dash">-</span>';
+function detailTable(list) {
+  if (!list.length) return '<div class="foot">이 날짜에 운항 편이 없습니다.</div>';
+
+  const bookable = list.filter(f => f.in_target_window && f.seat_status !== 'soldout' && f.economy_price_krw != null);
+  const best = bookable.length ? Math.min(...bookable.map(f => f.economy_price_krw)) : null;
+  const hasOutside = list.some(f => !f.in_target_window);
+
+  const rows = list.map(f => {
+    const st = STATUS[f.seat_status];
+    const isBest = f.in_target_window && f.economy_price_krw === best && f.seat_status !== 'soldout';
+    const eco = f.economy_price_krw != null
+      ? `<span class="fare">${won(f.economy_price_krw)}</span>${isBest ? '<span class="best">최저</span>' : ''}`
+      : '<span class="na">—</span>';
+    const biz = f.business_price_krw != null ? `<span class="fare">${won(f.business_price_krw)}</span>` : '<span class="na">—</span>';
     return `<tr class="${f.in_target_window ? '' : 'outside'}">
-      <td>${time}</td>
-      <td><span class="row-status-dot" style="background:${dot}"></span>${f.seat_status === 'available' ? '가능' : f.seat_status === 'limited' ? '적음' : '매진'}</td>
-      <td class="price">${eco}</td>
-      <td class="price">${biz}</td>
-    </tr>`;
+      <td><span class="time">${f.dep_dt.slice(11, 16)}</span></td>
+      <td><span class="seat"><i style="background:${st.fill}"></i>${st.label === '운항없음' ? '—' : st.label}</span></td>
+      <td>${eco}</td><td>${biz}</td></tr>`;
   }).join('');
 
-  wrap.innerHTML = `
-    <table class="detail-table">
-      <thead><tr><th>시간</th><th>좌석</th><th>이코노미</th><th>비즈니스</th></tr></thead>
+  const windowText = direction === 'outbound' ? '금 10시 이후 / 토 오전' : '일 18시 이후 / 월 전일';
+  return `<table>
+      <thead><tr><th>출발</th><th>좌석</th><th>이코노미</th><th>비즈니스</th></tr></thead>
       <tbody>${rows}</tbody>
     </table>
-    ${hasOutside ? '<div class="outside-note">흐린 행은 요청하신 시간대(' + (info.key === 'outbound' ? '금 10시~ / 토 오전' : '일 18시~ / 월 전일') + ') 밖의 편입니다.</div>' : ''}`;
-  return wrap;
+    ${hasOutside ? `<div class="foot">흐리게 표시된 편은 요청 시간대(${windowText}) 밖입니다. 비즈니스 ‘—’는 해당 편에 상위 클래스가 없다는 뜻입니다.</div>` : ''}`;
 }
 
 boot();

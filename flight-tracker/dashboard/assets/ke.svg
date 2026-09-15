@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 570" role="img" aria-label="대한항공">
+  <g fill="none" stroke="#0B1F6B" stroke-width="64" stroke-linecap="round">
+    <path d="M346 66 A232 232 0 0 0 194 504"/>
+    <path d="M118 460 A232 232 0 0 0 422 110"/>
+  </g>
+  <g transform="rotate(25 270 285)">
+    <path fill="#0B1F6B" d="M270 95 A95 95 0 0 1 270 285 A95 95 0 0 0 270 475 A190 190 0 0 0 270 95 Z"/>
+  </g>
+</svg>
