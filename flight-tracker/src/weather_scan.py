@@ -40,16 +40,13 @@ def run(provider_kind: str) -> dict:
     by_airport: dict[str, dict[str, dict]] = {code: {} for code in AIRPORT_COORDS}
     errors: list[dict] = []
 
+    end = today + dt.timedelta(days=FORECAST_HORIZON_DAYS)
     for airport_code in AIRPORT_COORDS:
-        for offset in range(FORECAST_HORIZON_DAYS + 1):
-            date = today + dt.timedelta(days=offset)
-            try:
-                info = provider.get_forecast(airport_code, date)
-            except WeatherProviderError as e:
-                errors.append({"airport": airport_code, "date": date.isoformat(), "reason": str(e)})
-                continue
-            if info is not None:
-                by_airport[airport_code][date.isoformat()] = info.to_dict()
+        try:
+            for info in provider.get_range(airport_code, today, end):
+                by_airport[airport_code][info.date] = info.to_dict()
+        except WeatherProviderError as e:
+            errors.append({"airport": airport_code, "reason": str(e)})
 
     return {
         "generated_at": dt.datetime.now().isoformat(),

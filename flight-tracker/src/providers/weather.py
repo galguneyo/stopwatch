@@ -57,23 +57,45 @@ class WeatherProvider:
         """해당 날짜가 예보 범위 밖이면 None을 반환한다(가짜 값을 만들지 않는다)."""
         raise NotImplementedError
 
+    def get_range(self, airport_code: str, start: dt.date, end: dt.date) -> list[WeatherInfo]:
+        """기간 전체를 한 번에 가져온다. 기본 구현은 날짜별 호출을 반복한다."""
+        out: list[WeatherInfo] = []
+        day = start
+        while day <= end:
+            info = self.get_forecast(airport_code, day)
+            if info is not None:
+                out.append(info)
+            day += dt.timedelta(days=1)
+        return out
+
 
 class WeatherProviderError(RuntimeError):
     pass
 
 
 class OpenMeteoWeatherProvider(WeatherProvider):
-    """api.open-meteo.com 기반 실провider. API 키 불필요.
+    """api.open-meteo.com 기반 실 provider. API 키 불필요.
 
-    이 세션에서는 네트워크가 막혀 있어 실제 호출을 검증하지 못했다.
-    네트워크가 열린 환경(GitHub Actions 등)에서 먼저 하루치로 확인 후 사용할 것.
+    2026-09-15 GitHub Actions 러너에서 실연결 검증 완료 (VERIFICATION.md 참고).
+    Open-Meteo는 한 번의 호출로 기간 전체를 돌려주므로 get_range를 쓰는 쪽이
+    날짜별 반복 호출보다 훨씬 빠르고 rate limit에도 안전하다.
     """
 
     BASE_URL = "https://api.open-meteo.com/v1/forecast"
+    DAILY_FIELDS = (
+        "weathercode,precipitation_probability_max,windspeed_10m_max,"
+        "temperature_2m_max,temperature_2m_min"
+    )
 
     def get_forecast(self, airport_code: str, date: dt.date) -> WeatherInfo | None:
-        if date - dt.date.today() > dt.timedelta(days=FORECAST_HORIZON_DAYS):
-            return None
+        results = self.get_range(airport_code, date, date)
+        return results[0] if results else None
+
+    def get_range(self, airport_code: str, start: dt.date, end: dt.date) -> list[WeatherInfo]:
+        horizon = dt.date.today() + dt.timedelta(days=FORECAST_HORIZON_DAYS)
+        end = min(end, horizon)
+        if start > end:
+            return []
         if airport_code not in AIRPORT_COORDS:
             raise WeatherProviderError(f"알 수 없는 공항 코드: {airport_code}")
 
@@ -86,26 +108,29 @@ class OpenMeteoWeatherProvider(WeatherProvider):
         params = {
             "latitude": lat,
             "longitude": lon,
-            "daily": "weathercode,precipitation_probability_max,windspeed_10m_max,temperature_2m_max,temperature_2m_min",
+            "daily": self.DAILY_FIELDS,
             "timezone": "Asia/Seoul",
-            "start_date": date.isoformat(),
-            "end_date": date.isoformat(),
+            "start_date": start.isoformat(),
+            "end_date": end.isoformat(),
         }
         try:
-            res = requests.get(self.BASE_URL, params=params, timeout=10)
+            res = requests.get(self.BASE_URL, params=params, timeout=20)
             res.raise_for_status()
             daily = res.json()["daily"]
         except Exception as e:  # noqa: BLE001
-            raise WeatherProviderError(f"{airport_code} {date} 날씨 조회 실패: {e}") from e
+            raise WeatherProviderError(f"{airport_code} {start}~{end} 날씨 조회 실패: {e}") from e
 
-        code = daily["weathercode"][0]
-        return WeatherInfo(
-            airport_code=airport_code,
-            date=date.isoformat(),
-            summary=_WMO_SUMMARY.get(code, f"코드 {code}"),
-            precip_probability_pct=daily["precipitation_probability_max"][0],
-            wind_speed_kmh=daily["windspeed_10m_max"][0],
-            temp_high_c=daily["temperature_2m_max"][0],
-            temp_low_c=daily["temperature_2m_min"][0],
-            source="live",
-        )
+        out: list[WeatherInfo] = []
+        for i, day in enumerate(daily["time"]):
+            code = daily["weathercode"][i]
+            out.append(WeatherInfo(
+                airport_code=airport_code,
+                date=day,
+                summary=_WMO_SUMMARY.get(code, f"코드 {code}"),
+                precip_probability_pct=daily["precipitation_probability_max"][i],
+                wind_speed_kmh=daily["windspeed_10m_max"][i],
+                temp_high_c=daily["temperature_2m_max"][i],
+                temp_low_c=daily["temperature_2m_min"][i],
+                source="live",
+            ))
+        return out

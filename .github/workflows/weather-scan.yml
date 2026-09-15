@@ -12,6 +12,8 @@ on:
     branches: [claude/jolly-cannon-vp1kcb]
     paths:
       - ".github/workflows/weather-scan.yml"
+      - "flight-tracker/src/weather_scan.py"
+      - "flight-tracker/src/providers/weather.py"
 
 permissions:
   contents: write
