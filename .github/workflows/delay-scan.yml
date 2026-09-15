@@ -1,0 +1,49 @@
+name: Delay scan
+
+# 2026-09-15 실측(VERIFICATION.md): apis.data.go.kr 는 클라우드 러너에서 정상
+# 응답한다. 항공사 사이트와 달리 IP 차단이 없으므로 지연/결항 정보는 여기서
+# 그대로 자동화할 수 있다. 남은 조건은 서비스 키뿐이다.
+on:
+  schedule:
+    - cron: "0 12 * * *" # 21:00 KST — 그날 운항이 대부분 끝난 뒤
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  delay:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: flight-tracker
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install requests pyyaml
+
+      - name: Fetch today's delays
+        env:
+          KAC_SERVICE_KEY: ${{ secrets.KAC_SERVICE_KEY }}
+        run: |
+          if [ -z "$KAC_SERVICE_KEY" ]; then
+            echo "KAC_SERVICE_KEY 시크릿이 없어 건너뜁니다."
+            echo "공공데이터포털에서 키를 발급받아 리포지토리 Secret으로 등록하세요."
+            exit 0
+          fi
+          python src/delay_scan.py --provider live
+
+      - name: Commit delays
+        run: |
+          git config user.name "flight-scan-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/delays.json
+          git diff --cached --quiet || git commit -m "chore: refresh today's delay status"
+          git push origin HEAD:${{ github.ref_name }}

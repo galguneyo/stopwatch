@@ -5,20 +5,26 @@
 러너**에서 `src/verify_live.py`를 실제로 실행해 결과를 기록했습니다.
 
 - 실행 워크플로: `.github/workflows/verify-live.yml`
-- 실행 일시: 2026-09-15 08:04 UTC
+- 실행 일시: 2026-09-15 08:04 UTC / 08:34 UTC (2차)
 - 실행 환경: `ubuntu-latest` / Python 3.11.16 / Playwright Chromium
-- 실행 로그: Actions run `34944953393`
+- 실행 로그: Actions run `34944953393`, `34947663672`
 
 ## 결론 요약
 
 | 대상 | requests | 헤드리스 브라우저 | 판정 |
 |---|---|---|---|
 | Open-Meteo (날씨) | HTTP 200 | — | **실연결 성공** |
+| 공공데이터포털 `apis.data.go.kr` | HTTP 400 | — | **도달 가능** |
+| 공공데이터포털 `www.data.go.kr` | HTTP 200 | — | **도달 가능** |
 | 대한항공 (KE) | HTTP 403 | `ERR_HTTP2_PROTOCOL_ERROR` | 차단 |
 | 아시아나 (OZ) | HTTP 403 | `ERR_HTTP2_PROTOCOL_ERROR` | 차단 |
 | 제주항공 (7C) | HTTP 200 | HTTP 403 `JEJUAIR ERROR OCCURED` | 차단 |
 | 티웨이 (TW) | HTTP 403 | HTTP 403 `Access Denied` | 차단(명시적) |
 | 에어부산 (BX) | HTTP 403 | **HTTP 200 정상 로드** (form 3 / input 39) | 통과 |
+
+`apis.data.go.kr`의 400은 차단이 아니라 **파라미터 없이 호출해서 서버가 돌려준
+정상적인 오류**입니다. 즉 서버가 응답했다는 뜻이고, 항공사와 달리 클라우드 IP를
+막지 않는다는 증거입니다.
 
 ## 1. 날씨 — 검증 완료
 
@@ -32,6 +38,21 @@ CJU 2026-09-16  약한 비      강수 90%  풍속 24.0km/h  20.8~25.8°C  (sour
 
 API 키가 필요 없고 클라우드 IP에서도 정상 응답하므로, 날씨는
 `.github/workflows/weather-scan.yml`로 **매일 자동 갱신**합니다.
+
+## 1-2. 당일 지연/결항 — 클라우드 자동화 가능 (서비스 키만 필요)
+
+`apis.data.go.kr`가 클라우드 러너에서 정상 응답하므로, 한국공항공사
+"실시간 항공운항 현황 정보 상세 조회 서비스"(데이터 번호 15113771)는
+**항공권과 달리 GitHub Actions에서 그대로 자동화할 수 있습니다.** 남은 일은
+두 가지뿐입니다.
+
+1. 공공데이터포털에서 활용신청 → 서비스 키 발급
+2. 발급 페이지의 문서를 보고 `config/delay_api.yaml`의 엔드포인트·필드명을
+   채우고 `verified: true`로 변경
+
+키는 리포지토리 Secret `KAC_SERVICE_KEY`로 등록하면
+`.github/workflows/delay-scan.yml`이 매일 돌며 `data/delays.json`을 갱신합니다.
+키가 없으면 워크플로는 아무것도 하지 않고 안내만 출력하고 끝납니다.
 
 ## 2. 항공권 — 클라우드에서는 불가, 로컬 경로 필요
 
