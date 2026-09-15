@@ -4,222 +4,288 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>갈매기의 귀향 플래너</title>
+<link rel="stylesheet" as="style" crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap">
 <style>
   :root {
-    --bg: #f2f2f5;
-    --surface: #ffffff;
-    --surface-blur: rgba(242,242,245,0.82);
-    --surface-sunken: #e9e9ee;
-    --hairline: rgba(60,60,67,0.13);
-    --text: #16161a;
-    --muted: #6c6c74;
-    --faint: #9a9aa2;
-    --accent: #0071e3;
-    --ok: #1d9e4b;
-    --warn: #c77700;
-    --bad: #d92b20;
-    --none: #a8a8b0;
-    --ok-fill: #34c759;
-    --warn-fill: #ff9f0a;
-    --bad-fill: #ff3b30;
-    --shadow: 0 1px 1px rgba(0,0,0,0.04), 0 6px 18px rgba(20,20,40,0.07);
+    /* 제주 — 하늘, 바다, 현무암, 감귤 */
+    --sky: #bfe3f5;
+    --sea: #a3dbd2;
+    --sand: #f7e7d0;
+    --tangerine: #ffd3a6;
+
+    --text: #0d2530;
+    --muted: #4d6b78;
+    --faint: #7f9aa6;
+    --accent: #0b7fa8;
+
+    --ok: #0f7f3c;
+    --warn: #935400;
+    --bad: #c1352a;
+    --none: #8ba3ad;
+    --ok-fill: #17b357;
+    --warn-fill: #f0a020;
+    --bad-fill: #e0483a;
+
+    /* 글래스 */
+    --glass: rgba(255,255,255,0.50);
+    --glass-strong: rgba(255,255,255,0.68);
+    --glass-sunken: rgba(255,255,255,0.28);
+    --glass-edge: rgba(255,255,255,0.65);
+    --glass-spec: rgba(255,255,255,0.85);
+    --glass-under: rgba(13,37,48,0.05);
+    --glass-shadow: rgba(13,37,48,0.13);
+    --hairline: rgba(13,37,48,0.10);
     color-scheme: light;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --bg: #000000;
-      --surface: #1a1a1d;
-      --surface-blur: rgba(10,10,12,0.8);
-      --surface-sunken: #141417;
-      --hairline: rgba(255,255,255,0.11);
-      --text: #f3f3f6;
-      --muted: #9b9ba3;
-      --faint: #6e6e78;
-      --accent: #3b9eff;
-      --ok: #34c759;
-      --warn: #ff9f0a;
-      --bad: #ff6159;
-      --none: #7c7c86;
-      --shadow: 0 1px 1px rgba(0,0,0,0.5), 0 6px 18px rgba(0,0,0,0.45);
+      --sky: #0b2430;
+      --sea: #0d2f33;
+      --sand: #1a1626;
+      --tangerine: #2a1a1f;
+
+      --text: #e9f4f7;
+      --muted: #9fb8c2;
+      --faint: #6d8792;
+      --accent: #5ccbe8;
+
+      --ok: #3ddc84;
+      --warn: #ffb340;
+      --bad: #ff6f63;
+      --none: #6d8792;
+      --ok-fill: #2fc46f;
+      --warn-fill: #e79a22;
+      --bad-fill: #e05548;
+
+      --glass: rgba(20,28,34,0.46);
+      --glass-strong: rgba(28,38,45,0.66);
+      --glass-sunken: rgba(8,14,18,0.34);
+      --glass-edge: rgba(255,255,255,0.13);
+      --glass-spec: rgba(255,255,255,0.22);
+      --glass-under: rgba(0,0,0,0.25);
+      --glass-shadow: rgba(0,0,0,0.45);
+      --hairline: rgba(255,255,255,0.10);
       color-scheme: dark;
     }
   }
   :root[data-theme="dark"] {
-    --bg: #000000;
-    --surface: #1a1a1d;
-    --surface-blur: rgba(10,10,12,0.8);
-    --surface-sunken: #141417;
-    --hairline: rgba(255,255,255,0.11);
-    --text: #f3f3f6;
-    --muted: #9b9ba3;
-    --faint: #6e6e78;
-    --accent: #3b9eff;
-    --ok: #34c759;
-    --warn: #ff9f0a;
-    --bad: #ff6159;
-    --none: #7c7c86;
-    --shadow: 0 1px 1px rgba(0,0,0,0.5), 0 6px 18px rgba(0,0,0,0.45);
+    --sky: #0b2430; --sea: #0d2f33; --sand: #1a1626; --tangerine: #2a1a1f;
+    --text: #e9f4f7; --muted: #9fb8c2; --faint: #6d8792; --accent: #5ccbe8;
+    --ok: #3ddc84; --warn: #ffb340; --bad: #ff6f63; --none: #6d8792;
+    --ok-fill: #2fc46f; --warn-fill: #e79a22; --bad-fill: #e05548;
+    --glass: rgba(20,28,34,0.46); --glass-strong: rgba(28,38,45,0.66);
+    --glass-sunken: rgba(8,14,18,0.34); --glass-edge: rgba(255,255,255,0.13);
+    --glass-spec: rgba(255,255,255,0.22); --glass-under: rgba(0,0,0,0.25);
+    --glass-shadow: rgba(0,0,0,0.45); --hairline: rgba(255,255,255,0.10);
     color-scheme: dark;
   }
 
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
   body {
     margin: 0;
-    background: var(--bg);
     color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Noto Sans KR",
-                 "Pretendard", system-ui, "Segoe UI", sans-serif;
+    font-family: "Pretendard", "Pretendard Variable", -apple-system, BlinkMacSystemFont,
+                 "Noto Sans KR", system-ui, sans-serif;
     font-size: 14px;
     line-height: 1.45;
     word-break: keep-all;
     -webkit-font-smoothing: antialiased;
+    background:
+      radial-gradient(110% 80% at 12% 0%, var(--sky) 0%, transparent 62%),
+      radial-gradient(95% 70% at 92% 12%, var(--tangerine) 0%, transparent 58%),
+      radial-gradient(120% 90% at 78% 96%, var(--sea) 0%, transparent 64%),
+      radial-gradient(90% 70% at 4% 88%, var(--sand) 0%, transparent 60%),
+      var(--sky);
+    background-attachment: fixed;
+    min-height: 100vh;
   }
-  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
-  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 8px; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 
-  .shell { max-width: 560px; margin: 0 auto; padding-inline: 18px; }
+  /* 리퀴드 글래스 기본 슬래브 */
+  .glass {
+    background: var(--glass);
+    backdrop-filter: blur(26px) saturate(185%);
+    -webkit-backdrop-filter: blur(26px) saturate(185%);
+    border: 1px solid var(--glass-edge);
+    border-radius: 20px;
+    box-shadow:
+      inset 0 1px 0 var(--glass-spec),
+      inset 0 -1px 0 var(--glass-under),
+      0 10px 30px var(--glass-shadow);
+  }
+
+  .shell { max-width: 560px; margin: 0 auto; padding-inline: 16px; padding-bottom: 44px; }
 
   header {
     position: sticky;
     top: env(safe-area-inset-top, 0px);
     z-index: 20;
-    background: var(--surface-blur);
-    backdrop-filter: saturate(180%) blur(20px);
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
-    border-bottom: 1px solid var(--hairline);
+    background: var(--glass-strong);
+    backdrop-filter: blur(30px) saturate(190%);
+    -webkit-backdrop-filter: blur(30px) saturate(190%);
+    border-bottom: 1px solid var(--glass-edge);
+    box-shadow: inset 0 1px 0 var(--glass-spec), 0 6px 20px var(--glass-shadow);
   }
-  .header-inner { max-width: 560px; margin: 0 auto; padding: 14px 18px 12px; }
-  h1 { font-size: 19px; font-weight: 700; letter-spacing: -0.022em; margin: 0 0 11px; }
+  .header-inner { max-width: 560px; margin: 0 auto; padding: 14px 16px 12px; }
+  h1 { font-size: 19px; font-weight: 700; letter-spacing: -0.03em; margin: 0 0 11px; }
 
-  .segmented { display: flex; gap: 2px; background: var(--surface-sunken); border-radius: 10px; padding: 2px; }
+  .segmented {
+    display: flex; gap: 3px; padding: 3px; border-radius: 14px;
+    background: var(--glass-sunken);
+    border: 1px solid var(--hairline);
+  }
   .segmented button {
     flex: 1; border: 0; background: transparent; color: var(--text);
-    font: inherit; font-size: 13px; font-weight: 600; letter-spacing: -0.01em;
-    padding: 7px 8px; border-radius: 8px; cursor: pointer; transition: background 0.18s ease;
+    font: inherit; font-size: 13px; font-weight: 600; letter-spacing: -0.02em;
+    padding: 7px 8px; border-radius: 11px; cursor: pointer;
+    transition: background 0.2s ease, box-shadow 0.2s ease;
   }
-  .segmented button[aria-pressed="true"] { background: var(--surface); box-shadow: var(--shadow); }
+  .segmented button[aria-pressed="true"] {
+    background: var(--glass-strong);
+    box-shadow: inset 0 1px 0 var(--glass-spec), 0 2px 8px var(--glass-shadow);
+  }
 
   .notice {
     display: flex; gap: 8px; align-items: flex-start;
-    margin-top: 14px; padding: 9px 12px; border-radius: 11px;
-    font-size: 12px; line-height: 1.4;
-    background: color-mix(in srgb, var(--warn-fill) 14%, var(--surface));
+    margin-top: 14px; padding: 10px 13px; border-radius: 14px;
+    font-size: 12px; line-height: 1.45;
+    background: var(--glass);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-edge);
+    box-shadow: inset 0 1px 0 var(--glass-spec);
     color: var(--warn);
-    border: 1px solid color-mix(in srgb, var(--warn-fill) 30%, transparent);
   }
-  .notice.is-live { background: color-mix(in srgb, var(--ok-fill) 12%, var(--surface)); color: var(--ok);
-                    border-color: color-mix(in srgb, var(--ok-fill) 28%, transparent); }
-  .notice.is-empty { background: color-mix(in srgb, var(--bad-fill) 12%, var(--surface)); color: var(--bad);
-                     border-color: color-mix(in srgb, var(--bad-fill) 28%, transparent); }
+  .notice b { color: var(--warn); }
+  .notice.is-live, .notice.is-live b { color: var(--ok); }
+  .notice.is-empty, .notice.is-empty b { color: var(--bad); }
+  .notice .pip { width: 7px; height: 7px; border-radius: 50%; background: currentColor; margin-top: 5px; flex: 0 0 auto; }
 
-  .rule-line { margin-top: 16px; font-size: 12px; color: var(--muted); letter-spacing: -0.005em; }
+  .rule-line { margin: 16px 0 0; font-size: 12px; color: var(--muted); letter-spacing: -0.01em; }
 
-  /* date rail */
-  .rail-wrap { margin: 10px -18px 0; }
-  .rail { display: flex; gap: 7px; overflow-x: auto; padding: 6px 18px 12px; scrollbar-width: none; scroll-behavior: smooth; }
+  /* 날짜 레일 */
+  .rail-wrap { margin: 10px -16px 0; }
+  .rail { display: flex; gap: 8px; overflow-x: auto; padding: 8px 16px 14px; scrollbar-width: none; scroll-behavior: smooth; }
   .rail::-webkit-scrollbar { display: none; }
-  .rail-month { flex: 0 0 auto; align-self: center; font-size: 11px; font-weight: 700; color: var(--faint); padding: 0 2px; }
+  .rail-month { flex: 0 0 auto; align-self: center; font-size: 11px; font-weight: 700; color: var(--muted); padding: 0 2px; }
   .chip {
-    flex: 0 0 auto; width: 54px; padding: 7px 0 8px;
-    background: var(--surface); border: 1px solid var(--hairline); border-radius: 13px;
-    font: inherit; color: inherit; cursor: pointer; text-align: center;
-    box-shadow: var(--shadow); transition: transform 0.15s ease, background 0.15s ease;
+    flex: 0 0 auto; width: 56px; padding: 8px 0 9px;
+    border-radius: 17px; text-align: center; cursor: pointer;
+    font: inherit; color: inherit;
+    background: var(--glass);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-edge);
+    box-shadow: inset 0 1px 0 var(--glass-spec), 0 4px 14px var(--glass-shadow);
+    transition: transform 0.18s ease, background 0.2s ease;
   }
-  .chip:active { transform: scale(0.96); }
+  .chip:active { transform: scale(0.95); }
   .chip .dow { font-size: 11px; font-weight: 600; color: var(--muted); }
-  .chip .day { font-size: 18px; font-weight: 700; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; margin-top: 1px; }
-  .chip .mark { height: 5px; margin-top: 3px; display: flex; justify-content: center; }
+  .chip .day { font-size: 19px; font-weight: 700; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; margin-top: 1px; }
+  .chip .mark { height: 5px; margin-top: 4px; display: flex; justify-content: center; }
   .chip .mark i { width: 5px; height: 5px; border-radius: 50%; display: block; }
-  .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); }
+  .chip[aria-pressed="true"] {
+    background: color-mix(in srgb, var(--accent) 82%, transparent);
+    border-color: color-mix(in srgb, var(--accent) 60%, white);
+  }
   .chip[aria-pressed="true"] .dow, .chip[aria-pressed="true"] .day { color: #fff; }
-  .chip[aria-pressed="true"] .mark i { background: rgba(255,255,255,0.85) !important; }
+  .chip[aria-pressed="true"] .mark i { background: rgba(255,255,255,0.9) !important; }
 
-  /* summary */
-  .summary {
-    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
-    padding: 13px 15px; border-radius: 15px; background: var(--surface);
-    border: 1px solid var(--hairline); box-shadow: var(--shadow); margin-bottom: 11px;
-  }
-  .summary .stat { display: flex; flex-direction: column; gap: 1px; }
-  .summary .stat-k { font-size: 10px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--faint); }
-  .summary .stat-v { font-size: 16px; font-weight: 700; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
-  .summary .stat-v small { font-size: 11px; font-weight: 500; color: var(--muted); margin-left: 1px; }
+  /* 요약 */
+  .summary { display: flex; align-items: center; gap: 15px; flex-wrap: wrap; padding: 14px 16px; margin-bottom: 11px; }
+  .stat { display: flex; flex-direction: column; gap: 1px; }
+  .stat-k { font-size: 10px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--faint); }
+  .stat-v { font-size: 17px; font-weight: 700; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+  .stat-v small { font-size: 11px; font-weight: 500; color: var(--muted); margin-left: 1px; }
   .demand-chips { display: flex; gap: 5px; flex-wrap: wrap; margin-left: auto; }
-  .dchip { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 999px; }
-  .dchip.holiday { background: color-mix(in srgb, var(--bad-fill) 15%, var(--surface)); color: var(--bad); }
-  .dchip.sandwich { background: color-mix(in srgb, var(--warn-fill) 18%, var(--surface)); color: var(--warn); }
-  .dchip.longwk { background: color-mix(in srgb, var(--accent) 14%, var(--surface)); color: var(--accent); }
+  .dchip { font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 999px; border: 1px solid transparent; }
+  .dchip.holiday { background: color-mix(in srgb, var(--bad-fill) 16%, transparent); color: var(--bad); border-color: color-mix(in srgb, var(--bad-fill) 28%, transparent); }
+  .dchip.sandwich { background: color-mix(in srgb, var(--warn-fill) 18%, transparent); color: var(--warn); border-color: color-mix(in srgb, var(--warn-fill) 30%, transparent); }
+  .dchip.longwk { background: color-mix(in srgb, var(--accent) 15%, transparent); color: var(--accent); border-color: color-mix(in srgb, var(--accent) 28%, transparent); }
 
-  /* weather */
-  .weather { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-bottom: 22px; }
-  .wcard {
-    padding: 13px 14px; border-radius: 15px; background: var(--surface);
-    border: 1px solid var(--hairline); box-shadow: var(--shadow);
-  }
+  /* 날씨 */
+  .weather { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 11px; }
+  .wcard { padding: 14px 15px; }
   .wcard .leg { display: flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; color: var(--muted); }
   .wcard .leg .code { font-size: 10px; color: var(--faint); font-weight: 500; }
-  .wcard .now { display: flex; align-items: center; gap: 9px; margin: 7px 0 9px; }
-  .wcard .glyph { font-size: 25px; line-height: 1; }
-  .wcard .sky { font-size: 14px; font-weight: 700; letter-spacing: -0.015em; }
+  .wcard .now { display: flex; align-items: center; gap: 10px; margin: 8px 0 9px; }
+  .wcard .glyph { font-size: 26px; line-height: 1; }
+  .wcard .sky { font-size: 14px; font-weight: 700; letter-spacing: -0.02em; }
   .wcard .temp { font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
-  .wcard .metrics { display: flex; gap: 13px; font-size: 11px; color: var(--muted); }
+  .wcard .metrics { display: flex; gap: 14px; font-size: 11px; color: var(--muted); }
   .wcard .metrics b { font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; }
-  .wcard.dim { background: var(--surface-sunken); box-shadow: none; }
-  .wcard.dim .msg { font-size: 11.5px; color: var(--muted); margin-top: 7px; line-height: 1.4; }
+  .wcard.dim { background: var(--glass-sunken); box-shadow: inset 0 1px 0 var(--glass-spec); }
+  .wcard.dim .msg { font-size: 11.5px; color: var(--muted); margin-top: 8px; line-height: 1.45; }
 
-  /* airline list */
-  .list-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
-  .list-title { font-size: 13px; font-weight: 700; letter-spacing: -0.01em; }
-  .legend { display: flex; gap: 9px; font-size: 10.5px; color: var(--faint); }
-  .legend span { display: inline-flex; align-items: center; gap: 3px; }
-  .legend i { width: 6px; height: 6px; border-radius: 50%; display: block; }
+  /* 당일 운항 현황 */
+  .ops { padding: 14px 16px; margin-bottom: 22px; }
+  .ops-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+  .ops-title { font-size: 13px; font-weight: 700; letter-spacing: -0.02em; }
+  .ops-date { font-size: 10.5px; color: var(--faint); }
+  .ops-stats { display: flex; gap: 18px; margin: 11px 0 12px; }
+  .ops-bar { display: flex; height: 8px; border-radius: 999px; overflow: hidden; background: var(--glass-sunken); }
+  .ops-bar span { display: block; }
+  .ops-legend { display: flex; gap: 13px; margin-top: 9px; font-size: 10.5px; color: var(--muted); }
+  .ops-legend span { display: inline-flex; align-items: center; gap: 4px; }
+  .ops-legend i { width: 7px; height: 7px; border-radius: 2px; display: block; }
+  .ops-legend b { color: var(--text); font-weight: 700; font-variant-numeric: tabular-nums; }
+  .ops-note { margin-top: 10px; font-size: 10.5px; color: var(--faint); line-height: 1.5; }
 
-  .list { background: var(--surface); border: 1px solid var(--hairline); border-radius: 16px;
-          box-shadow: var(--shadow); overflow: hidden; margin-bottom: 30px; }
+  /* 항공사 목록 */
+  .list-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 9px; }
+  .list-title { font-size: 13px; font-weight: 700; letter-spacing: -0.02em; }
+  .legend { display: flex; gap: 10px; font-size: 10.5px; color: var(--muted); }
+  .legend span { display: inline-flex; align-items: center; gap: 4px; }
+  .legend i { width: 7px; height: 7px; border-radius: 50%; display: block; }
+
+  .list { overflow: hidden; margin-bottom: 8px; }
   .arow {
-    width: 100%; display: flex; align-items: center; gap: 11px;
-    padding: 11px 14px; background: transparent; border: 0; border-top: 1px solid var(--hairline);
+    width: 100%; display: flex; align-items: center; gap: 12px;
+    padding: 12px 15px; background: transparent; border: 0; border-top: 1px solid var(--hairline);
     font: inherit; color: inherit; cursor: pointer; text-align: left;
+    transition: background 0.18s ease;
   }
   .arow:first-child { border-top: 0; }
-  .arow:hover { background: color-mix(in srgb, var(--accent) 4%, transparent); }
-  .tile {
-    width: 36px; height: 36px; border-radius: 10px; flex: 0 0 auto;
-    display: grid; place-items: center; overflow: hidden;
-  }
-  .tile.brand { background: #fff; border: 1px solid var(--hairline); padding: 5px; }
+  .arow:hover { background: var(--glass-strong); }
+  .tile { width: 37px; height: 37px; border-radius: 12px; flex: 0 0 auto; display: grid; place-items: center; overflow: hidden; }
+  .tile.brand { background: #fff; border: 1px solid var(--hairline); padding: 5px; box-shadow: 0 2px 6px var(--glass-shadow); }
   .tile.brand img { width: 100%; height: 100%; object-fit: contain; display: block; }
-  .tile.mono { color: #fff; font-size: 12px; font-weight: 700; letter-spacing: -0.02em; }
-  .aname { flex: 1; font-size: 14px; font-weight: 600; letter-spacing: -0.012em; }
-  .status { display: inline-flex; align-items: center; gap: 6px; }
-  .status i { width: 9px; height: 9px; border-radius: 50%; display: block; }
-  .status span { font-size: 12px; font-weight: 600; min-width: 42px; text-align: right; }
-  .caret { width: 14px; color: var(--faint); font-size: 11px; transition: transform 0.2s ease; }
+  .tile.mono { color: #fff; font-size: 12px; font-weight: 700; letter-spacing: -0.03em; box-shadow: 0 2px 6px var(--glass-shadow); }
+  .aname { flex: 1; font-size: 14px; font-weight: 600; letter-spacing: -0.02em; }
+  .status { display: inline-flex; align-items: center; gap: 7px; }
+  .status i { width: 9px; height: 9px; border-radius: 50%; display: block; box-shadow: 0 0 0 3px color-mix(in srgb, currentColor 18%, transparent); }
+  .status span { font-size: 12px; font-weight: 600; min-width: 44px; text-align: right; }
+  .caret { width: 14px; color: var(--faint); font-size: 11px; transition: transform 0.22s ease; }
   .arow[aria-expanded="true"] .caret { transform: rotate(90deg); }
 
-  .panel { padding: 2px 14px 14px; }
+  .panel { padding: 2px 15px 15px; }
   table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
   thead th {
-    font-size: 10px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
-    color: var(--faint); text-align: right; padding: 5px 0 6px; border-bottom: 1px solid var(--hairline);
+    font-size: 10px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--faint); text-align: right; padding: 5px 0 7px; border-bottom: 1px solid var(--hairline);
   }
-  thead th:first-child, tbody td:first-child { text-align: left; }
+  thead th:first-child, tbody td:first-child,
   thead th:nth-child(2), tbody td:nth-child(2) { text-align: left; }
   tbody td { font-size: 12.5px; padding: 8px 0; border-bottom: 1px solid var(--hairline); text-align: right; }
   tbody tr:last-child td { border-bottom: 0; }
   tbody tr.outside td { color: var(--faint); }
-  td .time { font-weight: 600; }
-  td .fare { font-weight: 600; }
+  td .time, td .fare { font-weight: 600; }
   td .na { color: var(--faint); }
   .seat { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; }
   .seat i { width: 6px; height: 6px; border-radius: 50%; display: block; }
-  .best { margin-left: 5px; font-size: 9.5px; font-weight: 700; padding: 1.5px 5px; border-radius: 999px;
-          background: color-mix(in srgb, var(--ok-fill) 18%, var(--surface)); color: var(--ok); }
-  .foot { font-size: 11px; color: var(--faint); padding-top: 9px; line-height: 1.45; }
-  .empty { padding: 26px 14px; text-align: center; font-size: 12.5px; color: var(--muted); }
+  .best {
+    margin-left: 5px; font-size: 9.5px; font-weight: 700; padding: 2px 6px; border-radius: 999px;
+    background: color-mix(in srgb, var(--ok-fill) 20%, transparent); color: var(--ok);
+    border: 1px solid color-mix(in srgb, var(--ok-fill) 32%, transparent);
+  }
+  .foot { font-size: 11px; color: var(--faint); padding-top: 10px; line-height: 1.5; }
+  .empty { padding: 28px 15px; text-align: center; font-size: 12.5px; color: var(--muted); }
 </style>
 </head>
 <body>
@@ -241,6 +307,7 @@
 
   <div id="summary"></div>
   <div class="weather" id="weather"></div>
+  <div id="ops"></div>
 
   <div class="list-head">
     <div class="list-title">항공사별 예약 가능 여부</div>
@@ -250,7 +317,7 @@
       <span><i style="background:var(--bad-fill)"></i>매진</span>
     </div>
   </div>
-  <div class="list" id="list"></div>
+  <div class="list glass" id="list"></div>
 </div>
 
 <script>
@@ -283,25 +350,27 @@ const ROUTES = {
 };
 
 const STATUS = {
-  available: { label: '있음',   fill: 'var(--ok-fill)',   tone: 'var(--ok)' },
-  limited:   { label: '적음',   fill: 'var(--warn-fill)', tone: 'var(--warn)' },
-  soldout:   { label: '매진',   fill: 'var(--bad-fill)',  tone: 'var(--bad)' },
-  none:      { label: '운항없음', fill: 'var(--none)',    tone: 'var(--faint)' },
+  available: { label: '있음',    fill: 'var(--ok-fill)',   tone: 'var(--ok)' },
+  limited:   { label: '적음',    fill: 'var(--warn-fill)', tone: 'var(--warn)' },
+  soldout:   { label: '매진',    fill: 'var(--bad-fill)',  tone: 'var(--bad)' },
+  none:      { label: '운항없음', fill: 'var(--none)',      tone: 'var(--faint)' },
 };
 
 const won = n => n.toLocaleString('ko-KR') + '원';
 const DOW = ['일','월','화','수','목','금','토'];
 
-let flights = null, weather = null;
+let flights = null, weather = null, delays = null;
 let direction = 'outbound', selectedDate = null, expanded = null;
 
 async function boot() {
-  const [f, w] = await Promise.allSettled([
+  const [f, w, d] = await Promise.allSettled([
     fetch(DATA_BASE + 'results.json', { cache: 'no-store' }).then(r => r.json()),
     fetch(DATA_BASE + 'weather.json', { cache: 'no-store' }).then(r => r.json()),
+    fetch(DATA_BASE + 'delays.json',  { cache: 'no-store' }).then(r => r.json()),
   ]);
   flights = f.status === 'fulfilled' ? f.value : null;
   weather = w.status === 'fulfilled' ? w.value : null;
+  delays  = d.status === 'fulfilled' ? d.value : null;
 
   if (!flights) {
     document.getElementById('list').innerHTML =
@@ -328,19 +397,17 @@ async function boot() {
 function renderNotice() {
   const all = [...flights.outbound.flights, ...flights.inbound.flights];
   const live = all.some(f => f.source === 'live');
-  const weatherLive = weather?.provider === 'live';
-  const weatherNote = weatherLive
-    ? '날씨는 Open-Meteo 실시간 예보입니다.'
-    : '날씨도 목업입니다.';
+  const weatherNote = weather?.provider === 'live'
+    ? '날씨는 Open-Meteo 실시간 예보입니다.' : '날씨도 목업입니다.';
   const el = document.getElementById('notice');
 
   if (!all.length) {
     const skipped = [...flights.outbound.skipped, ...flights.inbound.skipped].length;
-    el.innerHTML = `<div class="notice is-empty"><span>●</span><span>조회된 항공편이 없습니다. 미검증 셀렉터로 ${skipped}건을 건너뛰었습니다 — <code>config/selectors.yaml</code>을 확인하세요.</span></div>`;
+    el.innerHTML = `<div class="notice is-empty"><span class="pip"></span><span>조회된 항공편이 없습니다. 미검증 셀렉터로 ${skipped}건을 건너뛰었습니다 — <code>config/selectors.yaml</code>을 확인하세요.</span></div>`;
   } else if (!live) {
-    el.innerHTML = `<div class="notice"><span>●</span><span><b>항공권은 목업 데이터</b>입니다 — 화면 구성 확인용이며 실제 가격·좌석이 아닙니다. ${weatherNote}</span></div>`;
+    el.innerHTML = `<div class="notice"><span class="pip"></span><span><b>항공권은 목업 데이터</b>입니다 — 화면 구성 확인용이며 실제 가격·좌석이 아닙니다. ${weatherNote}</span></div>`;
   } else {
-    el.innerHTML = `<div class="notice is-live"><span>●</span><span>항공권 실시간 조회 결과입니다. ${weatherNote} 결제 전 항공사 공식 화면에서 최종 확인하세요.</span></div>`;
+    el.innerHTML = `<div class="notice is-live"><span class="pip"></span><span>항공권 실시간 조회 결과입니다. ${weatherNote} 결제 전 항공사 공식 화면에서 최종 확인하세요.</span></div>`;
   }
 }
 
@@ -360,8 +427,8 @@ function datesForDirection() {
 }
 
 function renderAll() {
-  document.getElementById('ruleLine').textContent =
-    `${ROUTES[direction].fromName} → ${ROUTES[direction].toName} · ${ROUTES[direction].rule}`;
+  const r = ROUTES[direction];
+  document.getElementById('ruleLine').textContent = `${r.fromName} → ${r.toName} · ${r.rule}`;
   const dates = datesForDirection();
   if (!selectedDate && dates.length) selectedDate = dates[0][0];
   renderRail(dates);
@@ -390,10 +457,9 @@ function renderRail(dates) {
     chip.dataset.date = dateStr;
     chip.setAttribute('aria-pressed', String(dateStr === selectedDate));
     chip.setAttribute('aria-label', `${d.getMonth() + 1}월 ${d.getDate()}일 ${DOW[d.getDay()]}요일`);
-    chip.innerHTML =
-      `<div class="dow">${DOW[d.getDay()]}</div>` +
-      `<div class="day">${d.getDate()}</div>` +
-      `<div class="mark"><i style="background:${mark}"></i></div>`;
+    chip.innerHTML = `<div class="dow">${DOW[d.getDay()]}</div>` +
+                     `<div class="day">${d.getDate()}</div>` +
+                     `<div class="mark"><i style="background:${mark}"></i></div>`;
     chip.addEventListener('click', () => selectDate(dateStr));
     rail.appendChild(chip);
   }
@@ -418,6 +484,7 @@ function scrollSelectedIntoView() {
 function renderDay() {
   renderSummary();
   renderWeather();
+  renderOps();
   renderList();
 }
 
@@ -425,8 +492,7 @@ function renderSummary() {
   const el = document.getElementById('summary');
   if (!selectedDate) { el.innerHTML = ''; return; }
   const day = dayFlights(selectedDate);
-  const inWindow = day.filter(f => f.in_target_window);
-  const open = inWindow.filter(f => f.seat_status !== 'soldout' && f.economy_price_krw != null);
+  const open = day.filter(f => f.in_target_window && f.seat_status !== 'soldout' && f.economy_price_krw != null);
   const cheapest = open.length ? Math.min(...open.map(f => f.economy_price_krw)) : null;
   const carriers = new Set(open.map(f => f.airline_code)).size;
   const demand = day[0]?.demand;
@@ -437,19 +503,13 @@ function renderSummary() {
   if (demand?.is_long_weekend) chips.push('<span class="dchip longwk">연휴</span>');
 
   const d = new Date(selectedDate + 'T00:00:00');
-  el.innerHTML = `<div class="summary">
-    <div class="stat">
-      <div class="stat-k">선택일</div>
-      <div class="stat-v">${d.getMonth() + 1}.${d.getDate()}<small>(${DOW[d.getDay()]})</small></div>
-    </div>
-    <div class="stat">
-      <div class="stat-k">최저가</div>
-      <div class="stat-v">${cheapest != null ? won(cheapest) : '—'}</div>
-    </div>
-    <div class="stat">
-      <div class="stat-k">예약가능 항공사</div>
-      <div class="stat-v">${carriers}<small>/${AIRLINES.length}</small></div>
-    </div>
+  el.innerHTML = `<div class="summary glass">
+    <div class="stat"><div class="stat-k">선택일</div>
+      <div class="stat-v">${d.getMonth() + 1}.${d.getDate()}<small>(${DOW[d.getDay()]})</small></div></div>
+    <div class="stat"><div class="stat-k">최저가</div>
+      <div class="stat-v">${cheapest != null ? won(cheapest) : '—'}</div></div>
+    <div class="stat"><div class="stat-k">예약가능 항공사</div>
+      <div class="stat-v">${carriers}<small>/${AIRLINES.length}</small></div></div>
     ${chips.length ? `<div class="demand-chips">${chips.join('')}</div>` : ''}
   </div>`;
 }
@@ -465,21 +525,69 @@ function weatherCard(leg, code, name) {
   const head = `<div class="leg">${leg} · ${name} <span class="code">${code}</span></div>`;
   if (!w) {
     const horizon = weather?.forecast_horizon_days ?? 14;
-    return `<div class="wcard dim">${head}
+    return `<div class="wcard glass dim">${head}
       <div class="msg">예보 범위 밖<br>단기예보는 약 ${horizon}일 이내만 제공됩니다.</div></div>`;
   }
-  return `<div class="wcard">${head}
+  return `<div class="wcard glass">${head}
     <div class="now">
       <div class="glyph">${SKY_GLYPH[w.summary] || '🌡️'}</div>
-      <div>
-        <div class="sky">${w.summary}</div>
-        <div class="temp">${Math.round(w.temp_low_c)}° / ${Math.round(w.temp_high_c)}°</div>
-      </div>
+      <div><div class="sky">${w.summary}</div>
+           <div class="temp">${Math.round(w.temp_low_c)}° / ${Math.round(w.temp_high_c)}°</div></div>
     </div>
     <div class="metrics">
       <span>강수 <b>${w.precip_probability_pct}%</b></span>
       <span>풍속 <b>${w.wind_speed_kmh}</b>km/h</span>
     </div></div>`;
+}
+
+function renderOps() {
+  const el = document.getElementById('ops');
+  const r = ROUTES[direction];
+  const route = delays?.routes?.[`${r.from}-${r.to}`];
+
+  if (!route || !route.summary || !route.summary.total) {
+    const reason = delays?.errors?.length
+      ? '공공API 설정이 아직 검증되지 않아 조회하지 않았습니다.'
+      : '당일 운항 데이터가 없습니다.';
+    el.innerHTML = `<div class="ops glass">
+      <div class="ops-head"><div class="ops-title">오늘의 운항 상황</div></div>
+      <div class="ops-note" style="margin-top:8px">${reason}</div></div>`;
+    return;
+  }
+
+  const s = route.summary;
+  const ontime = s.total - s.delayed - s.cancelled;
+  const pct = n => (n / s.total * 100).toFixed(1) + '%';
+  const d = new Date(delays.date + 'T00:00:00');
+  const isMock = delays.provider === 'mock';
+
+  el.innerHTML = `<div class="ops glass">
+    <div class="ops-head">
+      <div class="ops-title">오늘의 운항 상황 · ${r.from} → ${r.to}</div>
+      <div class="ops-date">${d.getMonth() + 1}월 ${d.getDate()}일 기준</div>
+    </div>
+    <div class="ops-stats">
+      <div class="stat"><div class="stat-k">정시율</div>
+        <div class="stat-v">${s.ontime_rate != null ? Math.round(s.ontime_rate * 100) + '%' : '—'}</div></div>
+      <div class="stat"><div class="stat-k">평균 지연</div>
+        <div class="stat-v">${s.avg_delay_min != null ? s.avg_delay_min + '분' : '—'}</div></div>
+      <div class="stat"><div class="stat-k">운항 편수</div>
+        <div class="stat-v">${s.total}편</div></div>
+    </div>
+    <div class="ops-bar" role="img"
+         aria-label="정시 ${ontime}편, 지연 ${s.delayed}편, 결항 ${s.cancelled}편">
+      <span style="width:${pct(ontime)};background:var(--ok-fill)"></span>
+      <span style="width:${pct(s.delayed)};background:var(--warn-fill)"></span>
+      <span style="width:${pct(s.cancelled)};background:var(--bad-fill)"></span>
+    </div>
+    <div class="ops-legend">
+      <span><i style="background:var(--ok-fill)"></i>정시 <b>${ontime}</b></span>
+      <span><i style="background:var(--warn-fill)"></i>지연 <b>${s.delayed}</b></span>
+      <span><i style="background:var(--bad-fill)"></i>결항 <b>${s.cancelled}</b></span>
+    </div>
+    <div class="ops-note">예약일이 아니라 <b>오늘</b> 실적입니다 — 이 노선이 요즘 얼마나 제때 뜨는지 보는 참고 지표입니다.
+      지연은 15분 이상을 기준으로 합니다.${isMock ? ' 현재 값은 <b>목업</b>입니다.' : ''}</div>
+  </div>`;
 }
 
 function rollup(list) {
@@ -499,8 +607,7 @@ function renderList() {
 
   for (const air of AIRLINES) {
     const mine = day.filter(f => f.airline_code === air.code);
-    const key = rollup(mine);
-    const st = STATUS[key];
+    const st = STATUS[rollup(mine)];
     const isOpen = expanded === air.code;
 
     const row = document.createElement('button');
@@ -512,13 +619,10 @@ function renderList() {
         ? `<span class="tile brand"><img src="${air.logo}" alt=""></span>`
         : `<span class="tile mono" style="background:${air.color}">${air.code}</span>`) +
       `<span class="aname">${air.name}</span>` +
-      `<span class="status"><i style="background:${st.fill}"></i>` +
-      `<span style="color:${st.tone}">${st.label}</span></span>` +
+      `<span class="status" style="color:${st.tone}"><i style="background:${st.fill}"></i>` +
+      `<span>${st.label}</span></span>` +
       `<span class="caret" aria-hidden="true">▸</span>`;
-    row.addEventListener('click', () => {
-      expanded = isOpen ? null : air.code;
-      renderList();
-    });
+    row.addEventListener('click', () => { expanded = isOpen ? null : air.code; renderList(); });
     list.appendChild(row);
 
     if (isOpen) {
@@ -546,7 +650,7 @@ function detailTable(list) {
     const biz = f.business_price_krw != null ? `<span class="fare">${won(f.business_price_krw)}</span>` : '<span class="na">—</span>';
     return `<tr class="${f.in_target_window ? '' : 'outside'}">
       <td><span class="time">${f.dep_dt.slice(11, 16)}</span></td>
-      <td><span class="seat"><i style="background:${st.fill}"></i>${st.label === '운항없음' ? '—' : st.label}</span></td>
+      <td><span class="seat"><i style="background:${st.fill}"></i>${st.label}</span></td>
       <td>${eco}</td><td>${biz}</td></tr>`;
   }).join('');
 

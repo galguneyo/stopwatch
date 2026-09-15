@@ -52,7 +52,13 @@ def check_reachability() -> None:
     section("1) 호스트 도달성")
     import requests
 
-    hosts = ["https://api.open-meteo.com/v1/forecast?latitude=37.5&longitude=127&daily=weathercode&timezone=Asia%2FSeoul"]
+    hosts = [
+        "https://api.open-meteo.com/v1/forecast?latitude=37.5&longitude=127&daily=weathercode&timezone=Asia%2FSeoul",
+        # 지연/결항 공공API 호스트. 서비스 키가 없어도 호스트 도달성은 확인할 수 있다
+        # (키 없이 호출하면 인증 오류가 오는 것이 정상이며, 그것 자체가 '연결됨'의 증거다).
+        "https://apis.data.go.kr",
+        "https://www.data.go.kr",
+    ]
     hosts += [url for _, url in AIRLINE_ENTRY.values()]
 
     for url in hosts:

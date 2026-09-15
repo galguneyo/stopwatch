@@ -1,0 +1,51 @@
+# 당일 지연/결항 조회용 공공API 설정 (한국공항공사 실시간 항공운항 현황 정보 상세 조회)
+#
+# 아래 값은 전부 미검증 placeholder입니다. `verified: true` 로 바꾸기 전에는
+# providers/delay.py 가 의도적으로 실패합니다 — 추측한 필드명으로 조회하면
+# 응답이 비어도 "지연 없음"처럼 보여서 오히려 위험하기 때문입니다.
+#
+# 채우는 방법:
+#   1) 공공데이터포털(data.go.kr) 로그인 → "한국공항공사_실시간 항공운항 현황 정보
+#      상세 조회 서비스"(데이터 번호 15113771) 활용신청 → 서비스 키 발급
+#   2) 같은 페이지의 상세 문서/Swagger에서 실제 엔드포인트 경로, 요청 파라미터명,
+#      응답 필드명을 확인해 아래를 채운다
+#   3) verified: true 로 변경
+#   4) 서비스 키는 이 파일에 적지 말고 환경변수로 넣는다:
+#        export KAC_SERVICE_KEY="발급받은키"
+#      GitHub Actions에서는 리포지토리 Secret으로 등록한다.
+#
+# 참고: 국토교통부 TAGO 계열 OPEN API는 일부 호출중지/대체 공지가 있으므로
+#       한국공항공사 API를 우선 검토하는 편이 안전합니다.
+
+verified: false
+
+# 예: https://apis.data.go.kr/<기관코드>/<서비스명>/<오퍼레이션명>
+endpoint: ""
+
+# 요청 파라미터 이름 매핑 (문서에서 확인한 실제 이름으로)
+params:
+  service_key: "serviceKey"
+  departure_airport: ""   # 예: schDepAirportCode
+  arrival_airport: ""     # 예: schArrAirportCode
+  fixed:                  # 매 호출 고정으로 붙일 값들
+    _type: "json"
+    numOfRows: 200
+    pageNo: 1
+
+# 응답 JSON에서 항공편 배열까지 내려가는 경로
+items_path: ["response", "body", "items", "item"]
+
+# 응답 필드명 매핑
+response_fields:
+  airline: ""     # 예: airlineKorean / airlineEnglish
+  flight_no: ""   # 예: flightId
+  scheduled: ""   # 예정 시각 (예: scheduleDateTime)
+  estimated: ""   # 변경 시각 (예: estimatedDateTime)
+  state: ""       # 상태 문자열 (예: remark)
+
+# 상태 문자열을 어떤 상태로 볼지. 응답의 실제 표기를 보고 채운다.
+state_keywords:
+  cancelled: ["결항", "CANCEL"]
+  delayed: ["지연", "DELAY"]
+  departed: ["출발", "DEPARTED"]
+  arrived: ["도착", "ARRIVED"]

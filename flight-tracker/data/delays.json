@@ -1,0 +1,602 @@
+{
+  "generated_at": "2026-09-15T08:28:49.035948",
+  "provider": "mock",
+  "date": "2026-09-15",
+  "routes": {
+    "GMP-CJU": {
+      "flights": [
+        {
+          "airline_code": "7C",
+          "flight_no": "7C100",
+          "origin": "GMP",
+          "dest": "CJU",
+          "scheduled_dt": "2026-09-15T06:30:00",
+          "estimated_dt": "2026-09-15T06:38:00",
+          "state": "ontime",
+          "delay_minutes": 8,
+          "source": "mock"
+        },
+        {
+          "airline_code": "KE",
+          "flight_no": "KE100",
+          "origin": "GMP",
+          "dest": "CJU",
+          "scheduled_dt": "2026-09-15T07:00:00",
+          "estimated_dt": "2026-09-15T07:12:00",
+          "state": "ontime",
+          "delay_minutes": 12,
+          "source": "mock"
+        },
+        {
+          "airline_code": "TW",
+          "flight_no": "TW100",
+          "origin": "GMP",
+          "dest": "CJU",
+          "scheduled_dt": "2026-09-15T07:40:00",
+          "estimated_dt": "2026-09-15T07:43:00",
+          "state": "ontime",
+          "delay_minutes": 3,
+          "source": "mock"
+        },
+        {
+          "airline_code": "OZ",
+          "flight_no": "OZ100",
+          "origin": "GMP",
+          "dest": "CJU",
+          "scheduled_dt": "2026-09-15T08:10:00",
+          "estimated_dt": "2026-09-15T08:16:00",
+          "state": "ontime",
+          "delay_minutes": 6,
+          "source": "mock"
+        },
+        {
+          "airline_code": "KE",
+          "flight_no": "KE101",
+          "origin": "GMP",
+          "dest": "CJU",
+          "scheduled_dt": "2026-09-15T08:20:00",
+          "estimated_dt": "2026-09-15T08:24:00",
+          "state": "ontime",
+          "delay_minutes": 4,
+          "source": "mock"
+        },
+        {
+          "airline_code": "7C",
+          "flight_no": "7C101",
+          "origin": "GMP",
+          "dest": "CJU",
+          "scheduled_dt": "2026-09-15T09:50:00",
+          "estimated_dt": "2026-09-15T09:53:00",
+          "state": "ontime",
+          "delay_minutes": 3,
+          "source": "mock"
+        },
+        {
+          "airline_code": "KE",
+          "flight_no": "KE102",
+          "origin": "GMP",
+          "dest": "CJU",
+          "scheduled_dt": "2026-09-15T10:30:00",
+          "estimated_dt": "2026-09-15T10:44:00",
+          "state": "ontime",
+          "delay_minutes": 14,
+          "source": "mock"
+        },
+        {
+          "airline_code": "BX",
+          "flight_no": "BX100",
+          "origin": "GMP",
+          "dest": "CJU",
+          "scheduled_dt": "2026-09-15T11:20:00",
+          "estimated_dt": null,
+          "state": "cancelled",
+          "delay_minutes": null,
+          "source": "mock"
+        },
+        {
+          "airline_code": "OZ",
+          "flight_no": "OZ101",
+          "origin": "GMP",
+          "dest": "CJU",
+          "scheduled_dt": "2026-09-15T11:30:00",
+          "estimated_dt": "2026-09-15T11:42:00",
+          "state": "ontime",
+          "delay_minutes": 12,
+          "source": "mock"
+        },
+        {
+          "airline_code": "KE",
+          "flight_no": "KE103",
+          "origin": "GMP",
+          "dest": "CJU",
+          "scheduled_dt": "2026-09-15T12:40:00",
+          "estimated_dt": "2026-09-15T12:46:00",
+          "state": "ontime",
+          "delay_minutes": 6,
+          "source": "mock"
+        },
+        {
+          "airline_code": "OZ",
+          "flight_no": "OZ102",
+          "origin": "GMP",
+          "dest": "CJU",
+          "scheduled_dt": "2026-09-15T13:00:00",
+          "estimated_dt": "2026-09-15T13:06:00",
+          "state": "ontime",
+          "delay_minutes": 6,
+          "source": "mock"
+        },
+        {
+          "airline_code": "7C",
+          "flight_no": "7C102",
+          "origin": "GMP",
+          "dest": "CJU",
+          "scheduled_dt": "2026-09-15T13:20:00",
+          "estimated_dt": "2026-09-15T13:33:00",
+          "state": "ontime",
+          "delay_minutes": 13,
+          "source": "mock"
+        },
+        {
+          "airline_code": "TW",
+          "flight_no": "TW101",
+          "origin": "GMP",
+          "dest": "CJU",
+          "scheduled_dt": "2026-09-15T14:10:00",
+          "estimated_dt": "2026-09-15T14:52:00",
+          "state": "delayed",
+          "delay_minutes": 42,
+          "source": "mock"
+        },
+        {
+          "airline_code": "KE",
+          "flight_no": "KE104",
+          "origin": "GMP",
+          "dest": "CJU",
+          "scheduled_dt": "2026-09-15T15:20:00",
+          "estimated_dt": "2026-09-15T15:33:00",
+          "state": "ontime",
+          "delay_minutes": 13,
+          "source": "mock"
+        },
+        {
+          "airline_code": "ZE",
+          "flight_no": "ZE100",
+          "origin": "GMP",
+          "dest": "CJU",
+          "scheduled_dt": "2026-09-15T16:00:00",
+          "estimated_dt": "2026-09-15T16:08:00",
+          "state": "ontime",
+          "delay_minutes": 8,
+          "source": "mock"
+        },
+        {
+          "airline_code": "OZ",
+          "flight_no": "OZ103",
+          "origin": "GMP",
+          "dest": "CJU",
+          "scheduled_dt": "2026-09-15T16:20:00",
+          "estimated_dt": "2026-09-15T16:31:00",
+          "state": "ontime",
+          "delay_minutes": 11,
+          "source": "mock"
+        },
+        {
+          "airline_code": "BX",
+          "flight_no": "BX101",
+          "origin": "GMP",
+          "dest": "CJU",
+          "scheduled_dt": "2026-09-15T16:50:00",
+          "estimated_dt": "2026-09-15T17:22:00",
+          "state": "delayed",
+          "delay_minutes": 32,
+          "source": "mock"
+        },
+        {
+          "airline_code": "KE",
+          "flight_no": "KE105",
+          "origin": "GMP",
+          "dest": "CJU",
+          "scheduled_dt": "2026-09-15T17:00:00",
+          "estimated_dt": "2026-09-15T17:01:00",
+          "state": "ontime",
+          "delay_minutes": 1,
+          "source": "mock"
+        },
+        {
+          "airline_code": "7C",
+          "flight_no": "7C103",
+          "origin": "GMP",
+          "dest": "CJU",
+          "scheduled_dt": "2026-09-15T17:10:00",
+          "estimated_dt": "2026-09-15T17:10:00",
+          "state": "ontime",
+          "delay_minutes": 0,
+          "source": "mock"
+        },
+        {
+          "airline_code": "OZ",
+          "flight_no": "OZ104",
+          "origin": "GMP",
+          "dest": "CJU",
+          "scheduled_dt": "2026-09-15T18:30:00",
+          "estimated_dt": "2026-09-15T18:34:00",
+          "state": "ontime",
+          "delay_minutes": 4,
+          "source": "mock"
+        },
+        {
+          "airline_code": "KE",
+          "flight_no": "KE106",
+          "origin": "GMP",
+          "dest": "CJU",
+          "scheduled_dt": "2026-09-15T19:40:00",
+          "estimated_dt": "2026-09-15T19:42:00",
+          "state": "ontime",
+          "delay_minutes": 2,
+          "source": "mock"
+        },
+        {
+          "airline_code": "7C",
+          "flight_no": "7C104",
+          "origin": "GMP",
+          "dest": "CJU",
+          "scheduled_dt": "2026-09-15T19:50:00",
+          "estimated_dt": "2026-09-15T19:54:00",
+          "state": "ontime",
+          "delay_minutes": 4,
+          "source": "mock"
+        },
+        {
+          "airline_code": "TW",
+          "flight_no": "TW102",
+          "origin": "GMP",
+          "dest": "CJU",
+          "scheduled_dt": "2026-09-15T20:10:00",
+          "estimated_dt": "2026-09-15T20:40:00",
+          "state": "delayed",
+          "delay_minutes": 30,
+          "source": "mock"
+        },
+        {
+          "airline_code": "OZ",
+          "flight_no": "OZ105",
+          "origin": "GMP",
+          "dest": "CJU",
+          "scheduled_dt": "2026-09-15T20:40:00",
+          "estimated_dt": "2026-09-15T20:43:00",
+          "state": "ontime",
+          "delay_minutes": 3,
+          "source": "mock"
+        },
+        {
+          "airline_code": "RS",
+          "flight_no": "RS100",
+          "origin": "GMP",
+          "dest": "CJU",
+          "scheduled_dt": "2026-09-15T21:00:00",
+          "estimated_dt": "2026-09-15T21:20:00",
+          "state": "delayed",
+          "delay_minutes": 20,
+          "source": "mock"
+        },
+        {
+          "airline_code": "KE",
+          "flight_no": "KE107",
+          "origin": "GMP",
+          "dest": "CJU",
+          "scheduled_dt": "2026-09-15T21:10:00",
+          "estimated_dt": "2026-09-15T22:07:00",
+          "state": "delayed",
+          "delay_minutes": 57,
+          "source": "mock"
+        }
+      ],
+      "summary": {
+        "total": 26,
+        "delayed": 5,
+        "cancelled": 1,
+        "ontime_rate": 0.769,
+        "avg_delay_min": 36
+      }
+    },
+    "CJU-GMP": {
+      "flights": [
+        {
+          "airline_code": "7C",
+          "flight_no": "7C100",
+          "origin": "CJU",
+          "dest": "GMP",
+          "scheduled_dt": "2026-09-15T06:30:00",
+          "estimated_dt": "2026-09-15T07:03:00",
+          "state": "delayed",
+          "delay_minutes": 33,
+          "source": "mock"
+        },
+        {
+          "airline_code": "KE",
+          "flight_no": "KE100",
+          "origin": "CJU",
+          "dest": "GMP",
+          "scheduled_dt": "2026-09-15T07:00:00",
+          "estimated_dt": "2026-09-15T07:09:00",
+          "state": "ontime",
+          "delay_minutes": 9,
+          "source": "mock"
+        },
+        {
+          "airline_code": "TW",
+          "flight_no": "TW100",
+          "origin": "CJU",
+          "dest": "GMP",
+          "scheduled_dt": "2026-09-15T07:40:00",
+          "estimated_dt": "2026-09-15T08:40:00",
+          "state": "delayed",
+          "delay_minutes": 60,
+          "source": "mock"
+        },
+        {
+          "airline_code": "OZ",
+          "flight_no": "OZ100",
+          "origin": "CJU",
+          "dest": "GMP",
+          "scheduled_dt": "2026-09-15T08:10:00",
+          "estimated_dt": "2026-09-15T08:10:00",
+          "state": "ontime",
+          "delay_minutes": 0,
+          "source": "mock"
+        },
+        {
+          "airline_code": "KE",
+          "flight_no": "KE101",
+          "origin": "CJU",
+          "dest": "GMP",
+          "scheduled_dt": "2026-09-15T08:20:00",
+          "estimated_dt": "2026-09-15T08:28:00",
+          "state": "ontime",
+          "delay_minutes": 8,
+          "source": "mock"
+        },
+        {
+          "airline_code": "7C",
+          "flight_no": "7C101",
+          "origin": "CJU",
+          "dest": "GMP",
+          "scheduled_dt": "2026-09-15T09:50:00",
+          "estimated_dt": "2026-09-15T09:50:00",
+          "state": "ontime",
+          "delay_minutes": 0,
+          "source": "mock"
+        },
+        {
+          "airline_code": "KE",
+          "flight_no": "KE102",
+          "origin": "CJU",
+          "dest": "GMP",
+          "scheduled_dt": "2026-09-15T10:30:00",
+          "estimated_dt": "2026-09-15T10:42:00",
+          "state": "ontime",
+          "delay_minutes": 12,
+          "source": "mock"
+        },
+        {
+          "airline_code": "BX",
+          "flight_no": "BX100",
+          "origin": "CJU",
+          "dest": "GMP",
+          "scheduled_dt": "2026-09-15T11:20:00",
+          "estimated_dt": "2026-09-15T11:32:00",
+          "state": "ontime",
+          "delay_minutes": 12,
+          "source": "mock"
+        },
+        {
+          "airline_code": "OZ",
+          "flight_no": "OZ101",
+          "origin": "CJU",
+          "dest": "GMP",
+          "scheduled_dt": "2026-09-15T11:30:00",
+          "estimated_dt": "2026-09-15T11:43:00",
+          "state": "ontime",
+          "delay_minutes": 13,
+          "source": "mock"
+        },
+        {
+          "airline_code": "KE",
+          "flight_no": "KE103",
+          "origin": "CJU",
+          "dest": "GMP",
+          "scheduled_dt": "2026-09-15T12:40:00",
+          "estimated_dt": "2026-09-15T12:47:00",
+          "state": "ontime",
+          "delay_minutes": 7,
+          "source": "mock"
+        },
+        {
+          "airline_code": "OZ",
+          "flight_no": "OZ102",
+          "origin": "CJU",
+          "dest": "GMP",
+          "scheduled_dt": "2026-09-15T13:00:00",
+          "estimated_dt": "2026-09-15T13:06:00",
+          "state": "ontime",
+          "delay_minutes": 6,
+          "source": "mock"
+        },
+        {
+          "airline_code": "7C",
+          "flight_no": "7C102",
+          "origin": "CJU",
+          "dest": "GMP",
+          "scheduled_dt": "2026-09-15T13:20:00",
+          "estimated_dt": "2026-09-15T13:24:00",
+          "state": "ontime",
+          "delay_minutes": 4,
+          "source": "mock"
+        },
+        {
+          "airline_code": "TW",
+          "flight_no": "TW101",
+          "origin": "CJU",
+          "dest": "GMP",
+          "scheduled_dt": "2026-09-15T14:10:00",
+          "estimated_dt": "2026-09-15T14:13:00",
+          "state": "ontime",
+          "delay_minutes": 3,
+          "source": "mock"
+        },
+        {
+          "airline_code": "KE",
+          "flight_no": "KE104",
+          "origin": "CJU",
+          "dest": "GMP",
+          "scheduled_dt": "2026-09-15T15:20:00",
+          "estimated_dt": "2026-09-15T15:24:00",
+          "state": "ontime",
+          "delay_minutes": 4,
+          "source": "mock"
+        },
+        {
+          "airline_code": "ZE",
+          "flight_no": "ZE100",
+          "origin": "CJU",
+          "dest": "GMP",
+          "scheduled_dt": "2026-09-15T16:00:00",
+          "estimated_dt": "2026-09-15T16:07:00",
+          "state": "ontime",
+          "delay_minutes": 7,
+          "source": "mock"
+        },
+        {
+          "airline_code": "OZ",
+          "flight_no": "OZ103",
+          "origin": "CJU",
+          "dest": "GMP",
+          "scheduled_dt": "2026-09-15T16:20:00",
+          "estimated_dt": "2026-09-15T16:32:00",
+          "state": "ontime",
+          "delay_minutes": 12,
+          "source": "mock"
+        },
+        {
+          "airline_code": "BX",
+          "flight_no": "BX101",
+          "origin": "CJU",
+          "dest": "GMP",
+          "scheduled_dt": "2026-09-15T16:50:00",
+          "estimated_dt": "2026-09-15T16:51:00",
+          "state": "ontime",
+          "delay_minutes": 1,
+          "source": "mock"
+        },
+        {
+          "airline_code": "KE",
+          "flight_no": "KE105",
+          "origin": "CJU",
+          "dest": "GMP",
+          "scheduled_dt": "2026-09-15T17:00:00",
+          "estimated_dt": "2026-09-15T17:02:00",
+          "state": "ontime",
+          "delay_minutes": 2,
+          "source": "mock"
+        },
+        {
+          "airline_code": "7C",
+          "flight_no": "7C103",
+          "origin": "CJU",
+          "dest": "GMP",
+          "scheduled_dt": "2026-09-15T17:10:00",
+          "estimated_dt": "2026-09-15T17:22:00",
+          "state": "ontime",
+          "delay_minutes": 12,
+          "source": "mock"
+        },
+        {
+          "airline_code": "OZ",
+          "flight_no": "OZ104",
+          "origin": "CJU",
+          "dest": "GMP",
+          "scheduled_dt": "2026-09-15T18:30:00",
+          "estimated_dt": "2026-09-15T18:40:00",
+          "state": "ontime",
+          "delay_minutes": 10,
+          "source": "mock"
+        },
+        {
+          "airline_code": "KE",
+          "flight_no": "KE106",
+          "origin": "CJU",
+          "dest": "GMP",
+          "scheduled_dt": "2026-09-15T19:40:00",
+          "estimated_dt": "2026-09-15T19:45:00",
+          "state": "ontime",
+          "delay_minutes": 5,
+          "source": "mock"
+        },
+        {
+          "airline_code": "7C",
+          "flight_no": "7C104",
+          "origin": "CJU",
+          "dest": "GMP",
+          "scheduled_dt": "2026-09-15T19:50:00",
+          "estimated_dt": "2026-09-15T20:01:00",
+          "state": "ontime",
+          "delay_minutes": 11,
+          "source": "mock"
+        },
+        {
+          "airline_code": "TW",
+          "flight_no": "TW102",
+          "origin": "CJU",
+          "dest": "GMP",
+          "scheduled_dt": "2026-09-15T20:10:00",
+          "estimated_dt": "2026-09-15T20:41:00",
+          "state": "delayed",
+          "delay_minutes": 31,
+          "source": "mock"
+        },
+        {
+          "airline_code": "OZ",
+          "flight_no": "OZ105",
+          "origin": "CJU",
+          "dest": "GMP",
+          "scheduled_dt": "2026-09-15T20:40:00",
+          "estimated_dt": "2026-09-15T20:54:00",
+          "state": "ontime",
+          "delay_minutes": 14,
+          "source": "mock"
+        },
+        {
+          "airline_code": "RS",
+          "flight_no": "RS100",
+          "origin": "CJU",
+          "dest": "GMP",
+          "scheduled_dt": "2026-09-15T21:00:00",
+          "estimated_dt": "2026-09-15T21:57:00",
+          "state": "delayed",
+          "delay_minutes": 57,
+          "source": "mock"
+        },
+        {
+          "airline_code": "KE",
+          "flight_no": "KE107",
+          "origin": "CJU",
+          "dest": "GMP",
+          "scheduled_dt": "2026-09-15T21:10:00",
+          "estimated_dt": "2026-09-15T21:15:00",
+          "state": "ontime",
+          "delay_minutes": 5,
+          "source": "mock"
+        }
+      ],
+      "summary": {
+        "total": 26,
+        "delayed": 4,
+        "cancelled": 0,
+        "ontime_rate": 0.846,
+        "avg_delay_min": 45
+      }
+    }
+  },
+  "errors": []
+}
