@@ -66,6 +66,7 @@ flight-tracker/
 ├── dashboard/index.html        # Travel Planner 스타일 대시보드 (Apple 디자인 기조)
 ├── src/weekly_report.py        # 주차별 사전예약 확인 마크다운 리포트 생성 (reports/latest.md)
 ├── src/weather_scan.py         # 공항별 날씨 예보 조회 오케스트레이터
+├── src/verify_live.py          # 실연결 검증 (인터넷 열린 환경에서 실행)
 ├── tests/test_rules.py
 └── .github/workflows/flight-scan.yml  # 주간(항공권)+날씨 자동 실행 (repo 루트 기준 경로)
 ```
