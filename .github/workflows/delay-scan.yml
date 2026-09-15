@@ -5,7 +5,9 @@ name: Delay scan
 # 그대로 자동화할 수 있다. 남은 조건은 서비스 키뿐이다.
 on:
   schedule:
-    - cron: "0 12 * * *" # 21:00 KST — 그날 운항이 대부분 끝난 뒤
+    # 10분 주기 갱신 원칙. 지연/결항은 실시간성이 가장 큰 값이라 이 주기가 실제로
+    # 의미가 있다. KAC_SERVICE_KEY 시크릿이 없으면 첫 단계에서 바로 끝난다.
+    - cron: "*/10 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -14,33 +16,48 @@ permissions:
 jobs:
   delay:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: flight-tracker
     steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.ref_name }}
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Install dependencies
-        run: pip install requests pyyaml
-
-      - name: Fetch today's delays
+      # 키가 없으면 체크아웃·설치까지 가기 전에 멈춰서, 10분마다 도는 동안
+      # 불필요한 실행 시간을 쓰지 않도록 한다.
+      - name: Check service key
+        id: guard
         env:
           KAC_SERVICE_KEY: ${{ secrets.KAC_SERVICE_KEY }}
         run: |
           if [ -z "$KAC_SERVICE_KEY" ]; then
+            echo "has_key=false" >> "$GITHUB_OUTPUT"
             echo "KAC_SERVICE_KEY 시크릿이 없어 건너뜁니다."
-            echo "공공데이터포털에서 키를 발급받아 리포지토리 Secret으로 등록하세요."
-            exit 0
+            echo "공공데이터포털에서 키를 발급받아 리포지토리 Secret으로 등록하고,"
+            echo "flight-tracker/config/delay_api.yaml 을 채운 뒤 verified: true 로 바꾸세요."
+          else
+            echo "has_key=true" >> "$GITHUB_OUTPUT"
           fi
-          python src/delay_scan.py --provider live
+
+      - uses: actions/checkout@v4
+        if: steps.guard.outputs.has_key == 'true'
+        with:
+          ref: ${{ github.ref_name }}
+
+      - uses: actions/setup-python@v5
+        if: steps.guard.outputs.has_key == 'true'
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        if: steps.guard.outputs.has_key == 'true'
+        run: pip install requests pyyaml
+        working-directory: flight-tracker
+
+      - name: Fetch today's delays
+        if: steps.guard.outputs.has_key == 'true'
+        env:
+          KAC_SERVICE_KEY: ${{ secrets.KAC_SERVICE_KEY }}
+        run: python src/delay_scan.py --provider live
+        working-directory: flight-tracker
 
       - name: Commit delays
+        if: steps.guard.outputs.has_key == 'true'
+        working-directory: flight-tracker
         run: |
           git config user.name "flight-scan-bot"
           git config user.email "actions@users.noreply.github.com"

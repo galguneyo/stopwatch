@@ -6,7 +6,9 @@ name: Weather scan
 # 매일 실행한다.
 on:
   schedule:
-    - cron: "0 20 * * *" # 05:00 KST
+    # 10분 주기 갱신 원칙. Open-Meteo는 무료·키 불필요이고 호출량도 공항 3곳 ×
+    # 10분 = 하루 432회로 무료 한도(1만) 안에 충분히 들어간다.
+    - cron: "*/10 * * * *"
   workflow_dispatch:
   push:
     branches: [claude/jolly-cannon-vp1kcb]
