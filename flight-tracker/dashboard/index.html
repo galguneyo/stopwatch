@@ -66,6 +66,25 @@
   .flight-row.soldout { color: var(--muted); text-decoration: line-through; }
   .empty-day { color: var(--muted); font-size: 12px; }
   .skipped { margin-top: 8px; font-size: 11px; color: var(--muted); }
+
+  .section-heading { font-size: 16px; font-weight: 700; margin: 28px 0 14px; }
+  .cal-months { display: flex; flex-wrap: wrap; gap: 18px; margin-bottom: 8px; }
+  .cal-month { background: var(--card); border: 1px solid var(--card-border); border-radius: 12px; padding: 12px; width: 100%; max-width: 340px; }
+  .cal-month-title { font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+  .cal-dow { font-size: 10px; color: var(--muted); text-align: center; padding-bottom: 2px; }
+  .cal-cell { min-height: 46px; border-radius: 8px; padding: 4px; font-size: 10px; background: #0f1013; border: 1px solid transparent; }
+  .cal-cell.blank { background: transparent; }
+  .cal-cell.inactive { opacity: 0.35; }
+  .cal-cell.target { background: #1b1e26; }
+  .cal-cell.target.holiday { border-color: var(--red); }
+  .cal-cell.target.sandwich { border-color: var(--amber); }
+  .cal-cell.target.longweekend { border-color: var(--accent); }
+  .cal-cell.nodata { border: 1px dashed var(--card-border); }
+  .cal-daynum { font-weight: 600; font-size: 11px; }
+  .cal-price { margin-top: 2px; font-weight: 700; color: var(--green); font-size: 10px; }
+  .cal-price.soldout-all { color: var(--muted); font-weight: 400; }
+  .cal-count { color: var(--muted); font-size: 9px; }
 </style>
 </head>
 <body>
@@ -110,8 +129,155 @@ async function load() {
   }
 
   contentEl.innerHTML = '';
+
+  const calHeading = document.createElement('div');
+  calHeading.className = 'section-heading';
+  calHeading.textContent = `월별 예약가능현황 (향후 ${data.window_weeks}주)`;
+  contentEl.appendChild(calHeading);
+
+  contentEl.appendChild(renderCalendars('서울(GMP) → 제주(CJU) · 금(10시~)/토(오전) 출발만 대상', data.outbound, 'outbound', data.window_weeks));
+  contentEl.appendChild(renderCalendars('제주(CJU) → 서울(GMP) · 일(18시~)/월(전일) 도착만 대상', data.inbound, 'inbound', data.window_weeks));
+
+  const listHeading = document.createElement('div');
+  listHeading.className = 'section-heading';
+  listHeading.textContent = '상세 목록';
+  contentEl.appendChild(listHeading);
+
   contentEl.appendChild(renderRoute('서울(GMP) → 제주(CJU) · 금요일 10시 이후 / 토요일 오전', data.outbound));
   contentEl.appendChild(renderRoute('제주(CJU) → 서울(GMP) · 일요일 18시 이후 / 월요일 전체', data.inbound));
+}
+
+function isTargetDay(direction, jsWeekday) {
+  // jsWeekday: 0=일 1=월 ... 6=토
+  if (direction === 'outbound') return jsWeekday === 5 || jsWeekday === 6; // 금,토
+  return jsWeekday === 0 || jsWeekday === 1; // 일,월
+}
+
+function renderCalendars(title, routeData, direction, windowWeeks) {
+  const wrap = document.createElement('div');
+  wrap.className = 'route-section';
+
+  const h = document.createElement('div');
+  h.className = 'route-title';
+  h.textContent = title;
+  wrap.appendChild(h);
+
+  const byDate = {};
+  for (const f of routeData.flights) {
+    const dateKey = f.dep_dt.slice(0, 10);
+    (byDate[dateKey] ||= []).push(f);
+  }
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const endDate = new Date(today.getTime() + windowWeeks * 7 * 86400000);
+
+  const monthsWrap = document.createElement('div');
+  monthsWrap.className = 'cal-months';
+
+  let cursor = new Date(today.getFullYear(), today.getMonth(), 1);
+  const lastMonth = new Date(endDate.getFullYear(), endDate.getMonth(), 1);
+
+  while (cursor <= lastMonth) {
+    monthsWrap.appendChild(renderMonth(cursor.getFullYear(), cursor.getMonth(), byDate, direction, today, endDate));
+    cursor = new Date(cursor.getFullYear(), cursor.getMonth() + 1, 1);
+  }
+
+  wrap.appendChild(monthsWrap);
+
+  if (routeData.skipped && routeData.skipped.length) {
+    const sk = document.createElement('div');
+    sk.className = 'skipped';
+    sk.textContent = `건너뛴 조회: ${routeData.skipped.length}건 (results.json의 skipped 참조)`;
+    wrap.appendChild(sk);
+  }
+
+  return wrap;
+}
+
+function renderMonth(year, month, byDate, direction, today, endDate) {
+  const box = document.createElement('div');
+  box.className = 'cal-month';
+
+  const title = document.createElement('div');
+  title.className = 'cal-month-title';
+  title.textContent = `${year}년 ${month + 1}월`;
+  box.appendChild(title);
+
+  const grid = document.createElement('div');
+  grid.className = 'cal-grid';
+  for (const dow of ['일', '월', '화', '수', '목', '금', '토']) {
+    const el = document.createElement('div');
+    el.className = 'cal-dow';
+    el.textContent = dow;
+    grid.appendChild(el);
+  }
+
+  const firstDay = new Date(year, month, 1);
+  const startOffset = firstDay.getDay();
+  for (let i = 0; i < startOffset; i++) {
+    const blank = document.createElement('div');
+    blank.className = 'cal-cell blank';
+    grid.appendChild(blank);
+  }
+
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  for (let day = 1; day <= daysInMonth; day++) {
+    const d = new Date(year, month, day);
+    const dateKey = d.toISOString().slice(0, 10);
+    const cell = document.createElement('div');
+    const isTarget = isTargetDay(direction, d.getDay());
+    const inWindow = d >= today && d <= endDate;
+
+    const flights = byDate[dateKey];
+    const classes = ['cal-cell'];
+    let demand = null;
+    if (flights && flights.length) demand = flights[0].demand;
+
+    if (isTarget && inWindow) {
+      classes.push('target');
+      if (demand?.is_holiday) classes.push('holiday');
+      else if (demand?.is_sandwich_day) classes.push('sandwich');
+      else if (demand?.is_long_weekend) classes.push('longweekend');
+      if (!flights || !flights.length) classes.push('nodata');
+    } else {
+      classes.push('inactive');
+    }
+    cell.className = classes.join(' ');
+
+    const num = document.createElement('div');
+    num.className = 'cal-daynum';
+    num.textContent = String(day);
+    cell.appendChild(num);
+
+    if (isTarget && inWindow) {
+      if (flights && flights.length) {
+        const bookableFlights = flights.filter(f => f.bookable && f.price_krw != null);
+        const priceEl = document.createElement('div');
+        if (bookableFlights.length) {
+          const minPrice = Math.min(...bookableFlights.map(f => f.price_krw));
+          priceEl.className = 'cal-price';
+          priceEl.textContent = minPrice.toLocaleString('ko-KR');
+        } else {
+          priceEl.className = 'cal-price soldout-all';
+          priceEl.textContent = '매진';
+        }
+        cell.appendChild(priceEl);
+        const countEl = document.createElement('div');
+        countEl.className = 'cal-count';
+        countEl.textContent = `${flights.length}편`;
+        cell.appendChild(countEl);
+      }
+      if (demand?.holiday_name) {
+        cell.title = demand.holiday_name;
+      }
+    }
+
+    grid.appendChild(cell);
+  }
+
+  box.appendChild(grid);
+  return box;
 }
 
 function renderRoute(title, routeData) {

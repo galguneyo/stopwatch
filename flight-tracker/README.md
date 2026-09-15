@@ -60,7 +60,8 @@ flight-tracker/
 │       └── playwright_provider.py  # 실항공사 조회용 범용 엔진 (셀렉터 검증 전엔 의도적으로 실패)
 ├── config/selectors.yaml       # 항공사별 CSS 셀렉터 설정 (현재 전부 미검증)
 ├── data/results.json           # scan.py 실행 결과 (대시보드가 읽음)
-├── dashboard/index.html        # 정적 대시보드 (fetch로 ../data/results.json 로드)
+├── dashboard/index.html        # 정적 대시보드: 월별 달력형 예약가능현황 + 상세 목록
+├── src/weekly_report.py        # 주차별 사전예약 확인 마크다운 리포트 생성 (reports/latest.md)
 ├── tests/test_rules.py
 └── .github/workflows/flight-scan.yml  # 주간 자동 실행 (repo 루트 기준 경로)
 ```
@@ -81,10 +82,23 @@ pip install -r requirements.txt
 # 1) 목업 데이터로 파이프라인/대시보드 확인 (네트워크 불필요)
 python src/scan.py --provider mock --weeks-ahead 8
 
-# 2) 정적 서버로 대시보드 열기
+# 2) 주차별 사전예약 확인 리포트 생성 (reports/latest.md)
+python src/weekly_report.py
+
+# 3) 정적 서버로 대시보드 열기
 python -m http.server 8000
 # 브라우저에서 http://localhost:8000/dashboard/index.html
 ```
+
+대시보드는 두 파트로 구성됩니다.
+- **월별 예약가능현황**(달력형): 노선별로 검색 대상 요일(서울→제주는 금/토, 제주→서울은
+  일/월)만 색이 채워지고, 나머지 요일은 흐리게 표시됩니다. 셀 안에는 최저가와 편수를,
+  테두리 색으로 공휴일(빨강)/샌드위치 데이(주황)/3일 이상 연휴(파랑)를 표시합니다.
+- **상세 목록**: 날짜별 전 항공편(항공사·시각·가격·매진 여부)을 카드로 나열합니다.
+
+`weekly_report.py`는 같은 데이터를 ISO 주차 단위로 묶어 "이번 주에 예약해야 할 편"을
+사람이 바로 읽을 수 있는 마크다운으로 정리합니다 — 수요 집중 주차는 상단에
+경고 문구가 자동으로 붙습니다.
 
 ## 실데이터 연결하기
 
