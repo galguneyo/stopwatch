@@ -328,14 +328,19 @@ async function boot() {
 function renderNotice() {
   const all = [...flights.outbound.flights, ...flights.inbound.flights];
   const live = all.some(f => f.source === 'live');
+  const weatherLive = weather?.provider === 'live';
+  const weatherNote = weatherLive
+    ? '날씨는 Open-Meteo 실시간 예보입니다.'
+    : '날씨도 목업입니다.';
   const el = document.getElementById('notice');
+
   if (!all.length) {
     const skipped = [...flights.outbound.skipped, ...flights.inbound.skipped].length;
     el.innerHTML = `<div class="notice is-empty"><span>●</span><span>조회된 항공편이 없습니다. 미검증 셀렉터로 ${skipped}건을 건너뛰었습니다 — <code>config/selectors.yaml</code>을 확인하세요.</span></div>`;
   } else if (!live) {
-    el.innerHTML = `<div class="notice"><span>●</span><span><b>목업 데이터</b>입니다. 화면 구성 확인용이며 실제 항공권 가격·좌석이 아닙니다.</span></div>`;
+    el.innerHTML = `<div class="notice"><span>●</span><span><b>항공권은 목업 데이터</b>입니다 — 화면 구성 확인용이며 실제 가격·좌석이 아닙니다. ${weatherNote}</span></div>`;
   } else {
-    el.innerHTML = `<div class="notice is-live"><span>●</span><span>실시간 조회 결과입니다. 결제 전 항공사 공식 화면에서 최종 확인하세요.</span></div>`;
+    el.innerHTML = `<div class="notice is-live"><span>●</span><span>항공권 실시간 조회 결과입니다. ${weatherNote} 결제 전 항공사 공식 화면에서 최종 확인하세요.</span></div>`;
   }
 }
 
