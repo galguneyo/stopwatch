@@ -1,5 +1,10 @@
 name: Weekly Seoul-Jeju flight scan
 
+# 주의 (2026-09-15 실측, VERIFICATION.md 참고): 대한항공·아시아나·제주항공·티웨이는
+# GitHub Actions 클라우드 IP에서 403 / Access Denied / HTTP2 오류로 차단된다.
+# 즉 이 워크플로만으로는 우선순위 항공사의 실데이터를 가져올 수 없다.
+# 실데이터 수집은 사용자 PC(가정용 IP)에서 `python src/scan.py --provider live`로
+# 돌리는 경로가 기본이며, 이 워크플로는 self-hosted 러너나 차단이 풀린 경우를 위해 남겨둔다.
 on:
   schedule:
     # 매주 월요일 00:00 UTC = 한국시간 09:00
@@ -47,28 +52,4 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           git add data/results.json reports/latest.md
           git diff --cached --quiet || git commit -m "chore: weekly flight scan update"
-          git push
-
-  weather:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: flight-tracker
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-      - run: pip install -r requirements.txt
-      - name: Run weather scan
-        # 날씨는 항공권보다 변동이 잦으므로 이 워크플로는 별도로 더 자주(예: 매일)
-        # 실행하도록 스케줄을 분리하는 것을 권장한다. 지금은 단순화를 위해
-        # 같은 주간 트리거에 묶어두었다.
-        run: python src/weather_scan.py --provider "${{ github.event.inputs.provider || 'live' }}"
-      - name: Commit updated weather
-        run: |
-          git config user.name "flight-scan-bot"
-          git config user.email "actions@users.noreply.github.com"
-          git add data/weather.json
-          git diff --cached --quiet || git commit -m "chore: weather forecast update"
           git push
