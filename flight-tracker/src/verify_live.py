@@ -43,6 +43,14 @@ BOT_MARKERS = [
 
 LINE = "-" * 68
 
+# 로그가 길어지면 앞부분이 잘려 결론을 놓치기 쉬우므로, 각 검증의 판정을 모아
+# 맨 마지막에 한 번 더 요약해서 찍는다.
+VERDICTS: list[tuple[str, str]] = []
+
+
+def record(label: str, verdict: str) -> None:
+    VERDICTS.append((label, verdict))
+
 
 def section(title: str) -> None:
     print(f"\n{LINE}\n{title}\n{LINE}")
@@ -66,8 +74,10 @@ def check_reachability() -> None:
         try:
             res = requests.get(url, timeout=15, headers={"User-Agent": "Mozilla/5.0"})
             print(f"  {host:<28} HTTP {res.status_code}  ({len(res.content):,} bytes)")
+            record(f"도달성 {host}", f"HTTP {res.status_code}")
         except Exception as e:  # noqa: BLE001
             print(f"  {host:<28} 실패: {type(e).__name__}: {e}")
+            record(f"도달성 {host}", f"실패 {type(e).__name__}")
 
 
 def check_weather() -> None:
@@ -87,6 +97,7 @@ def check_weather() -> None:
         print(f"  {code} {info.date}  {info.summary}  "
               f"강수 {info.precip_probability_pct}%  풍속 {info.wind_speed_kmh}km/h  "
               f"{info.temp_low_c}~{info.temp_high_c}°C  (source={info.source})")
+        record(f"날씨 {code}", f"{info.summary} / 강수 {info.precip_probability_pct}%")
 
     print("\n  => 값이 출력됐다면 weather live provider는 실연결 검증 완료.")
 
@@ -140,7 +151,11 @@ def main() -> None:
             step()
         except Exception as e:  # noqa: BLE001
             print(f"\n  단계 실패: {type(e).__name__}: {e}")
-    section("검증 종료")
+
+    section("요약")
+    width = max((len(label) for label, _ in VERDICTS), default=0)
+    for label, verdict in VERDICTS:
+        print(f"  {label:<{width}}  {verdict}")
 
 
 if __name__ == "__main__":
