@@ -378,11 +378,23 @@ const DOW = ['일','월','화','수','목','금','토'];
 
 const REFRESH_MS = 10 * 60 * 1000; // 10분 주기 갱신
 
+// build_standalone.py 로 만든 단일 파일에는 데이터가 내장되어 있다. 그 경우
+// 값이 고정된 스냅샷이므로 자동 갱신을 켜지 않고 "언제 기준"인지만 밝힌다.
+const SNAPSHOT = window.__SNAPSHOT__ || null;
+
 let flights = null, weather = null, delays = null;
 let direction = 'outbound', selectedDate = null, expanded = null;
 let lastUpdated = null, isStale = false;
 
 async function fetchAll() {
+  if (SNAPSHOT) {
+    flights = SNAPSHOT.results;
+    weather = SNAPSHOT.weather;
+    delays = SNAPSHOT.delays;
+    lastUpdated = new Date(SNAPSHOT.generated_at);
+    isStale = false;
+    return true;
+  }
   const [f, w, d] = await Promise.allSettled([
     fetch(DATA_BASE + 'results.json', { cache: 'no-store' }).then(r => r.json()),
     fetch(DATA_BASE + 'weather.json', { cache: 'no-store' }).then(r => r.json()),
@@ -416,6 +428,13 @@ function renderStamp() {
     text.textContent = '갱신 실패 · 이전 데이터 표시 중';
     return;
   }
+  if (SNAPSHOT) {
+    const t = lastUpdated;
+    const pad = n => String(n).padStart(2, '0');
+    text.textContent = `저장본 · ${t.getFullYear()}.${pad(t.getMonth() + 1)}.${pad(t.getDate())} ` +
+                       `${pad(t.getHours())}:${pad(t.getMinutes())} 기준`;
+    return;
+  }
   const mins = Math.floor((Date.now() - lastUpdated) / 60000);
   const ago = mins < 1 ? '방금' : `${mins}분 전`;
   text.textContent = `10분마다 자동 갱신 · ${ago}`;
@@ -431,14 +450,18 @@ async function boot() {
     return;
   }
 
-  document.getElementById('stamp').addEventListener('click', refresh);
-  setInterval(refresh, REFRESH_MS);
-  setInterval(renderStamp, 30000);
-  // 탭이 백그라운드인 동안에는 굳이 받아오지 않고, 돌아왔을 때 오래됐으면 바로 갱신한다.
-  document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState !== 'visible' || !lastUpdated) return;
-    if (Date.now() - lastUpdated >= REFRESH_MS) refresh(); else renderStamp();
-  });
+  if (SNAPSHOT) {
+    document.getElementById('stamp').disabled = true;
+  } else {
+    document.getElementById('stamp').addEventListener('click', refresh);
+    setInterval(refresh, REFRESH_MS);
+    setInterval(renderStamp, 30000);
+    // 탭이 백그라운드인 동안에는 굳이 받아오지 않고, 돌아왔을 때 오래됐으면 바로 갱신한다.
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState !== 'visible' || !lastUpdated) return;
+      if (Date.now() - lastUpdated >= REFRESH_MS) refresh(); else renderStamp();
+    });
+  }
 
   document.querySelectorAll('#dirToggle button').forEach(btn => {
     btn.addEventListener('click', () => {
