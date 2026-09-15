@@ -1,0 +1,63 @@
+# 항공편 클릭 시 이동할 예매 링크 설정.
+#
+# entry_url : 항공사 예매 진입 페이지. 날짜·노선은 채워지지 않으므로 사용자가
+#             직접 선택해야 하지만, 주소가 바뀌지 않는 한 깨지지 않는다.
+# deep_link : 노선·날짜가 미리 채워진 검색 결과 URL 템플릿. 비워두면 entry_url 로
+#             연결된다.
+#
+# deep_link 를 비워둔 이유: 각 사의 딥링크 규격을 이 개발 환경에서 확인할 수
+# 없었다(샌드박스는 물론 GitHub Actions 러너에서도 항공사 도메인이 403으로 막힘,
+# VERIFICATION.md 참고). 추측한 주소를 넣으면 클릭했을 때 깨진 페이지로 보내게 되고,
+# 그건 링크가 아예 없는 것보다 나쁘다.
+#
+# 채우는 방법:
+#   1) 브라우저에서 해당 항공사 국내선 검색을 한 번 해본다 (서울↔제주, 편도, 직항)
+#   2) 결과 화면의 주소창을 복사해 날짜·출발지·도착지 부분을 치환자로 바꾼다
+#   3) verified: true 로 바꾼다
+#
+# 쓸 수 있는 치환자:
+#   {origin} {dest}        공항 코드 (GMP, CJU)
+#   {date}                 YYYYMMDD
+#   {date_dash}            YYYY-MM-DD
+
+KE:
+  name: 대한항공
+  verified: false
+  entry_url: "https://www.koreanair.com/kr/ko"
+  deep_link: ""
+
+OZ:
+  name: 아시아나항공
+  verified: false
+  entry_url: "https://flyasiana.com/C/KR/KO/index"
+  deep_link: ""
+
+7C:
+  name: 제주항공
+  verified: false
+  entry_url: "https://www.jejuair.net/jejuair/main.do"
+  deep_link: ""
+
+TW:
+  name: 티웨이항공
+  verified: false
+  entry_url: "https://www.twayair.com/app/main"
+  deep_link: ""
+
+BX:
+  name: 에어부산
+  verified: false
+  entry_url: "https://www.airbusan.com/content/individual/"
+  deep_link: ""
+
+RS:
+  name: 에어서울
+  verified: false
+  entry_url: "https://flyairseoul.com"
+  deep_link: ""
+
+ZE:
+  name: 이스타항공
+  verified: false
+  entry_url: "https://www.eastarjet.com"
+  deep_link: ""

@@ -34,6 +34,8 @@ AIRLINE_ENTRY = {
     "7C": ("제주항공", "https://www.jejuair.net/jejuair/main.do"),
     "TW": ("티웨이항공", "https://www.twayair.com/app/main"),
     "BX": ("에어부산", "https://www.airbusan.com/content/individual/"),
+    "RS": ("에어서울", "https://flyairseoul.com"),
+    "ZE": ("이스타항공", "https://www.eastarjet.com"),
 }
 
 BOT_MARKERS = [

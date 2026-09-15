@@ -349,6 +349,14 @@
   tbody tr:last-child td { border-bottom: 0; }
   tbody tr.outside td { color: var(--faint); }
   td .time, td .fare { font-weight: 600; }
+  a.book {
+    color: var(--accent); text-decoration: none;
+    display: inline-flex; align-items: center; gap: 3px;
+    border-bottom: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  }
+  a.book:hover { border-bottom-color: var(--accent); }
+  a.book .ext { font-size: 9px; opacity: 0.65; }
+  tr.outside a.book { color: var(--faint); border-bottom-color: transparent; }
   td .na { color: var(--faint); }
   .seat { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; }
   .seat i { width: 6px; height: 6px; border-radius: 50%; display: block; }
@@ -887,6 +895,9 @@ function detailTable(list) {
   const best = bookable.length ? Math.min(...bookable.map(f => f.economy_price_krw)) : null;
   const hasOutside = list.some(f => !f.in_target_window);
 
+  const anyDeep = list.some(f => f.booking_is_deep);
+  const anyLink = list.some(f => f.booking_url);
+
   const rows = list.map(f => {
     const st = STATUS[f.seat_status];
     const isBest = f.in_target_window && f.economy_price_krw === best && f.seat_status !== 'soldout';
@@ -894,18 +905,36 @@ function detailTable(list) {
       ? `<span class="fare">${won(f.economy_price_krw)}</span>${isBest ? '<span class="best">최저</span>' : ''}`
       : '<span class="na">—</span>';
     const biz = f.business_price_krw != null ? `<span class="fare">${won(f.business_price_krw)}</span>` : '<span class="na">—</span>';
+    const time = f.dep_dt.slice(11, 16);
+    const label = f.booking_is_deep
+      ? `${time} 출발 ${f.flight_no} 예매 화면 열기`
+      : `${f.airline_name} 예매 페이지 열기 (날짜는 직접 선택)`;
+    const timeCell = f.booking_url
+      ? `<a class="time book" href="${f.booking_url}" target="_blank" rel="noopener noreferrer"
+            title="${label}" aria-label="${label}">${time}<span class="ext" aria-hidden="true">↗</span></a>`
+      : `<span class="time">${time}</span>`;
+
     return `<tr class="${f.in_target_window ? '' : 'outside'}">
-      <td><span class="time">${f.dep_dt.slice(11, 16)}</span></td>
+      <td>${timeCell}</td>
       <td><span class="seat"><i style="background:${st.fill}"></i>${st.label}</span></td>
       <td>${eco}</td><td>${biz}</td></tr>`;
   }).join('');
 
   const windowText = direction === 'outbound' ? '금 10시 이후 / 토 오전' : '일 18시 이후 / 월 전일';
+  const notes = [];
+  if (hasOutside) notes.push(`흐리게 표시된 편은 요청 시간대(${windowText}) 밖입니다.`);
+  notes.push('비즈니스 ‘—’는 해당 편에 상위 클래스가 없다는 뜻입니다.');
+  if (anyLink) {
+    notes.push(anyDeep
+      ? '출발 시각을 누르면 해당 편 예매 화면이 새 탭에서 열립니다.'
+      : '출발 시각을 누르면 항공사 예매 페이지가 새 탭에서 열립니다 — 노선·날짜는 직접 선택해야 합니다.');
+  }
+
   return `<table>
       <thead><tr><th>출발</th><th>좌석</th><th>이코노미</th><th>비즈니스</th></tr></thead>
       <tbody>${rows}</tbody>
     </table>
-    ${hasOutside ? `<div class="foot">흐리게 표시된 편은 요청 시간대(${windowText}) 밖입니다. 비즈니스 ‘—’는 해당 편에 상위 클래스가 없다는 뜻입니다.</div>` : ''}`;
+    <div class="foot">${notes.join(' ')}</div>`;
 }
 
 boot();

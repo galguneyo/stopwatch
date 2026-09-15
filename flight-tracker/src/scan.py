@@ -18,6 +18,7 @@ import datetime as dt
 import json
 from pathlib import Path
 
+import booking_links
 import insights
 import rules
 from providers.base import FlightOffer, ProviderError
@@ -64,9 +65,19 @@ def scan_route(
                 if not offer.is_direct:
                     continue
                 relevant_dt = offer.dep_dt if direction == "outbound" else offer.arr_dt
+
+                # 실조회 provider가 편별 예매 URL을 잡아냈으면 그게 가장 정확하다.
+                # 없으면 설정에 있는 딥링크 또는 예매 진입 페이지로 보낸다.
+                if offer.booking_url:
+                    link = booking_links.BookingLink(offer.booking_url, True)
+                else:
+                    link = booking_links.resolve(offer.airline_code, origin, dest, date)
+
                 results.append(
                     {
                         **offer.to_dict(),
+                        "booking_url": link.url,
+                        "booking_is_deep": link.is_deep,
                         "in_target_window": time_filter(relevant_dt),
                         "demand": {
                             "is_holiday": flag.is_holiday,
