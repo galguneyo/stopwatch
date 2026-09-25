@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-25T20:33:22.784056",
+  "generated_at": "2026-09-25T23:30:06.485138",
   "provider": "live",
   "forecast_horizon_days": 14,
   "by_airport": {
@@ -19,9 +19,9 @@
         "date": "2026-09-26",
         "summary": "흐림",
         "precip_probability_pct": 33,
-        "wind_speed_kmh": 7.8,
-        "temp_high_c": 26.6,
-        "temp_low_c": 17.2,
+        "wind_speed_kmh": 8.4,
+        "temp_high_c": 26.5,
+        "temp_low_c": 17.3,
         "source": "live"
       },
       "2026-09-27": {
@@ -29,9 +29,9 @@
         "date": "2026-09-27",
         "summary": "부분 흐림",
         "precip_probability_pct": 3,
-        "wind_speed_kmh": 12.7,
-        "temp_high_c": 25.3,
-        "temp_low_c": 16.2,
+        "wind_speed_kmh": 12.5,
+        "temp_high_c": 25.1,
+        "temp_low_c": 16.3,
         "source": "live"
       },
       "2026-09-28": {
@@ -171,18 +171,18 @@
         "date": "2026-09-26",
         "summary": "흐림",
         "precip_probability_pct": 29,
-        "wind_speed_kmh": 21.7,
-        "temp_high_c": 23.8,
+        "wind_speed_kmh": 22.3,
+        "temp_high_c": 23.9,
         "temp_low_c": 20.1,
         "source": "live"
       },
       "2026-09-27": {
         "airport_code": "ICN",
         "date": "2026-09-27",
-        "summary": "부분 흐림",
+        "summary": "흐림",
         "precip_probability_pct": 8,
-        "wind_speed_kmh": 19.1,
-        "temp_high_c": 23.3,
+        "wind_speed_kmh": 17.8,
+        "temp_high_c": 23.1,
         "temp_low_c": 21.3,
         "source": "live"
       },
@@ -323,19 +323,19 @@
         "date": "2026-09-26",
         "summary": "강한 비",
         "precip_probability_pct": 100,
-        "wind_speed_kmh": 29.4,
-        "temp_high_c": 25.8,
-        "temp_low_c": 21.7,
+        "wind_speed_kmh": 25.8,
+        "temp_high_c": 26.5,
+        "temp_low_c": 21.9,
         "source": "live"
       },
       "2026-09-27": {
         "airport_code": "CJU",
         "date": "2026-09-27",
-        "summary": "흐림",
+        "summary": "부분 흐림",
         "precip_probability_pct": 73,
-        "wind_speed_kmh": 15.3,
-        "temp_high_c": 26.7,
-        "temp_low_c": 22.1,
+        "wind_speed_kmh": 14.7,
+        "temp_high_c": 26.6,
+        "temp_low_c": 21.9,
         "source": "live"
       },
       "2026-09-28": {
