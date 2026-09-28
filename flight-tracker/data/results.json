@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-21T03:22:18.259626",
+  "generated_at": "2026-09-28T03:42:31.433675",
   "provider": "live",
   "window_weeks": 8,
   "rules": {
@@ -22,16 +22,6 @@
     "skipped": [
       {
         "airline": "KE",
-        "date": "2026-09-25",
-        "reason": "KE 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
-      },
-      {
-        "airline": "KE",
-        "date": "2026-09-26",
-        "reason": "KE 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
-      },
-      {
-        "airline": "KE",
         "date": "2026-10-02",
         "reason": "KE 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
@@ -101,14 +91,14 @@
         "reason": "KE 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
       {
-        "airline": "OZ",
-        "date": "2026-09-25",
-        "reason": "OZ 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
+        "airline": "KE",
+        "date": "2026-11-20",
+        "reason": "KE 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
       {
-        "airline": "OZ",
-        "date": "2026-09-26",
-        "reason": "OZ 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
+        "airline": "KE",
+        "date": "2026-11-21",
+        "reason": "KE 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
       {
         "airline": "OZ",
@@ -181,14 +171,14 @@
         "reason": "OZ 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
       {
-        "airline": "7C",
-        "date": "2026-09-25",
-        "reason": "7C 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
+        "airline": "OZ",
+        "date": "2026-11-20",
+        "reason": "OZ 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
       {
-        "airline": "7C",
-        "date": "2026-09-26",
-        "reason": "7C 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
+        "airline": "OZ",
+        "date": "2026-11-21",
+        "reason": "OZ 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
       {
         "airline": "7C",
@@ -261,14 +251,14 @@
         "reason": "7C 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
       {
-        "airline": "TW",
-        "date": "2026-09-25",
-        "reason": "TW 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
+        "airline": "7C",
+        "date": "2026-11-20",
+        "reason": "7C 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
       {
-        "airline": "TW",
-        "date": "2026-09-26",
-        "reason": "TW 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
+        "airline": "7C",
+        "date": "2026-11-21",
+        "reason": "7C 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
       {
         "airline": "TW",
@@ -341,14 +331,14 @@
         "reason": "TW 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
       {
-        "airline": "BX",
-        "date": "2026-09-25",
-        "reason": "BX 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
+        "airline": "TW",
+        "date": "2026-11-20",
+        "reason": "TW 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
       {
-        "airline": "BX",
-        "date": "2026-09-26",
-        "reason": "BX 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
+        "airline": "TW",
+        "date": "2026-11-21",
+        "reason": "TW 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
       {
         "airline": "BX",
@@ -421,14 +411,14 @@
         "reason": "BX 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
       {
-        "airline": "RS",
-        "date": "2026-09-25",
-        "reason": "RS 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
+        "airline": "BX",
+        "date": "2026-11-20",
+        "reason": "BX 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
       {
-        "airline": "RS",
-        "date": "2026-09-26",
-        "reason": "RS 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
+        "airline": "BX",
+        "date": "2026-11-21",
+        "reason": "BX 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
       {
         "airline": "RS",
@@ -501,14 +491,14 @@
         "reason": "RS 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
       {
-        "airline": "ZE",
-        "date": "2026-09-25",
-        "reason": "ZE 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
+        "airline": "RS",
+        "date": "2026-11-20",
+        "reason": "RS 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
       {
-        "airline": "ZE",
-        "date": "2026-09-26",
-        "reason": "ZE 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
+        "airline": "RS",
+        "date": "2026-11-21",
+        "reason": "RS 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
       {
         "airline": "ZE",
@@ -578,6 +568,16 @@
       {
         "airline": "ZE",
         "date": "2026-11-14",
+        "reason": "ZE 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
+      },
+      {
+        "airline": "ZE",
+        "date": "2026-11-20",
+        "reason": "ZE 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
+      },
+      {
+        "airline": "ZE",
+        "date": "2026-11-21",
         "reason": "ZE 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       }
     ]
@@ -588,16 +588,6 @@
     "skipped": [
       {
         "airline": "KE",
-        "date": "2026-09-21",
-        "reason": "KE 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
-      },
-      {
-        "airline": "KE",
-        "date": "2026-09-27",
-        "reason": "KE 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
-      },
-      {
-        "airline": "KE",
         "date": "2026-09-28",
         "reason": "KE 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
@@ -672,14 +662,14 @@
         "reason": "KE 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
       {
-        "airline": "OZ",
-        "date": "2026-09-21",
-        "reason": "OZ 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
+        "airline": "KE",
+        "date": "2026-11-22",
+        "reason": "KE 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
       {
-        "airline": "OZ",
-        "date": "2026-09-27",
-        "reason": "OZ 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
+        "airline": "KE",
+        "date": "2026-11-23",
+        "reason": "KE 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
       {
         "airline": "OZ",
@@ -757,14 +747,14 @@
         "reason": "OZ 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
       {
-        "airline": "7C",
-        "date": "2026-09-21",
-        "reason": "7C 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
+        "airline": "OZ",
+        "date": "2026-11-22",
+        "reason": "OZ 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
       {
-        "airline": "7C",
-        "date": "2026-09-27",
-        "reason": "7C 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
+        "airline": "OZ",
+        "date": "2026-11-23",
+        "reason": "OZ 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
       {
         "airline": "7C",
@@ -842,14 +832,14 @@
         "reason": "7C 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
       {
-        "airline": "TW",
-        "date": "2026-09-21",
-        "reason": "TW 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
+        "airline": "7C",
+        "date": "2026-11-22",
+        "reason": "7C 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
       {
-        "airline": "TW",
-        "date": "2026-09-27",
-        "reason": "TW 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
+        "airline": "7C",
+        "date": "2026-11-23",
+        "reason": "7C 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
       {
         "airline": "TW",
@@ -927,14 +917,14 @@
         "reason": "TW 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
       {
-        "airline": "BX",
-        "date": "2026-09-21",
-        "reason": "BX 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
+        "airline": "TW",
+        "date": "2026-11-22",
+        "reason": "TW 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
       {
-        "airline": "BX",
-        "date": "2026-09-27",
-        "reason": "BX 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
+        "airline": "TW",
+        "date": "2026-11-23",
+        "reason": "TW 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
       {
         "airline": "BX",
@@ -1012,14 +1002,14 @@
         "reason": "BX 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
       {
-        "airline": "RS",
-        "date": "2026-09-21",
-        "reason": "RS 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
+        "airline": "BX",
+        "date": "2026-11-22",
+        "reason": "BX 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
       {
-        "airline": "RS",
-        "date": "2026-09-27",
-        "reason": "RS 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
+        "airline": "BX",
+        "date": "2026-11-23",
+        "reason": "BX 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
       {
         "airline": "RS",
@@ -1097,14 +1087,14 @@
         "reason": "RS 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
       {
-        "airline": "ZE",
-        "date": "2026-09-21",
-        "reason": "ZE 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
+        "airline": "RS",
+        "date": "2026-11-22",
+        "reason": "RS 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
       {
-        "airline": "ZE",
-        "date": "2026-09-27",
-        "reason": "ZE 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
+        "airline": "RS",
+        "date": "2026-11-23",
+        "reason": "RS 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       },
       {
         "airline": "ZE",
@@ -1179,6 +1169,16 @@
       {
         "airline": "ZE",
         "date": "2026-11-16",
+        "reason": "ZE 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
+      },
+      {
+        "airline": "ZE",
+        "date": "2026-11-22",
+        "reason": "ZE 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
+      },
+      {
+        "airline": "ZE",
+        "date": "2026-11-23",
         "reason": "ZE 셀렉터가 아직 실사이트에서 검증(verified: true)되지 않았습니다. config/selectors.yaml 을 실제 네트워크 환경에서 채운 뒤 사용하세요."
       }
     ]
