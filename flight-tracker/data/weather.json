@@ -1,19 +1,9 @@
 {
-  "generated_at": "2026-09-28T19:50:59.444996",
+  "generated_at": "2026-09-29T00:08:42.615649",
   "provider": "live",
   "forecast_horizon_days": 14,
   "by_airport": {
     "GMP": {
-      "2026-09-28": {
-        "airport_code": "GMP",
-        "date": "2026-09-28",
-        "summary": "흐림",
-        "precip_probability_pct": 2,
-        "wind_speed_kmh": 11.9,
-        "temp_high_c": 23.6,
-        "temp_low_c": 15.9,
-        "source": "live"
-      },
       "2026-09-29": {
         "airport_code": "GMP",
         "date": "2026-09-29",
@@ -153,19 +143,19 @@
         "temp_high_c": 19.4,
         "temp_low_c": 13.8,
         "source": "live"
+      },
+      "2026-10-13": {
+        "airport_code": "GMP",
+        "date": "2026-10-13",
+        "summary": "흐림",
+        "precip_probability_pct": 12,
+        "wind_speed_kmh": 16.8,
+        "temp_high_c": 17.3,
+        "temp_low_c": 10.7,
+        "source": "live"
       }
     },
     "ICN": {
-      "2026-09-28": {
-        "airport_code": "ICN",
-        "date": "2026-09-28",
-        "summary": "흐림",
-        "precip_probability_pct": 2,
-        "wind_speed_kmh": 24.8,
-        "temp_high_c": 22.9,
-        "temp_low_c": 19.2,
-        "source": "live"
-      },
       "2026-09-29": {
         "airport_code": "ICN",
         "date": "2026-09-29",
@@ -305,19 +295,19 @@
         "temp_high_c": 19.3,
         "temp_low_c": 15.1,
         "source": "live"
+      },
+      "2026-10-13": {
+        "airport_code": "ICN",
+        "date": "2026-10-13",
+        "summary": "흐림",
+        "precip_probability_pct": 10,
+        "wind_speed_kmh": 28.1,
+        "temp_high_c": 18.7,
+        "temp_low_c": 13.0,
+        "source": "live"
       }
     },
     "CJU": {
-      "2026-09-28": {
-        "airport_code": "CJU",
-        "date": "2026-09-28",
-        "summary": "강한 이슬비",
-        "precip_probability_pct": 80,
-        "wind_speed_kmh": 15.0,
-        "temp_high_c": 23.6,
-        "temp_low_c": 20.5,
-        "source": "live"
-      },
       "2026-09-29": {
         "airport_code": "CJU",
         "date": "2026-09-29",
@@ -456,6 +446,16 @@
         "wind_speed_kmh": 15.5,
         "temp_high_c": 21.9,
         "temp_low_c": 20.1,
+        "source": "live"
+      },
+      "2026-10-13": {
+        "airport_code": "CJU",
+        "date": "2026-10-13",
+        "summary": "이슬비",
+        "precip_probability_pct": 17,
+        "wind_speed_kmh": 22.7,
+        "temp_high_c": 21.5,
+        "temp_low_c": 19.1,
         "source": "live"
       }
     }
