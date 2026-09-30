@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-30T12:10:01.717533",
+  "generated_at": "2026-09-30T17:59:33.681903",
   "provider": "live",
   "forecast_horizon_days": 14,
   "by_airport": {
@@ -7,9 +7,9 @@
       "2026-09-30": {
         "airport_code": "GMP",
         "date": "2026-09-30",
-        "summary": "강한 이슬비",
+        "summary": "이슬비",
         "precip_probability_pct": 71,
-        "wind_speed_kmh": 15.3,
+        "wind_speed_kmh": 15.6,
         "temp_high_c": 23.7,
         "temp_low_c": 14.9,
         "source": "live"
@@ -19,9 +19,9 @@
         "date": "2026-10-01",
         "summary": "부분 흐림",
         "precip_probability_pct": 2,
-        "wind_speed_kmh": 15.5,
-        "temp_high_c": 20.0,
-        "temp_low_c": 11.4,
+        "wind_speed_kmh": 16.2,
+        "temp_high_c": 20.3,
+        "temp_low_c": 11.6,
         "source": "live"
       },
       "2026-10-02": {
@@ -29,9 +29,9 @@
         "date": "2026-10-02",
         "summary": "대체로 맑음",
         "precip_probability_pct": 0,
-        "wind_speed_kmh": 15.5,
-        "temp_high_c": 19.9,
-        "temp_low_c": 9.6,
+        "wind_speed_kmh": 15.2,
+        "temp_high_c": 19.5,
+        "temp_low_c": 8.7,
         "source": "live"
       },
       "2026-10-03": {
@@ -39,29 +39,29 @@
         "date": "2026-10-03",
         "summary": "흐림",
         "precip_probability_pct": 0,
-        "wind_speed_kmh": 6.9,
-        "temp_high_c": 21.3,
-        "temp_low_c": 11.2,
+        "wind_speed_kmh": 6.6,
+        "temp_high_c": 19.6,
+        "temp_low_c": 10.8,
         "source": "live"
       },
       "2026-10-04": {
         "airport_code": "GMP",
         "date": "2026-10-04",
-        "summary": "이슬비",
+        "summary": "약한 이슬비",
         "precip_probability_pct": 52,
-        "wind_speed_kmh": 10.5,
-        "temp_high_c": 24.2,
+        "wind_speed_kmh": 10.9,
+        "temp_high_c": 24.5,
         "temp_low_c": 14.6,
         "source": "live"
       },
       "2026-10-05": {
         "airport_code": "GMP",
         "date": "2026-10-05",
-        "summary": "약한 소나기",
+        "summary": "이슬비",
         "precip_probability_pct": 47,
-        "wind_speed_kmh": 11.9,
-        "temp_high_c": 20.2,
-        "temp_low_c": 13.6,
+        "wind_speed_kmh": 11.6,
+        "temp_high_c": 21.4,
+        "temp_low_c": 14.5,
         "source": "live"
       },
       "2026-10-06": {
@@ -69,9 +69,9 @@
         "date": "2026-10-06",
         "summary": "맑음",
         "precip_probability_pct": 10,
-        "wind_speed_kmh": 9.2,
-        "temp_high_c": 20.7,
-        "temp_low_c": 11.6,
+        "wind_speed_kmh": 11.1,
+        "temp_high_c": 20.4,
+        "temp_low_c": 11.4,
         "source": "live"
       },
       "2026-10-07": {
@@ -159,11 +159,11 @@
       "2026-09-30": {
         "airport_code": "ICN",
         "date": "2026-09-30",
-        "summary": "이슬비",
+        "summary": "강한 이슬비",
         "precip_probability_pct": 62,
-        "wind_speed_kmh": 40.7,
+        "wind_speed_kmh": 37.1,
         "temp_high_c": 23.3,
-        "temp_low_c": 19.3,
+        "temp_low_c": 20.3,
         "source": "live"
       },
       "2026-10-01": {
@@ -171,9 +171,9 @@
         "date": "2026-10-01",
         "summary": "부분 흐림",
         "precip_probability_pct": 2,
-        "wind_speed_kmh": 39.9,
-        "temp_high_c": 20.4,
-        "temp_low_c": 16.3,
+        "wind_speed_kmh": 39.6,
+        "temp_high_c": 20.5,
+        "temp_low_c": 16.5,
         "source": "live"
       },
       "2026-10-02": {
@@ -181,9 +181,9 @@
         "date": "2026-10-02",
         "summary": "대체로 맑음",
         "precip_probability_pct": 0,
-        "wind_speed_kmh": 28.6,
-        "temp_high_c": 20.5,
-        "temp_low_c": 16.2,
+        "wind_speed_kmh": 31.4,
+        "temp_high_c": 19.7,
+        "temp_low_c": 15.6,
         "source": "live"
       },
       "2026-10-03": {
@@ -191,39 +191,39 @@
         "date": "2026-10-03",
         "summary": "흐림",
         "precip_probability_pct": 0,
-        "wind_speed_kmh": 20.3,
-        "temp_high_c": 18.8,
-        "temp_low_c": 15.3,
+        "wind_speed_kmh": 18.8,
+        "temp_high_c": 19.1,
+        "temp_low_c": 15.6,
         "source": "live"
       },
       "2026-10-04": {
         "airport_code": "ICN",
         "date": "2026-10-04",
-        "summary": "이슬비",
+        "summary": "약한 이슬비",
         "precip_probability_pct": 54,
-        "wind_speed_kmh": 20.8,
-        "temp_high_c": 21.8,
-        "temp_low_c": 13.9,
+        "wind_speed_kmh": 20.9,
+        "temp_high_c": 21.9,
+        "temp_low_c": 16.2,
         "source": "live"
       },
       "2026-10-05": {
         "airport_code": "ICN",
         "date": "2026-10-05",
-        "summary": "약한 소나기",
+        "summary": "소나기",
         "precip_probability_pct": 39,
-        "wind_speed_kmh": 20.9,
-        "temp_high_c": 20.1,
-        "temp_low_c": 15.2,
+        "wind_speed_kmh": 23.4,
+        "temp_high_c": 20.0,
+        "temp_low_c": 16.4,
         "source": "live"
       },
       "2026-10-06": {
         "airport_code": "ICN",
         "date": "2026-10-06",
-        "summary": "대체로 맑음",
+        "summary": "맑음",
         "precip_probability_pct": 8,
-        "wind_speed_kmh": 17.6,
-        "temp_high_c": 20.4,
-        "temp_low_c": 14.7,
+        "wind_speed_kmh": 23.0,
+        "temp_high_c": 20.3,
+        "temp_low_c": 14.8,
         "source": "live"
       },
       "2026-10-07": {
@@ -323,19 +323,19 @@
         "date": "2026-10-01",
         "summary": "약한 이슬비",
         "precip_probability_pct": 69,
-        "wind_speed_kmh": 24.5,
-        "temp_high_c": 23.0,
-        "temp_low_c": 19.4,
+        "wind_speed_kmh": 20.8,
+        "temp_high_c": 22.7,
+        "temp_low_c": 19.7,
         "source": "live"
       },
       "2026-10-02": {
         "airport_code": "CJU",
         "date": "2026-10-02",
-        "summary": "대체로 맑음",
+        "summary": "부분 흐림",
         "precip_probability_pct": 0,
         "wind_speed_kmh": 22.4,
-        "temp_high_c": 21.2,
-        "temp_low_c": 16.9,
+        "temp_high_c": 21.0,
+        "temp_low_c": 18.3,
         "source": "live"
       },
       "2026-10-03": {
@@ -343,9 +343,9 @@
         "date": "2026-10-03",
         "summary": "흐림",
         "precip_probability_pct": 24,
-        "wind_speed_kmh": 22.3,
-        "temp_high_c": 23.3,
-        "temp_low_c": 15.9,
+        "wind_speed_kmh": 21.1,
+        "temp_high_c": 23.5,
+        "temp_low_c": 15.5,
         "source": "live"
       },
       "2026-10-04": {
@@ -353,9 +353,9 @@
         "date": "2026-10-04",
         "summary": "약한 이슬비",
         "precip_probability_pct": 31,
-        "wind_speed_kmh": 19.1,
-        "temp_high_c": 23.3,
-        "temp_low_c": 21.7,
+        "wind_speed_kmh": 22.6,
+        "temp_high_c": 23.5,
+        "temp_low_c": 20.9,
         "source": "live"
       },
       "2026-10-05": {
@@ -363,19 +363,19 @@
         "date": "2026-10-05",
         "summary": "약한 이슬비",
         "precip_probability_pct": 68,
-        "wind_speed_kmh": 21.2,
-        "temp_high_c": 22.1,
-        "temp_low_c": 19.9,
+        "wind_speed_kmh": 20.8,
+        "temp_high_c": 22.2,
+        "temp_low_c": 20.8,
         "source": "live"
       },
       "2026-10-06": {
         "airport_code": "CJU",
         "date": "2026-10-06",
-        "summary": "약한 이슬비",
+        "summary": "이슬비",
         "precip_probability_pct": 69,
-        "wind_speed_kmh": 24.8,
+        "wind_speed_kmh": 26.6,
         "temp_high_c": 20.7,
-        "temp_low_c": 19.1,
+        "temp_low_c": 19.2,
         "source": "live"
       },
       "2026-10-07": {
