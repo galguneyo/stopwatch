@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-01T19:46:57.468804",
+  "generated_at": "2026-10-01T23:27:27.977649",
   "provider": "live",
   "forecast_horizon_days": 14,
   "by_airport": {
@@ -19,9 +19,9 @@
         "date": "2026-10-02",
         "summary": "맑음",
         "precip_probability_pct": 0,
-        "wind_speed_kmh": 14.2,
-        "temp_high_c": 20.0,
-        "temp_low_c": 9.1,
+        "wind_speed_kmh": 14.4,
+        "temp_high_c": 19.9,
+        "temp_low_c": 9.2,
         "source": "live"
       },
       "2026-10-03": {
@@ -30,8 +30,8 @@
         "summary": "흐림",
         "precip_probability_pct": 0,
         "wind_speed_kmh": 9.6,
-        "temp_high_c": 20.7,
-        "temp_low_c": 10.0,
+        "temp_high_c": 21.0,
+        "temp_low_c": 9.9,
         "source": "live"
       },
       "2026-10-04": {
@@ -171,9 +171,9 @@
         "date": "2026-10-02",
         "summary": "맑음",
         "precip_probability_pct": 0,
-        "wind_speed_kmh": 27.0,
-        "temp_high_c": 20.1,
-        "temp_low_c": 16.4,
+        "wind_speed_kmh": 26.3,
+        "temp_high_c": 19.9,
+        "temp_low_c": 16.3,
         "source": "live"
       },
       "2026-10-03": {
@@ -182,8 +182,8 @@
         "summary": "흐림",
         "precip_probability_pct": 0,
         "wind_speed_kmh": 19.0,
-        "temp_high_c": 20.2,
-        "temp_low_c": 15.5,
+        "temp_high_c": 20.9,
+        "temp_low_c": 15.4,
         "source": "live"
       },
       "2026-10-04": {
@@ -321,11 +321,11 @@
       "2026-10-02": {
         "airport_code": "CJU",
         "date": "2026-10-02",
-        "summary": "부분 흐림",
+        "summary": "대체로 맑음",
         "precip_probability_pct": 2,
         "wind_speed_kmh": 22.5,
-        "temp_high_c": 21.5,
-        "temp_low_c": 16.9,
+        "temp_high_c": 21.6,
+        "temp_low_c": 17.0,
         "source": "live"
       },
       "2026-10-03": {
@@ -333,9 +333,9 @@
         "date": "2026-10-03",
         "summary": "흐림",
         "precip_probability_pct": 8,
-        "wind_speed_kmh": 22.8,
-        "temp_high_c": 23.9,
-        "temp_low_c": 16.2,
+        "wind_speed_kmh": 22.9,
+        "temp_high_c": 24.0,
+        "temp_low_c": 16.3,
         "source": "live"
       },
       "2026-10-04": {
