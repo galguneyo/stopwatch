@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-02T19:58:49.725998",
+  "generated_at": "2026-10-02T23:38:49.983881",
   "provider": "live",
   "forecast_horizon_days": 14,
   "by_airport": {
@@ -19,9 +19,9 @@
         "date": "2026-10-03",
         "summary": "흐림",
         "precip_probability_pct": 0,
-        "wind_speed_kmh": 10.9,
-        "temp_high_c": 21.9,
-        "temp_low_c": 9.4,
+        "wind_speed_kmh": 10.6,
+        "temp_high_c": 21.8,
+        "temp_low_c": 9.2,
         "source": "live"
       },
       "2026-10-04": {
@@ -29,9 +29,9 @@
         "date": "2026-10-04",
         "summary": "이슬비",
         "precip_probability_pct": 79,
-        "wind_speed_kmh": 11.7,
-        "temp_high_c": 22.8,
-        "temp_low_c": 13.7,
+        "wind_speed_kmh": 12.1,
+        "temp_high_c": 23.0,
+        "temp_low_c": 13.8,
         "source": "live"
       },
       "2026-10-05": {
@@ -172,8 +172,8 @@
         "summary": "흐림",
         "precip_probability_pct": 0,
         "wind_speed_kmh": 19.2,
-        "temp_high_c": 21.3,
-        "temp_low_c": 15.7,
+        "temp_high_c": 20.8,
+        "temp_low_c": 15.5,
         "source": "live"
       },
       "2026-10-04": {
@@ -182,8 +182,8 @@
         "summary": "강한 이슬비",
         "precip_probability_pct": 86,
         "wind_speed_kmh": 37.0,
-        "temp_high_c": 22.2,
-        "temp_low_c": 18.5,
+        "temp_high_c": 22.4,
+        "temp_low_c": 18.3,
         "source": "live"
       },
       "2026-10-05": {
@@ -323,8 +323,8 @@
         "date": "2026-10-03",
         "summary": "흐림",
         "precip_probability_pct": 25,
-        "wind_speed_kmh": 22.0,
-        "temp_high_c": 24.3,
+        "wind_speed_kmh": 22.2,
+        "temp_high_c": 24.2,
         "temp_low_c": 16.4,
         "source": "live"
       },
@@ -333,8 +333,8 @@
         "date": "2026-10-04",
         "summary": "흐림",
         "precip_probability_pct": 25,
-        "wind_speed_kmh": 16.3,
-        "temp_high_c": 24.0,
+        "wind_speed_kmh": 17.5,
+        "temp_high_c": 23.7,
         "temp_low_c": 20.6,
         "source": "live"
       },
